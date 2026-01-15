@@ -1,0 +1,106 @@
+{
+  "items": [
+    {
+      "type": "image",
+      "src": "header_medium.jpg",
+      "title": "Schulausflug in den Wald",
+      "description": "Unsere Klasse 3a hatte einen wunderbaren Tag im Wald. Wir haben Tiere beobachtet und viel über die Natur gelernt.",
+      "date": "10. Jan 2026",
+      "gallery": [
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Die ganze Klasse vor dem Waldeingang"
+        },
+        {
+          "type": "image",
+          "src": "pngwing.com.png",
+          "caption": "Wir entdecken Spuren von Waldtieren"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Pause am Waldbach"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Gemeinsames Picknick auf der Lichtung"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "Thumbnail_The.Hunt.jpg",
+      "title": "Weihnachtsfeier in der Aula",
+      "description": "Unsere festliche Weihnachtsfeier mit Gesang, Theater und gemütlichem Beisammensein.",
+      "date": "20. Dez 2025",
+      "gallery": [
+        {
+          "type": "image",
+          "src": "Thumbnail_The.Hunt.jpg",
+          "caption": "Die festlich geschmückte Aula"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Unser Weihnachtschor in Aktion"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Theateraufführung der 4. Klasse"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Gemütliches Beisammensein mit Punsch"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Der Besuch vom Nikolaus"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "Thumbnail_Musik.im.Suedwesten.jpg",
+      "title": "Kunstprojekt Klasse 4b",
+      "description": "Die Schüler der Klasse 4b haben wunderschöne Kunstwerke zum Thema 'Jahreszeiten' gestaltet.",
+      "date": "05. Jan 2026",
+      "gallery": [
+        {
+          "type": "image",
+          "src": "Thumbnail_Musik.im.Suedwesten.jpg",
+          "caption": "Frühlingsbilder mit bunten Blumen"
+        },
+        {
+          "type": "video",
+          "src": "psycho.mp4",
+          "caption": "Sommerimpressionen am Strand"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Herbstliche Landschaften in warmen Farben"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Winterwunderland in Weiß und Blau"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Die stolzen Künstler mit ihren Werken"
+        },
+        {
+          "type": "image",
+          "src": "header_medium.jpg",
+          "caption": "Ausstellung in unserem Schulflur"
+        }
+      ]
+    }
+  ]
+}

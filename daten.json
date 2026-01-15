@@ -1,0 +1,128 @@
+{
+  "events": {
+    "de": [
+      {
+        "date": "15. Jan 2026",
+        "title": "Winterfest",
+        "description": "Gemeinsames Winterfest mit Eltern, Lehrern und Schülern. Warme Getränke und winterliche Aktivitäten.",
+        "countdown": "2026-01-15"
+      },
+      {
+        "date": "22. Jan 2026",
+        "title": "Elternabend",
+        "description": "Informationsabend für alle Eltern zum Thema \"Digitales Lernen\". Beginn: 19:00 Uhr.",
+        "countdown": "2026-01-22"
+      },
+      {
+        "date": "05. Feb 2026",
+        "title": "Projektwoche",
+        "description": "Beginn unserer Projektwoche zum Thema \"Nachhaltigkeit und Umweltschutz\".",
+        "countdown": "2026-02-05"
+      }
+    ]
+  },
+  "holidays": {
+    "de": [
+      {
+        "icon": "🎄",
+        "title": "Weihnachtsferien",
+        "description": "Erholsame Weihnachtsferien mit Familie und Freunden.",
+        "dates": "23.12.2025 - 05.01.2026"
+      },
+      {
+        "icon": "⛷️",
+        "title": "Winterferien",
+        "description": "Zeit für Wintersport und winterliche Abenteuer.",
+        "dates": "14.02.2026 - 18.02.2026"
+      },
+      {
+        "icon": "🐰",
+        "title": "Osterferien",
+        "description": "Frühlingsferien zum Entspannen und Genießen.",
+        "dates": "30.03.2026 - 10.04.2026"
+      },
+      {
+        "icon": "🌸",
+        "title": "Pfingstferien",
+        "description": "Kurze Pause im Frühsommer.",
+        "dates": "26.05.2026 - 05.06.2026"
+      },
+      {
+        "icon": "☀️",
+        "title": "Sommerferien",
+        "description": "Die großen Ferien für Urlaub und Erholung.",
+        "dates": "30.07.2026 - 12.09.2026"
+      },
+      {
+        "icon": "🍂",
+        "title": "Herbstferien",
+        "description": "Herbstliche Auszeit zum Jahresende.",
+        "dates": "26.10.2026 - 30.10.2026"
+      }
+    ]
+  },
+  "features": {
+    "de": [
+      {
+        "icon": "🎓",
+        "title": "Bildung & Lernen",
+        "text": "Moderner Unterricht mit individueller Förderung für jedes Kind.",
+        "fullText": "Moderner Unterricht mit individueller Förderung für jedes Kind. Wir legen Wert auf differenzierte Lernmethoden und schaffen eine Umgebung, in der sich jedes Kind nach seinen Fähigkeiten entwickeln kann. Unser engagiertes Lehrerteam begleitet die Kinder auf ihrem individuellen Lernweg."
+      },
+      {
+        "icon": "🌱",
+        "title": "Naturkultur",
+        "text": "Lernen in und mit der Natur - unser besonderes Schulprofil.",
+        "fullText": "Lernen in und mit der Natur - unser besonderes Schulprofil. Regelmäßige Ausflüge in den Wald, Schulgarten-Projekte und naturwissenschaftliche Experimente im Freien gehören zu unserem Alltag. Die Natur dient uns als Klassenzimmer und Inspirationsquelle für nachhaltiges Lernen."
+      },
+      {
+        "icon": "👥",
+        "title": "Gemeinschaft",
+        "text": "Ein starkes Miteinander von Schülern, Eltern und Lehrern.",
+        "fullText": "Ein starkes Miteinander von Schülern, Eltern und Lehrern. Gemeinsame Feste, Projekte und regelmäßiger Austausch schaffen eine lebendige Schulgemeinschaft, in der sich alle wohlfühlen. Wir pflegen eine offene Kommunikationskultur und fördern gegenseitigen Respekt."
+      },
+      {
+        "icon": "🎨",
+        "title": "Kreativität",
+        "text": "Vielfältige Angebote in Kunst, Musik und Theater.",
+        "fullText": "Vielfältige Angebote in Kunst, Musik und Theater. Ob Malen, Musizieren oder Theaterspielen - wir fördern die kreativen Talente unserer Schüler durch vielseitige AG-Angebote und Projekte. Kreativität ist ein wichtiger Bestandteil unseres pädagogischen Konzepts."
+      },
+      {
+        "icon": "⚽",
+        "title": "Sport & Bewegung",
+        "text": "Aktive Pausen und Sportangebote für gesunde Entwicklung.",
+        "fullText": "Aktive Pausen und Sportangebote für gesunde Entwicklung. Unser großzügiger Schulhof, vielfältige Sportgeräte und regelmäßige Bewegungsangebote sorgen für einen ausgewogenen Schulalltag. Wir wissen, dass Bewegung die Grundlage für erfolgreiches Lernen ist."
+      },
+      {
+        "icon": "🤝",
+        "title": "Schulsozialarbeit",
+        "text": "Unterstützung und Beratung für Kinder und Familien.",
+        "fullText": "Unterstützung und Beratung für Kinder und Familien. Unsere Schulsozialarbeit steht bei allen Fragen und Herausforderungen zur Seite und bietet professionelle Begleitung im Schulalltag. Wir sind Ansprechpartner für große und kleine Sorgen und unterstützen präventiv und lösungsorientiert."
+      }
+    ]
+  },
+  "faqs": {
+    "de": [
+      {
+        "question": "Wie kann ich mein Kind anmelden?",
+        "answer": "Die Anmeldung erfolgt persönlich im Sekretariat. Bitte bringen Sie die Geburtsurkunde und den Impfpass Ihres Kindes mit. Termine können telefonisch oder per E-Mail vereinbart werden."
+      },
+      {
+        "question": "Welche Betreuungszeiten bieten Sie an?",
+        "answer": "Wir bieten eine Betreuung von 7:00 bis 17:00 Uhr an. Dies umfasst Frühbetreuung, Unterrichtszeit und Nachmittagsbetreuung mit Hausaufgabenhilfe und verschiedenen AGs."
+      },
+      {
+        "question": "Gibt es eine Mensa oder Mittagsverpflegung?",
+        "answer": "Ja, wir haben eine moderne Mensa mit täglich frisch zubereitetem Essen. Es gibt immer eine vegetarische Option und wir berücksichtigen Allergien und religiöse Ernährungsgewohnheiten."
+      },
+      {
+        "question": "Wie groß sind die Klassen?",
+        "answer": "Unsere Klassen haben durchschnittlich 20-22 Schüler. Dies ermöglicht eine individuelle Betreuung und fördert ein gutes Lernklima."
+      },
+      {
+        "question": "Welche außerschulischen Aktivitäten gibt es?",
+        "answer": "Wir bieten vielfältige AGs an: Sport (Fußball, Turnen), Musik (Chor, Instrumente), Kunst, Theater, Schach, Programmieren und Naturwissenschaften. Die Angebote wechseln halbjährlich."
+      }
+    ]
+  }
+}

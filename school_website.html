@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grundschule Hardt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Zurück nach oben">↑</button>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" id="breadcrumb">
+        <ul class="breadcrumb-list">
+            <li><a href="#start" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Start</a></li>
+            <li class="breadcrumb-separator">›</li>
+            <li class="active" id="currentSection">Start</li>
+        </ul>
+    </nav>
+
+    <nav>
+        <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+        <ul id="menu">
+            <li><a href="#start">START</a></li>
+            <li><a href="#aktuelles">AKTUELLES</a></li>
+            <li><a href="#events">TERMINE</a></li>
+            <li><a href="#ferien">FERIEN</a></li>
+            <li><a href="#features">UNSERE SCHULE</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#kontakt">KONTAKT</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="start">
+        <div class="parallax-bg" id="parallaxBg"></div>
+        <div class="hero-content floating">
+            <img src="header_medium.jpg" alt="Grundschule Hardt" style="width: 100%; max-width: 800px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+            <h1>Grundschule Hardt</h1>
+            <p class="subtitle">Naturkultur - Lernen mit Kopf, Herz und Hand</p>
+            <a href="#features" class="cta-button">Mehr erfahren</a>
+        </div>
+    </section>
+
+    <!-- Aktuelles Section -->
+    <section class="aktuelles-section" id="aktuelles">
+        <div class="spiral-bg">
+            <div class="spiral spiral1"></div>
+            <div class="spiral spiral2"></div>
+            <div class="spiral spiral3"></div>
+            <div class="spiral spiral4"></div>
+            <div class="spiral spiral5"></div>
+        </div>
+        <div class="container">
+            <h2>Aktuelles</h2>
+            <div class="aktuelles-grid" id="aktuellesGrid">
+                <!-- Aktuelles werden dynamisch geladen -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Events/Calendar Section -->
+    <section class="events-section" id="events">
+        <div class="parallax-layer">
+            <div class="floating-shape shape11"></div>
+            <div class="floating-shape shape12"></div>
+            <div class="floating-shape shape13"></div>
+            <div class="floating-shape shape14"></div>
+            <div class="floating-shape shape15"></div>
+            <div class="floating-shape shape16"></div>
+        </div>
+        <div class="container">
+            <h2>Anstehende Termine</h2>
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events werden dynamisch geladen -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Holiday Calendar Section -->
+    <section class="holiday-calendar" id="ferien">
+        <div class="wave-bg">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+        <div class="container">
+            <h2>Ferienkalender 2026</h2>
+            <div class="holiday-grid" id="holidayGrid">
+                <!-- Ferien werden dynamisch geladen -->
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="hexagon-bg">
+            <div class="hexagon hex1"></div>
+            <div class="hexagon hex2"></div>
+            <div class="hexagon hex3"></div>
+            <div class="hexagon hex4"></div>
+            <div class="hexagon hex5"></div>
+            <div class="hexagon hex6"></div>
+            <div class="hexagon hex7"></div>
+            <div class="hexagon hex8"></div>
+        </div>
+        <div class="container">
+            <h2>Unsere Schule</h2>
+            <div class="feature-grid" id="featureGrid">
+                <!-- Features werden dynamisch geladen -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <h2>Häufig gestellte Fragen</h2>
+            <div class="faq-container" id="faqContainer">
+                <!-- FAQ items werden dynamisch geladen -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="kontakt">
+        <div class="particles-bg">
+            <div class="particle-line line1"></div>
+            <div class="particle-line line2"></div>
+            <div class="particle-line line3"></div>
+            <div class="particle-line line4"></div>
+            <div class="particle-line line5"></div>
+            <div class="particle-line line6"></div>
+            <div class="particle-line line7"></div>
+            <div class="particle-line line8"></div>
+        </div>
+        <div class="container">
+            <h2>Kontakt</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Adresse</h3>
+                    <p>Grundschule Hardt<br>
+                    Szekesfehervarer Str. 12<br>
+                    73525 Schwäbisch Gmünd<br>
+                    Deutschland</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Telefon</h3>
+                    <p><a href="tel:+497171 66929">+49 (0) 7171 / 66 92 9</a><br>
+                    Fax: +49 (0) 7171 / 37 58 8</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>E-Mail</h3>
+                    <p><a href="mailto:poststelle@04164951.schule.bwl.de">poststelle@04164951.schule.bwl.de</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🕒</div>
+                    <h3>Öffnungszeiten</h3>
+                    <p>Montag - Donnerstag<br>
+                    8:00 - 15:15 Uhr<br>
+                    Freitag<br>
+                    8:00 - 12:30 Uhr</p>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d21024.4102031876!2d9.82!3d48.8!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x410be6208557dbc7%3A0xf8b3c112e4a9b3fc!2sGrundschule%20Hardt!5e0!3m2!1sde!2sde!4v1768131287347!5m2!1sde!2sde"
+                    width="100%" 
+                    height="400" 
+                    style="border:0; border-radius: 20px;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Grundschule Hardt | Alle Rechte vorbehalten</p>
+        </div>
+    </footer>
+
+    <!-- Modal/Popup -->
+    <div class="modal" id="featureModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">✕</button>
+            <div class="modal-icon" id="modalIcon"></div>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <!-- Lightbox für Aktuelles -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <button class="lightbox-prev" onclick="navigateGallery(-1)">‹</button>
+            <button class="lightbox-next" onclick="navigateGallery(1)">›</button>
+            <div id="lightboxMediaContainer"></div>
+            <div class="lightbox-info">
+                <div class="lightbox-caption" id="lightboxCaption"></div>
+                <div class="lightbox-counter" id="lightboxCounter"></div>
+            </div>
+            <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
