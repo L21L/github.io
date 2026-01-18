@@ -404,3 +404,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Initialize - Daten laden und dann rendern
+loadData();
+loadAktuelles();
+
+// Update countdowns every minute
+setInterval(renderEvents, 60000);
