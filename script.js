@@ -313,6 +313,36 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 
+// Impressum öffnen
+function openImpressum(event) {
+    event.preventDefault();
+    const modal = document.getElementById('impressumModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Impressum schließen
+function closeImpressum() {
+    const modal = document.getElementById('impressumModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Datenschutz öffnen
+function openDatenschutz(event) {
+    event.preventDefault();
+    const modal = document.getElementById('datenschutzModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Datenschutz schließen
+function closeDatenschutz() {
+    const modal = document.getElementById('datenschutzModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
 // Modal schließen bei Klick außerhalb
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('featureModal').addEventListener('click', function(e) {
@@ -320,6 +350,26 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
+    
+    // Impressum Modal
+    const impressumModal = document.getElementById('impressumModal');
+    if (impressumModal) {
+        impressumModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImpressum();
+            }
+        });
+    }
+    
+    // Datenschutz Modal
+    const datenschutzModal = document.getElementById('datenschutzModal');
+    if (datenschutzModal) {
+        datenschutzModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDatenschutz();
+            }
+        });
+    }
 });
 
 // Mobile Menu
