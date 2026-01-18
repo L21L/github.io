@@ -411,3 +411,48 @@ loadAktuelles();
 
 // Update countdowns every minute
 setInterval(renderEvents, 60000);
+
+// --- Sprachwähler Logik ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+
+    if (langBtn) {
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+    }
+
+    // Schließen beim Klick irgendwo anders
+    document.addEventListener('click', () => {
+        if (langDropdown) langDropdown.classList.remove('active');
+    });
+});
+
+/**
+ * Öffnet die aktuelle Seite in einem datenschutzfreundlichen Übersetzungs-Proxy
+ */
+function translatePage(targetLang) {
+    const currentUrl = window.location.href;
+    
+    // Mehrere Alternativen für Übersetzungs-Proxies
+    const translationServices = [
+        `https://translate.riverside.rocks/?sl=auto&tl=${targetLang}&u=${encodeURIComponent(currentUrl)}`,
+        `https://lingva.thedaviddelta.com/auto/${targetLang}/${encodeURIComponent(currentUrl)}`,
+        `https://simplytranslate.org/translate?engine=google&sl=auto&tl=${targetLang}&url=${encodeURIComponent(currentUrl)}`
+    ];
+    
+    // Versuche den ersten Service, bei Fehler wird der Benutzer informiert
+    const translationUrl = translationServices[0];
+    
+    const newWindow = window.open(translationUrl, '_blank');
+    
+    // Fallback-Hinweis, falls es nicht funktioniert
+    setTimeout(() => {
+        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            alert('Die Übersetzung konnte nicht geöffnet werden. Bitte erlauben Sie Pop-ups für diese Seite.');
+        }
+    }, 1000);
+}

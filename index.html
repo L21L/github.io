@@ -22,9 +22,9 @@
         </ul>
     </nav>
 
-    <nav>
-        <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
-        <ul id="menu">
+<nav>
+    <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+    <ul id="menu">
             <li><a href="#start">START</a></li>
             <li><a href="#aktuelles">AKTUELLES</a></li>
             <li><a href="#events">TERMINE</a></li>
@@ -32,6 +32,17 @@
             <li><a href="#features">UNSERE SCHULE</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#kontakt">KONTAKT</a></li>
+            <li class="language-picker">
+                <button class="lang-btn" id="langBtn" aria-label="Sprache wählen">🌍</button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <a href="javascript:void(0)" onclick="translatePage('en')">English</a>
+                    <a href="javascript:void(0)" onclick="translatePage('tr')">Türkçe</a>
+                    <a href="javascript:void(0)" onclick="translatePage('ar')">العربية</a>
+                    <a href="javascript:void(0)" onclick="translatePage('uk')">Українська</a>
+                    <hr>
+                    <small>Datenschutzfreundliche Übersetzung</small>
+                </div>
+            </li>
         </ul>
     </nav>
 
