@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grundschule Hardt – Schwäbisch Gmünd</title>
+<meta name="description" content="Grundschule Hardt in Schwäbisch Gmünd – Ganztagsschule mit Naturprofil">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800&family=Baloo+2:wght@500;600;700;800&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --green-dark:#2D6A4F;--green-mid:#40916C;--green-light:#52B788;
+    --green-pale:#D8F3DC;--green-ghost:#F0FAF3;
+    --earth:#8B6F47;--earth-light:#C9A96E;--earth-pale:#FDF6EC;
+    --sun:#F9C74F;--sun-pale:#FFF8E1;
+    --coral:#E07A5F;--coral-pale:#FDE8E0;
+    --white:#FFF;--bg:#FAFCF8;--text:#1B3A2D;--text-light:#5A7A6A;
+    --border:#D5E5DA;
+    --shadow-sm:0 1px 4px rgba(45,106,79,.08);
+    --shadow-md:0 4px 20px rgba(45,106,79,.10);
+    --shadow-lg:0 8px 32px rgba(45,106,79,.12);
+    --radius:12px;--radius-sm:8px;--sidebar-w:290px
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;min-height:100vh;overflow-x:hidden}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--green-dark),var(--green-mid) 50%,var(--green-light));color:var(--white);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 80%,rgba(249,199,79,.15),transparent 50%),radial-gradient(circle at 85% 20%,rgba(126,200,227,.12),transparent 50%),radial-gradient(circle at 50% 100%,rgba(0,0,0,.15),transparent 60%);pointer-events:none}
+  .hero-deco{position:absolute;pointer-events:none;opacity:.08}
+  .hero-deco.tree-1{bottom:-10px;left:5%;width:120px;height:160px;background:var(--white);clip-path:polygon(50% 0%,15% 55%,25% 55%,5% 85%,20% 85%,0% 100%,100% 100%,80% 85%,95% 85%,75% 55%,85% 55%)}
+  .hero-deco.tree-2{bottom:-10px;right:8%;width:90px;height:130px;background:var(--white);clip-path:polygon(50% 0%,15% 55%,25% 55%,5% 85%,20% 85%,0% 100%,100% 100%,80% 85%,95% 85%,75% 55%,85% 55%)}
+  .hero-deco.sun{top:20px;right:60px;width:60px;height:60px;background:var(--sun);border-radius:50%;opacity:.15;box-shadow:0 0 40px 20px rgba(249,199,79,.15)}
+  .hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:32px 40px 28px;display:flex;align-items:center;gap:24px}
+  .hero-icon{width:64px;height:64px;background:rgba(255,255,255,.18);border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15)}
+  .hero-icon svg{width:36px;height:36px;fill:var(--white)}
+  .hero-text h1{font-family:'Baloo 2',cursive;font-size:1.65rem;font-weight:700;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .hero-text .hero-sub{font-size:.88rem;opacity:.85;margin-top:2px;font-weight:500}
+  .hero-nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+  .hero-nav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.82rem;font-weight:600;padding:6px 14px;border-radius:20px;transition:all .2s}
+  .hero-nav a:hover{background:rgba(255,255,255,.15);color:var(--white)}
+
+  /* APP */
+  .app{display:flex;min-height:calc(100vh - 100px)}
+
+  /* SIDEBAR */
+  .sidebar{position:sticky;top:0;width:var(--sidebar-w);height:100vh;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;z-index:100;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+  .sidebar-header{padding:24px 22px 18px;border-bottom:1px solid var(--border);background:var(--green-ghost)}
+  .school-badge{display:flex;align-items:center;gap:12px}
+  .school-badge-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--green-dark),var(--green-light));border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .school-badge-icon svg{width:22px;height:22px;fill:var(--white)}
+  .school-name{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;color:var(--green-dark);line-height:1.2}
+  .school-detail{font-size:.75rem;color:var(--text-light);margin-top:2px}
+  .sidebar-info{padding:14px 22px;background:var(--sun-pale);border-bottom:1px solid var(--border);font-size:.78rem;color:var(--earth);display:flex;align-items:center;gap:8px}
+  .sidebar-info svg{width:16px;height:16px;fill:var(--earth-light);flex-shrink:0}
+  .nav-section{padding:12px 0;flex:1}
+  .nav-rubrik{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:none;padding:11px 22px;font-family:'Nunito',sans-serif;font-size:.84rem;font-weight:700;color:var(--text-light);cursor:pointer;transition:all .2s;position:relative}
+  .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex-shrink:0;transition:all .25s}
+  .nav-rubrik:hover{color:var(--green-dark);background:var(--green-ghost)}
+  .nav-rubrik:hover .nav-dot{background:var(--green-light)}
+  .nav-rubrik.active{color:var(--green-dark);background:var(--green-ghost)}
+  .nav-rubrik.active .nav-dot{background:var(--green-mid);box-shadow:0 0 0 3px var(--green-pale);transform:scale(1.2)}
+  .nav-rubrik.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--green-mid);border-radius:0 4px 4px 0}
+  .nav-sub{display:none;padding:2px 0 8px}
+  .nav-rubrik.active+.nav-sub{display:block}
+  .nav-sub button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:none;border:none;padding:7px 22px 7px 44px;font-family:'Nunito',sans-serif;font-size:.82rem;color:var(--text-light);cursor:pointer;transition:all .15s}
+  .nav-sub button::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .2s}
+  .nav-sub button:hover{color:var(--green-dark);background:var(--green-ghost)}
+  .nav-sub button:hover::before{background:var(--green-light)}
+  .nav-sub button.active{color:var(--green-dark);font-weight:700}
+  .nav-sub button.active::before{background:var(--green-mid)}
+  .sidebar-footer{padding:16px 22px;border-top:1px solid var(--border);font-size:.72rem;color:var(--text-light);background:var(--green-ghost);line-height:1.5}
+  .sidebar-footer a{color:var(--green-mid);text-decoration:none}
+  .sidebar-footer a:hover{text-decoration:underline}
+
+  /* MAIN */
+  .main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .topbar{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);z-index:50;padding:0 48px;display:flex;align-items:stretch;min-height:50px;overflow-x:auto;box-shadow:var(--shadow-sm)}
+  .topbar::-webkit-scrollbar{height:0}
+  .tab-btn{background:none;border:none;padding:13px 20px;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:600;color:var(--text-light);cursor:pointer;white-space:nowrap;position:relative;transition:color .2s}
+  .tab-btn:hover{color:var(--green-dark)}
+  .tab-btn.active{color:var(--green-dark);font-weight:700}
+  .tab-btn.active::after{content:'';position:absolute;bottom:0;left:14px;right:14px;height:3px;background:linear-gradient(90deg,var(--green-mid),var(--green-light));border-radius:3px 3px 0 0}
+
+  .rubrik-title-bar{padding:36px 48px 8px;display:flex;align-items:center;gap:14px}
+  .rubrik-icon{width:44px;height:44px;background:var(--green-pale);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
+  .rubrik-icon svg{width:24px;height:24px;fill:var(--green-mid)}
+  .rubrik-title-bar h2{font-family:'Baloo 2',cursive;font-size:1.9rem;font-weight:700;color:var(--green-dark);line-height:1.2}
+
+  /* CONTENT */
+  .content-area{padding:20px 48px 80px;max-width:880px}
+  .content-area h3{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:600;color:var(--green-dark);margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--green-pale)}
+  .content-area h4{font-size:1.05rem;font-weight:700;color:var(--earth);margin:22px 0 8px}
+  .content-area h5,.content-area h6{font-size:.95rem;font-weight:700;margin:18px 0 6px}
+  .content-area p{margin:0 0 14px}
+  .content-area strong{color:var(--green-dark)}
+  .content-area ul,.content-area ol{margin:0 0 16px;padding-left:22px}
+  .content-area li{margin-bottom:6px;padding-left:4px}
+  .content-area li::marker{color:var(--green-light)}
+  .content-area img{max-width:100%;height:auto;border-radius:var(--radius);margin:18px 0;box-shadow:var(--shadow-md);border:3px solid var(--white);outline:1px solid var(--border)}
+  .content-area a{color:var(--green-mid);text-decoration:underline;text-decoration-color:var(--green-pale);text-underline-offset:3px;text-decoration-thickness:2px;transition:text-decoration-color .2s}
+  .content-area a:hover{text-decoration-color:var(--green-mid)}
+  .content-area table{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+  .content-area th{background:var(--green-dark);color:var(--white);padding:11px 16px;text-align:left;font-size:.85rem;font-weight:700}
+  .content-area td{padding:10px 16px;border-bottom:1px solid var(--border);font-size:.88rem;background:var(--white)}
+  .content-area tr:last-child td{border-bottom:none}
+  .content-area tr:nth-child(even) td{background:var(--green-ghost)}
+  .content-area blockquote{border-left:4px solid var(--green-light);padding:16px 22px;margin:18px 0;background:var(--green-ghost);border-radius:0 var(--radius-sm) var(--radius-sm) 0;color:var(--green-dark);font-style:italic}
+
+  /* PEERTUBE */
+  .peertube-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:22px 0;border-radius:var(--radius);box-shadow:var(--shadow-lg);background:#1a1a1a}
+  .peertube-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--radius)}
+
+  /* LOADING */
+  .loading-screen{display:flex;align-items:center;justify-content:center;min-height:50vh;flex-direction:column;gap:20px}
+  .spinner-tree{width:48px;height:48px;animation:sway 1.5s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+  .loading-text{font-size:.92rem;color:var(--text-light);font-weight:600}
+  .error-msg{background:var(--coral-pale);border:1px solid var(--coral);color:#6B3426;padding:24px 30px;border-radius:var(--radius);margin:48px;line-height:1.7}
+  .error-msg code{background:rgba(224,122,95,.15);padding:2px 7px;border-radius:4px;font-size:.85em;color:var(--coral)}
+  .setup-hint{background:var(--white);border:2px dashed var(--border);border-radius:var(--radius);padding:32px 36px;margin:24px 48px}
+  .setup-hint h3{font-family:'Baloo 2',cursive!important;border-bottom:none!important;margin-top:0!important;color:var(--green-dark)!important}
+  .setup-hint ol{padding-left:22px;margin:14px 0}
+  .setup-hint li{margin-bottom:10px;font-size:.9rem;color:var(--text-light)}
+  .setup-hint code{background:var(--green-pale);padding:2px 8px;border-radius:4px;font-size:.84em;color:var(--green-dark)}
+
+  /* FOOTER */
+  .page-footer{background:var(--green-dark);color:rgba(255,255,255,.7);padding:28px 48px;font-size:.8rem;text-align:center;line-height:1.6}
+  .page-footer a{color:var(--green-pale);text-decoration:none}
+  .page-footer a:hover{text-decoration:underline}
+  .page-footer strong{color:var(--white);font-weight:600}
+
+  /* MOBILE */
+  .mobile-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;background:var(--green-dark);border:none;border-radius:50%;width:52px;height:52px;cursor:pointer;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:transform .2s}
+  .mobile-toggle:active{transform:scale(.92)}
+  .mobile-toggle svg{width:22px;height:22px;stroke:var(--white);fill:none}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(27,58,45,.4);z-index:90;backdrop-filter:blur(2px)}
+  @media(max-width:900px){
+    .sidebar{position:fixed;top:0;left:0;height:100vh;transform:translateX(-100%);box-shadow:var(--shadow-lg)}
+    .sidebar.open{transform:translateX(0)}
+    .main{margin-left:0}
+    .topbar{padding:0 16px}
+    .rubrik-title-bar{padding:28px 22px 8px}
+    .rubrik-title-bar h2{font-size:1.5rem}
+    .content-area{padding:16px 22px 60px}
+    .mobile-toggle{display:flex}
+    .overlay.show{display:block}
+    .hero-inner{padding:22px 20px 20px;flex-wrap:wrap}
+    .hero-nav{display:none}
+    .hero-icon{width:48px;height:48px;border-radius:12px}
+    .hero-icon svg{width:28px;height:28px}
+    .hero-text h1{font-size:1.3rem}
+    .page-footer{padding:24px 22px}
+    .error-msg,.setup-hint{margin:20px}
+  }
+  .sidebar::-webkit-scrollbar{width:4px}
+  .sidebar::-webkit-scrollbar-track{background:transparent}
+  .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+  .sidebar::-webkit-scrollbar-thumb:hover{background:var(--green-light)}
+  @media print{
+    .sidebar,.topbar,.hero,.mobile-toggle,.page-footer{display:none!important}
+    .main{margin-left:0!important}
+    .content-area{padding:0!important;max-width:100%!important}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-deco tree-1"></div>
+  <div class="hero-deco tree-2"></div>
+  <div class="hero-deco sun"></div>
+  <div class="hero-inner">
+    <div class="hero-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg></div>
+    <div class="hero-text">
+      <h1>Grundschule Hardt</h1>
+      <div class="hero-sub">Schwäbisch Gmünd · Ganztagsschule mit Naturprofil</div>
+    </div>
+    <nav class="hero-nav" id="heroNav"></nav>
+  </div>
+</header>
+<button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Navigation"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<div class="app">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header"><div class="school-badge"><div class="school-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg></div><div><div class="school-name">Grundschule Hardt</div><div class="school-detail">Schwäbisch Gmünd</div></div></div></div>
+    <div class="sidebar-info"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg><span>Ganztagesangebot Mo–Do · 8:00–15:15 Uhr</span></div>
+    <div class="nav-section" id="navSection"></div>
+    <div class="sidebar-footer">Székesfehérvárer Str. 12 · 73525 Schwäbisch Gmünd<br>Tel. <a href="tel:+4971716692929">07171 66929</a> · <a href="mailto:poststelle@gshardt-gd.schule.bwl.de">E-Mail</a></div>
+  </nav>
+  <div class="main">
+    <div class="topbar" id="topbar"></div>
+    <div class="rubrik-title-bar"><div class="rubrik-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3z"/></svg></div><h2 id="rubrikTitle"></h2></div>
+    <div class="content-area" id="contentArea">
+      <div class="loading-screen" id="loadingScreen">
+        <svg class="spinner-tree" viewBox="0 0 48 48"><path fill="var(--green-mid)" d="M24 4 L12 22 H16 L8 36 H14 L6 48 H42 L34 36 H40 L32 22 H36 Z"/><rect fill="var(--earth)" x="21" y="42" width="6" height="6" rx="1"/></svg>
+        <div class="loading-text">Dokument wird geladen …</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="page-footer"><strong>Grundschule Hardt</strong> · Székesfehérvárer Str. 12 · 73525 Schwäbisch Gmünd · Tel. 07171 66929<br>Ganztagsschule mit Naturprofil</footer>
+
+<script>
+const DOCX_FILENAME="inhalt.docx";
+let rubriken=[],activeRubrik=0,activeTab=0;
+const ICONS=[
+  '<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 002 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>'
+];
+
+async function init(){
+  try{
+    const res=await fetch(DOCX_FILENAME);
+    if(!res.ok)throw new Error('Datei "'+DOCX_FILENAME+'" nicht gefunden (HTTP '+res.status+')');
+    const ab=await res.arrayBuffer();
+    const result=await mammoth.convertToHtml({arrayBuffer:ab},{
+      convertImage:mammoth.images.imgElement(function(img){
+        return img.read("base64").then(function(b){return{src:"data:"+(img.contentType||"image/png")+";base64,"+b}});
+      })
+    });
+    parseContent(result.value);
+  }catch(err){
+    document.getElementById('loadingScreen').style.display='none';
+    document.getElementById('contentArea').innerHTML='<div class="error-msg"><strong>Dokument konnte nicht geladen werden</strong><br>'+err.message+'</div><div class="setup-hint"><h3>Einrichtung in 3 Schritten</h3><ol><li>Word-Dokument mit <strong>Überschrift 1</strong> (= Rubriken) und <strong>Überschrift 2</strong> (= Reiter) erstellen</li><li>Als <code>'+DOCX_FILENAME+'</code> im selben Ordner wie <code>index.html</code> speichern</li><li>Beides auf GitHub pushen und <strong>GitHub Pages</strong> aktivieren</li></ol><p style="margin-top:14px;font-size:.85rem;color:var(--text-light)">Beispielstruktur:<br><code>Überschrift 1: Unsere Schule</code><br>&nbsp;&nbsp;<code>Überschrift 2: Das Team</code><br>&nbsp;&nbsp;&nbsp;&nbsp;Normaler Text, Bilder, PeerTube-Links …</p></div>';
+  }
+}
+
+function parseContent(html){
+  var doc=new DOMParser().parseFromString('<div>'+html+'</div>','text/html');
+  var children=Array.from(doc.body.firstElementChild.children);
+  rubriken=[];var cR=null,cT=null;
+  for(var i=0;i<children.length;i++){
+    var el=children[i],tag=el.tagName.toLowerCase();
+    if(tag==='h1'){cR={title:el.textContent.trim(),tabs:[]};cT=null;rubriken.push(cR)}
+    else if(tag==='h2'){if(!cR){cR={title:'Willkommen',tabs:[]};rubriken.push(cR)}cT={title:el.textContent.trim(),html:''};cR.tabs.push(cT)}
+    else{if(!cR){cR={title:'Willkommen',tabs:[]};rubriken.push(cR)}if(!cT){cT={title:'Übersicht',html:''};cR.tabs.push(cT)}cT.html+=el.outerHTML}
+  }
+  for(var r=0;r<rubriken.length;r++)if(rubriken[r].tabs.length===0)rubriken[r].tabs.push({title:'Übersicht',html:'<p><em>Kein Inhalt.</em></p>'});
+  if(rubriken.length===0)rubriken.push({title:'Startseite',tabs:[{title:'Inhalt',html:html}]});
+  for(var r=0;r<rubriken.length;r++)for(var t=0;t<rubriken[r].tabs.length;t++)rubriken[r].tabs[t].html=embedPT(rubriken[r].tabs[t].html);
+  var nav=document.getElementById('heroNav');
+  rubriken.slice(0,5).forEach(function(r,i){var a=document.createElement('a');a.href='#';a.textContent=r.title;a.onclick=function(e){e.preventDefault();showRubrik(i)};nav.appendChild(a)});
+  buildNav();showRubrik(0);document.getElementById('loadingScreen').style.display='none';
+}
+
+function embedPT(html){
+  var linked=[/(<a[^>]*href=["'])(https?:\/\/[^"'\s]+\/w\/([a-zA-Z0-9_-]+))[^"']*["'][^>]*>.*?<\/a>/gi,/(<a[^>]*href=["'])(https?:\/\/[^"'\s]+\/videos\/watch\/([a-zA-Z0-9_-]+))[^"']*["'][^>]*>.*?<\/a>/gi];
+  var plain=[/(https?:\/\/[^\s<"']+\/w\/([a-zA-Z0-9_-]+))/gi,/(https?:\/\/[^\s<"']+\/videos\/watch\/([a-zA-Z0-9_-]+))/gi];
+  for(var i=0;i<linked.length;i++)html=html.replace(linked[i],function(m,pre,url){return ptIframe(url)});
+  for(var i=0;i<plain.length;i++)html=html.replace(plain[i],function(m,url){return html.indexOf('videos/embed/')>-1?m:ptIframe(url)});
+  return html;
+}
+function ptIframe(url){
+  var embed=url.replace(/\/w\//,'/videos/embed/').replace(/\/videos\/watch\//,'/videos/embed/');
+  return '<div class="peertube-embed"><iframe src="'+embed+'" sandbox="allow-same-origin allow-scripts allow-popups" allowfullscreen></iframe></div>';
+}
+
+function buildNav(){
+  var nav=document.getElementById('navSection');nav.innerHTML='';
+  rubriken.forEach(function(r,ri){
+    var btn=document.createElement('button');btn.className='nav-rubrik'+(ri===0?' active':'');btn.innerHTML='<span class="nav-dot"></span>'+r.title;btn.onclick=function(){showRubrik(ri)};nav.appendChild(btn);
+    var sub=document.createElement('div');sub.className='nav-sub';
+    r.tabs.forEach(function(t,ti){var tb=document.createElement('button');tb.textContent=t.title;tb.onclick=function(e){e.stopPropagation();showRubrik(ri,ti);closeSidebar()};sub.appendChild(tb)});
+    nav.appendChild(sub);
+  });
+}
+
+function showRubrik(ri,ti){
+  ti=ti||0;activeRubrik=ri;activeTab=ti;
+  document.querySelectorAll('.nav-rubrik').forEach(function(b,i){b.classList.toggle('active',i===ri)});
+  document.getElementById('rubrikTitle').textContent=rubriken[ri].title;
+  document.querySelector('.rubrik-icon').innerHTML=ICONS[ri%ICONS.length];
+  var tb=document.getElementById('topbar');tb.innerHTML='';
+  rubriken[ri].tabs.forEach(function(t,i){var b=document.createElement('button');b.className='tab-btn'+(i===ti?' active':'');b.textContent=t.title;b.onclick=function(){showTab(i)};tb.appendChild(b)});
+  updSub();showTab(ti);
+}
+
+function showTab(ti){
+  activeTab=ti;
+  document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',i===ti)});
+  updSub();
+  var c=document.getElementById('contentArea'),t=rubriken[activeRubrik].tabs[ti];
+  c.innerHTML=t?t.html:'<p>Kein Inhalt</p>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updSub(){
+  var all=document.querySelectorAll('.nav-sub button'),idx=0;
+  for(var ri=0;ri<rubriken.length;ri++)for(var ti=0;ti<rubriken[ri].tabs.length;ti++)if(all[idx])all[idx++].classList.toggle('active',ri===activeRubrik&&ti===activeTab);
+}
+
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
