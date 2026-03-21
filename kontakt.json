@@ -1,0 +1,7 @@
+[
+  { "icon": "📍", "label": "Adresse", "value": "Székesfehérvárer Str. 12, 73525 Schwäbisch Gmünd" },
+  { "icon": "📞", "label": "Telefon", "value": "07171 66929" },
+  { "icon": "📠", "label": "Fax", "value": "07171 37588" },
+  { "icon": "✉️", "label": "E-Mail", "value": "poststelle@gshardt-gd.schule.bwl.de" },
+  { "icon": "🕐", "label": "Sekretariat", "value": "Di–Fr, 09:00–11:30 Uhr" }
+]

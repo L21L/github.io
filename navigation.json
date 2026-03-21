@@ -1,0 +1,9 @@
+[
+  { "label": "Über uns", "href": "#about" },
+  { "label": "Ganztag", "href": "#ganztag" },
+  { "label": "Aktuelles", "href": "#aktuelles" },
+  { "label": "Kultur", "href": "#kultur" },
+  { "label": "Team", "href": "#team" },
+  { "label": "Termine", "href": "#termine" },
+  { "label": "Kontakt", "href": "#kontakt" }
+]

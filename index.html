@@ -3,2155 +3,1672 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎬 Trickfilm-Werkstatt</title>
+<title>Grundschule Hardt – Schwäbisch Gmünd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
 :root {
-  --yellow:#FFD93D; --orange:#FF6B35; --red:#FF3366;
-  --blue:#4ECDC4; --purple:#A855F7; --green:#6BCB77;
-  --dark:#1a1a2e; --cream:#FFF8E7; --pink:#FF69B4;
+  --primary: #1a6b3c;
+  --primary-light: #2d9f5b;
+  --primary-dark: #0e4426;
+  --accent: #f0a830;
+  --accent-light: #ffd47a;
+  --bg: #faf8f4;
+  --bg-warm: #f4efe6;
+  --text: #2a2a2a;
+  --text-light: #6b6b6b;
+  --white: #ffffff;
+  --shadow: 0 4px 30px rgba(0,0,0,0.08);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:radial-gradient(ellipse at 20% 20%,#16213e 0%,#0f3460 40%,#1a1a2e 100%);min-height:100vh;overflow-x:hidden}
-.filmstrip{display:flex;background:#111;padding:6px 0;overflow:hidden;border-bottom:3px solid var(--yellow);flex-wrap:nowrap}
-.fh{width:30px;height:22px;background:var(--dark);border-radius:4px;flex-shrink:0;margin:0 8px;border:2px solid #333}
-header{text-align:center;padding:28px 20px 10px}
-.main-title{font-family:'Fredoka One',cursive;font-size:clamp(2rem,6vw,4rem);color:var(--yellow);text-shadow:4px 4px 0 var(--orange),8px 8px 0 rgba(0,0,0,0.3);animation:titleBounce 2.5s ease-in-out infinite}
-@keyframes titleBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.subtitle{font-size:1.1rem;color:var(--blue);font-weight:700;margin-top:8px}
-.camera-emoji{font-size:3rem;display:inline-block;margin-bottom:8px}
-.intro-box{max-width:750px;margin:20px auto;background:linear-gradient(135deg,var(--yellow),var(--orange));border-radius:24px;padding:20px 28px;box-shadow:0 8px 30px rgba(255,107,53,0.4);text-align:center;position:relative}
-.intro-box p{font-size:1.05rem;color:var(--dark);font-weight:700;line-height:1.6}
-.star-deco{position:absolute;font-size:1.8rem}
-.star-deco.tl{top:-10px;left:-10px}.star-deco.tr{top:-10px;right:-10px}
-.star-deco.bl{bottom:-10px;left:-10px}.star-deco.br{bottom:-10px;right:-10px}
 
-/* NAV */
-.nav{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:20px 16px 10px;max-width:900px;margin:0 auto}
-.tab-btn{font-family:'Fredoka One',cursive;font-size:0.95rem;padding:12px 16px;border:none;border-radius:50px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px;box-shadow:0 4px 0 rgba(0,0,0,0.35);color:white;position:relative}
-.tab-btn:hover{transform:translateY(-3px);box-shadow:0 7px 0 rgba(0,0,0,0.35)}
-.tab-btn:active,.tab-btn.active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,0.3)}
-.tab-btn:nth-child(1){background:linear-gradient(135deg,#FF3366,#FF6B35)}
-.tab-btn:nth-child(2){background:linear-gradient(135deg,#A855F7,#6366F1)}
-.tab-btn:nth-child(3){background:linear-gradient(135deg,#4ECDC4,#06b6d4)}
-.tab-btn:nth-child(4){background:linear-gradient(135deg,#6BCB77,#84cc16)}
-.tab-btn:nth-child(5){background:linear-gradient(135deg,#FFD93D,#FF6B35)}
-.tab-btn:nth-child(6){background:linear-gradient(135deg,#FF69B4,#ec4899)}
-.tab-badge{position:absolute;top:-6px;right:-6px;background:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;display:none}
-.tab-badge.show{display:flex}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* PANELS */
-.content{max-width:900px;margin:16px auto 60px;padding:0 16px}
-.panel{display:none;animation:fadeIn 0.35s ease}
-.panel.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.panel-header{border-radius:24px 24px 0 0;padding:22px 30px 18px;text-align:center}
-.panel-title{font-family:'Fredoka One',cursive;font-size:2rem;color:white;text-shadow:2px 2px 0 rgba(0,0,0,0.2)}
-.panel-emoji{font-size:2.8rem;display:block;margin-bottom:6px}
-.ph-1{background:linear-gradient(135deg,#FF3366,#FF6B35)}
-.ph-2{background:linear-gradient(135deg,#A855F7,#6366F1)}
-.ph-3{background:linear-gradient(135deg,#4ECDC4,#06b6d4)}
-.ph-4{background:linear-gradient(135deg,#6BCB77,#84cc16)}
-.ph-5{background:linear-gradient(135deg,#FFD93D,#FF6B35)}
-.ph-6{background:linear-gradient(135deg,#FF69B4,#ec4899)}
-.panel-body{background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-top:none;border-radius:0 0 22px 22px;padding:16px}
+html { scroll-behavior: smooth; }
 
-/* CARDS */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-top:none;padding:18px}
-.card{background:var(--cream);border-radius:18px;padding:18px;box-shadow:0 5px 18px rgba(0,0,0,0.2);transition:transform 0.2s;position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px}
-.card:hover{transform:translateY(-4px)}
-.card:nth-child(1)::before{background:#FF3366}.card:nth-child(2)::before{background:#A855F7}
-.card:nth-child(3)::before{background:#4ECDC4}.card:nth-child(4)::before{background:#6BCB77}
-.card-icon{font-size:2.2rem;margin-bottom:8px;display:block}
-.card-title{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--dark);margin-bottom:6px}
-.card p{font-size:0.9rem;color:#444;line-height:1.55}
-.tip-box{background:linear-gradient(135deg,#1e3a5f,#16213e);border:2px solid var(--yellow);border-radius:14px;padding:14px 18px;margin:14px 0;display:flex;gap:12px;align-items:flex-start}
-.tip-icon{font-size:1.6rem;flex-shrink:0}
-.tip-box p{color:#fff;font-size:0.9rem;line-height:1.55}
-.tip-box strong{color:var(--yellow)}
-.inner-box{background:rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:14px}
-.inner-title{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:12px}
-input[type=text],textarea{font-family:'Nunito',sans-serif;border-radius:10px;border:2px solid #ccc;padding:8px 12px;font-size:0.95rem;background:rgba(255,255,255,0.95);color:#222}
-input[type=text]:focus,textarea:focus{outline:none;border-color:var(--purple)}
-textarea{resize:none}
-.lbl{color:white;font-weight:700;font-size:0.88rem;display:block;margin-bottom:4px}
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
 
-/* IDEAS */
-.idea-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border:2px solid var(--purple);border-radius:16px;padding:20px;text-align:center;margin-bottom:14px}
-.idea-result{background:white;border-radius:12px;padding:14px 18px;margin:14px 0;min-height:70px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--dark);text-align:center;line-height:1.4;transition:opacity 0.25s}
-.gen-btn{font-family:'Fredoka One',cursive;font-size:1.15rem;padding:12px 32px;background:linear-gradient(135deg,var(--purple),#6366F1);color:white;border:none;border-radius:50px;cursor:pointer;box-shadow:0 5px 0 #5b21b6;transition:all 0.1s}
-.gen-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #5b21b6}
-.gen-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5b21b6}
+/* ===== CUSTOM CURSOR TRAIL ===== */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s;
+  mix-blend-mode: multiply;
+}
 
-/* FIGURES */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fig-input-row{display:flex;gap:8px;margin-bottom:10px}
-.fig-input-row input{flex:1;border-color:var(--blue)}
-.add-btn{padding:8px 14px;background:var(--green);color:white;border:none;border-radius:10px;font-family:'Fredoka One',cursive;font-size:0.95rem;cursor:pointer;box-shadow:0 3px 0 #3d8a44;transition:all 0.1s;white-space:nowrap}
-.add-btn:active{transform:translateY(2px);box-shadow:none}
-@keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
-.fig-items{list-style:none}
-.fig-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.1);border-radius:12px;margin-bottom:8px;color:white;animation:popIn 0.25s ease}
-.fig-item-emoji{font-size:1.6rem;flex-shrink:0;width:36px;text-align:center}
-.fig-item-info{flex:1;min-width:0}
-.fig-item-name{font-weight:800;font-size:0.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fig-item-role{font-size:0.75rem;opacity:0.65;margin-top:1px}
-.fig-del{margin-left:auto;background:var(--red);border:none;color:white;border-radius:6px;padding:2px 7px;cursor:pointer;font-size:0.8rem;flex-shrink:0}
-.fig-template-btn{background:rgba(255,255,255,0.08);border:none;border-radius:10px;padding:8px 10px;cursor:pointer;text-align:left;transition:background 0.15s;display:flex;align-items:center;gap:8px}
-.fig-template-btn:hover{background:rgba(255,255,255,0.16)}
-.fig-template-emoji{font-size:1.4rem;flex-shrink:0}
-.fig-template-info{}
-.fig-template-name{color:white;font-weight:700;font-size:0.82rem;display:block}
-.fig-template-desc{color:rgba(255,255,255,0.5);font-size:0.7rem}
+/* ===== FLOATING NATURE PARTICLES ===== */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+  animation: float-particle linear infinite;
+  font-size: 1.4rem;
+}
 
-/* BACKGROUNDS */
-.bg-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:14px}
-.bg-card{border-radius:14px;overflow:hidden;cursor:pointer;transition:transform 0.2s;box-shadow:0 4px 14px rgba(0,0,0,0.3)}
-.bg-card:hover{transform:scale(1.04)}
-.bg-card.selected{outline:3px solid var(--yellow);transform:scale(1.05)}
-.bg-preview{height:80px;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
-.bg-label{background:white;text-align:center;padding:5px;font-family:'Fredoka One',cursive;font-size:0.85rem;color:var(--dark)}
-#selected-bgs{color:rgba(255,255,255,0.55);font-style:italic;font-size:0.88rem;line-height:2}
+@keyframes float-particle {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.15; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
 
-/* STORYBOARD */
-.sb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-.sb-frame{background:white;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.25)}
-.sb-header{background:var(--dark);color:var(--yellow);font-family:'Fredoka One',cursive;font-size:0.85rem;padding:5px 10px;display:flex;justify-content:space-between;align-items:center;gap:6px}
-.sb-del{cursor:pointer;color:#aaa;flex-shrink:0}
-.sb-del:hover{color:white}
-.sb-tools{display:flex;gap:4px;margin-left:auto}
-.sb-tool-btn{background:rgba(255,255,255,0.15);border:none;color:white;border-radius:6px;padding:2px 7px;cursor:pointer;font-size:0.75rem;transition:background 0.15s}
-.sb-tool-btn:hover{background:rgba(255,255,255,0.3)}
-.sb-tool-btn.active-tool{background:var(--yellow);color:var(--dark)}
-.sb-img-wrap{position:relative}
-/* Canvas drawing area */
-.sb-canvas-wrap{position:relative;height:110px;background:#f5f5f5;border-bottom:2px dashed #ddd;overflow:hidden}
-.sb-canvas{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
-.sb-emoji-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.5rem;pointer-events:none;transition:opacity 0.2s}
-.sb-emoji-overlay.hidden{opacity:0}
-.emoji-popup{display:none;position:absolute;top:100%;left:0;z-index:200;background:white;border:2px solid #ddd;border-radius:12px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,0.25);grid-template-columns:repeat(5,1fr);gap:4px;width:178px}
-.emoji-popup.open{display:grid}
-.ep-btn{font-size:1.4rem;cursor:pointer;border:none;background:none;border-radius:6px;padding:2px}
-.ep-btn:hover{background:#f0f0f0}
-.sb-color-row{display:flex;gap:4px;padding:4px 6px;background:#f0f0f0;flex-wrap:wrap;align-items:center}
-.color-dot{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;flex-shrink:0;transition:transform 0.15s}
-.color-dot:hover{transform:scale(1.2)}
-.color-dot.active-color{border-color:#333;transform:scale(1.2)}
-.clear-btn{margin-left:auto;font-size:0.7rem;padding:2px 7px;background:#ff6b6b;color:white;border:none;border-radius:6px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700}
-.brush-size{width:50px;height:14px;cursor:pointer;accent-color:var(--purple)}
-.sb-ta{width:100%;padding:7px 9px;border:none;font-family:'Nunito',sans-serif;font-size:0.8rem;height:52px;color:#333;resize:none}
-.sb-ta:focus{outline:2px solid var(--purple)}
-.add-frame-btn{font-family:'Fredoka One',cursive;font-size:1rem;padding:10px 24px;background:linear-gradient(135deg,var(--green),#84cc16);color:white;border:none;border-radius:20px;cursor:pointer;box-shadow:0 4px 0 #4a9045;transition:all 0.1s}
-.add-frame-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 #4a9045}
-.add-frame-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #4a9045}
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(250, 248, 244, 0.85);
+}
 
-/* WEEK PLAN */
-.week-grid{display:grid;gap:12px}
-.week-item{display:grid;grid-template-columns:80px 1fr auto;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.2);transition:transform 0.2s;overflow:visible}
-.week-item:hover{transform:scale(1.01)}
-.week-num{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.6rem;color:white;padding:10px 6px;text-align:center;border-radius:14px 0 0 14px}
-.week-num span{font-size:0.62rem;font-weight:800;opacity:0.85;font-family:'Nunito',sans-serif;letter-spacing:1px;text-transform:uppercase}
-.week-content{background:var(--cream);padding:12px 14px;flex:1}
-.week-content h3{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--dark);margin-bottom:4px}
-.week-content h3[contenteditable]{border-bottom:2px dashed #ccc;outline:none;cursor:text;padding-bottom:2px}
-.week-content h3[contenteditable]:focus{border-color:var(--purple)}
-.week-content p[contenteditable]{font-size:0.82rem;color:#555;line-height:1.5;outline:none;cursor:text;border-bottom:1px dashed transparent}
-.week-content p[contenteditable]:focus{border-color:#ccc}
-.week-content p{font-size:0.82rem;color:#555;line-height:1.5}
-.week-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;align-items:center}
-.week-tag{font-size:0.72rem;padding:2px 7px 2px 9px;border-radius:20px;font-weight:700;color:white;display:inline-flex;align-items:center;gap:4px;cursor:default}
-.week-tag-del{background:rgba(255,255,255,0.35);border:none;color:white;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;font-size:0.6rem;cursor:pointer;line-height:1;padding:0;flex-shrink:0}
-.week-tag-del:hover{background:rgba(255,255,255,0.6)}
-.week-tag-add{font-size:0.72rem;padding:2px 9px;border-radius:20px;font-weight:700;color:#1a1a2e;background:rgba(0,0,0,0.12);border:1.5px dashed rgba(0,0,0,0.35);cursor:pointer;transition:background 0.15s;position:relative}
-.week-tag-add:hover{background:rgba(0,0,0,0.18)}
-.tag-picker{display:none;position:fixed;z-index:9999;background:#1a1a2e;border:2px solid var(--yellow);border-radius:14px;padding:10px;box-shadow:0 8px 28px rgba(0,0,0,0.6);width:260px}
-.tag-picker.open{display:block}
-.tag-picker-title{font-family:'Fredoka One',cursive;color:var(--yellow);font-size:0.85rem;margin-bottom:8px}
-.tag-picker-grid{display:flex;flex-wrap:wrap;gap:5px;max-height:220px;overflow-y:auto}
-.tag-option{font-size:0.72rem;padding:3px 10px;border-radius:20px;font-weight:700;color:white;cursor:pointer;border:none;transition:opacity 0.15s}
-.tag-option:hover{opacity:0.8}
-.tag-option.already-used{opacity:0.35;cursor:not-allowed}
-.week-edit-col{background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;gap:6px;border-left:1px solid #e0d8c8;border-radius:0 14px 14px 0}
-.week-content{background:var(--cream);padding:12px 14px;flex:1}
-.week-edit-hint{font-size:0.62rem;color:#aaa;text-align:center;font-family:'Nunito',sans-serif;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:1px}
-.week-edit-icon{font-size:1rem;cursor:default}
+nav.scrolled {
+  padding: 0.6rem 2rem;
+  box-shadow: 0 2px 30px rgba(0,0,0,0.06);
+}
 
-/* CANVAS FULLSCREEN MODAL */
-.canvas-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;align-items:center;justify-content:center}
-.canvas-modal-overlay.open{display:flex}
-.canvas-modal{background:#1a1a2e;border-radius:20px;padding:20px;max-width:95vw;max-height:95vh;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-.canvas-modal-header{display:flex;justify-content:space-between;align-items:center}
-.canvas-modal-title{font-family:'Fredoka One',cursive;color:var(--yellow);font-size:1.4rem}
-.canvas-modal-close{background:var(--red);border:none;color:white;border-radius:10px;padding:6px 14px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer}
-.canvas-modal-body{position:relative;background:#f5f5f5;border-radius:12px;overflow:hidden;flex:1}
-#modal-canvas{display:block;cursor:crosshair;touch-action:none;max-width:100%}
-.canvas-modal-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center;background:rgba(255,255,255,0.06);border-radius:12px;padding:8px 12px}
-.modal-color-dot{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform 0.15s;flex-shrink:0}
-.modal-color-dot:hover{transform:scale(1.2)}
-.modal-color-dot.active-color{border-color:#fff;transform:scale(1.2)}
-.modal-tool-btn{background:rgba(255,255,255,0.12);border:none;color:white;border-radius:8px;padding:5px 10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.85rem;transition:background 0.15s}
-.modal-tool-btn:hover{background:rgba(255,255,255,0.25)}
-.modal-tool-btn.active-tool{background:var(--yellow);color:var(--dark)}
-.modal-brush{width:80px;accent-color:var(--purple);cursor:pointer}
-.modal-apply-btn{margin-left:auto;background:linear-gradient(135deg,var(--green),#84cc16);border:none;color:white;border-radius:10px;padding:8px 20px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;box-shadow:0 3px 0 #3d8a44}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-/* PDF BUTTONS */
-.pdf-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:14px;background:rgba(255,255,255,0.05);border-radius:16px;margin-bottom:14px}
-.pdf-btn{font-family:'Fredoka One',cursive;font-size:1rem;padding:11px 22px;border:none;border-radius:14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;box-shadow:0 4px 0 rgba(0,0,0,0.25)}
-.pdf-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(0,0,0,0.25)}
-.pdf-btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,0.25)}
-.pdf-export-btn{background:linear-gradient(135deg,#FF3366,#FF6B35);color:white}
-.pdf-import-btn{background:linear-gradient(135deg,#4ECDC4,#06b6d4);color:white}
-#pdf-import-input{display:none}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--primary-dark);
+}
 
-/* PROGRESS */
-.prog-item{margin-bottom:14px}
-.prog-label{display:flex;justify-content:space-between;color:white;font-size:0.88rem;font-weight:700;margin-bottom:5px}
-.prog-bar{height:14px;background:rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;cursor:pointer}
-.prog-bar:hover{opacity:0.85}
-.prog-fill{height:100%;border-radius:20px;transition:width 0.45s ease;width:0%}
-.prog-hint{color:rgba(255,255,255,0.4);font-size:0.78rem;text-align:center;margin-top:8px}
+.nav-logo-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: transform 0.3s;
+}
 
-/* CHECKLIST */
-.checklist{list-style:none}
-.cl-item{display:flex;align-items:center;gap:10px;padding:9px 12px;margin-bottom:7px;background:rgba(255,255,255,0.07);border-radius:12px;cursor:pointer;transition:background 0.15s;color:#fff;font-size:0.9rem}
-.cl-item:hover{background:rgba(255,255,255,0.14)}
-.cl-item.checked{text-decoration:line-through;opacity:0.55}
-.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--yellow);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s}
-.cl-item.checked .check-box{background:var(--green);border-color:var(--green);color:white}
-.congrats-box{display:none;margin-top:14px;background:linear-gradient(135deg,#FFD93D,#FF6B35);border-radius:18px;padding:22px;text-align:center}
+.nav-logo:hover .nav-logo-icon { transform: rotate(-5deg) scale(1.05); }
 
-/* ===== BADGES ===== */
-.badges-section{background:rgba(255,255,255,0.06);border-radius:14px;padding:16px;margin-bottom:14px}
-.badges-title{font-family:'Fredoka One',cursive;color:var(--yellow);font-size:1.15rem;margin-bottom:14px;text-align:center}
-.badges-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
-.badge-card{background:rgba(255,255,255,0.07);border-radius:14px;padding:14px 10px;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;border:2px solid rgba(255,255,255,0.1)}
-.badge-card.earned{background:linear-gradient(135deg,rgba(255,217,61,0.2),rgba(255,107,53,0.2));border-color:var(--yellow);animation:badgeGlow 2s ease-in-out infinite}
-@keyframes badgeGlow{0%,100%{box-shadow:0 0 8px rgba(255,217,61,0.3)}50%{box-shadow:0 0 20px rgba(255,217,61,0.6)}}
-.badge-icon{font-size:2.5rem;display:block;margin-bottom:6px;filter:grayscale(1);opacity:0.35;transition:all 0.4s}
-.badge-card.earned .badge-icon{filter:grayscale(0);opacity:1;animation:badgeBounce 0.5s ease}
-@keyframes badgeBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-.badge-name{font-family:'Fredoka One',cursive;font-size:0.85rem;color:white;line-height:1.3}
-.badge-card:not(.earned) .badge-name{opacity:0.4}
-.badge-lock{position:absolute;top:6px;right:6px;font-size:0.75rem;opacity:0.4}
-.badge-card.earned .badge-lock{display:none}
+.nav-logo-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
 
-/* SAVE INDICATOR */
-#save-indicator{position:fixed;bottom:20px;right:20px;z-index:999;background:#6BCB77;color:white;font-family:'Fredoka One',cursive;font-size:1rem;padding:10px 18px;border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.3);opacity:0;transition:opacity 0.4s ease;pointer-events:none}
+.nav-logo-sub {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
 
-/* TOAST POPUP for badge unlock */
-#badge-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);z-index:1000;background:linear-gradient(135deg,#FFD93D,#FF6B35);color:var(--dark);font-family:'Fredoka One',cursive;font-size:1.1rem;padding:14px 24px;border-radius:50px;box-shadow:0 6px 24px rgba(255,107,53,0.5);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;white-space:nowrap}
-#badge-toast.show{transform:translateX(-50%) translateY(0)}
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
 
-/* CONFETTI */
-.confetti-piece{position:fixed;width:10px;height:10px;border-radius:2px;pointer-events:none;z-index:998;animation:confettiFall linear forwards}
-@keyframes confettiFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  position: relative;
+}
 
-@media(max-width:600px){
-  .sb-grid{grid-template-columns:repeat(2,1fr)}
-  .two-col{grid-template-columns:1fr}
-  .panel-title{font-size:1.5rem}
-  .badges-grid{grid-template-columns:repeat(3,1fr)}
+.nav-links a:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  position: relative;
+}
+
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  position: absolute;
+  left: 7px;
+  transition: all 0.3s;
+}
+
+.nav-burger span:nth-child(1) { top: 10px; }
+.nav-burger span:nth-child(2) { top: 17px; }
+.nav-burger span:nth-child(3) { top: 24px; }
+
+.nav-burger.open span:nth-child(1) { transform: rotate(45deg); top: 17px; }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: rotate(-45deg); top: 17px; }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(250,248,244,0.97);
+  backdrop-filter: blur(30px);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  text-decoration: none;
+  color: var(--primary-dark);
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.5rem 2rem;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.mobile-menu a:hover { background: var(--primary); color: white; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(26,107,60,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,168,48,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(250,248,244,1) 0%, rgba(244,239,230,1) 100%);
+}
+
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.hero-shape-1 {
+  width: 500px; height: 500px;
+  background: var(--primary);
+  top: -100px; right: -100px;
+  opacity: 0.06;
+  animation: morph 20s ease-in-out infinite;
+}
+
+.hero-shape-2 {
+  width: 300px; height: 300px;
+  background: var(--accent);
+  bottom: -50px; left: 10%;
+  opacity: 0.08;
+  animation: morph 15s ease-in-out infinite reverse;
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 50% 40% 60% 50%; transform: translate(0, 0) rotate(0deg); }
+  25% { border-radius: 40% 60% 50% 50%; transform: translate(20px, -20px) rotate(5deg); }
+  50% { border-radius: 60% 50% 40% 60%; transform: translate(-10px, 10px) rotate(-3deg); }
+  75% { border-radius: 50% 50% 60% 40%; transform: translate(10px, 20px) rotate(2deg); }
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(26,107,60,0.08);
+  color: var(--primary);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.03em;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.hero-badge-dot {
+  width: 8px; height: 8px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--primary-light);
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(26,107,60,0.25);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(26,107,60,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid rgba(26,107,60,0.2);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  background: rgba(26,107,60,0.04);
+}
+
+/* Hero right — animated illustration */
+.hero-visual {
+  position: relative;
+  height: 450px;
+  animation: fadeInUp 1s ease 0.4s both;
+}
+
+.hero-card {
+  position: absolute;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+
+.hero-card:hover { transform: translateY(-5px) rotate(0deg) !important; }
+
+.hero-card-1 {
+  top: 0; left: 10%;
+  transform: rotate(-3deg);
+  width: 220px;
+  z-index: 3;
+}
+
+.hero-card-2 {
+  top: 120px; right: 0;
+  transform: rotate(2deg);
+  width: 200px;
+  z-index: 2;
+}
+
+.hero-card-3 {
+  bottom: 20px; left: 20%;
+  transform: rotate(-1deg);
+  width: 240px;
+  z-index: 1;
+}
+
+.hero-card-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.25rem;
+}
+
+.hero-card-text {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.hero-card-stat {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  animation: fadeInUp 1s ease 1s both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--primary-light), transparent);
+  animation: scroll-pulse 2s ease infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.3); }
+}
+
+/* ===== SECTIONS COMMON ===== */
+section {
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== ABOUT / SCHOOL PROFILE ===== */
+#about {
+  background: var(--white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.about-feature {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  transition: all 0.3s;
+}
+
+.about-feature:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.about-feature-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-feature-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.25rem;
+}
+
+.about-feature-text {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* About visual — animated counter cards */
+.about-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.stat-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transition: transform 0.5s;
+}
+
+.stat-card:hover::before { transform: scaleX(1); }
+
+.stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.stat-card.accent { background: var(--primary); }
+.stat-card.accent .stat-number { color: var(--accent-light); }
+.stat-card.accent .stat-label { color: rgba(255,255,255,0.8); }
+
+/* ===== GANZTAG ===== */
+#ganztag {
+  background: var(--bg-warm);
+}
+
+.ganztag-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.ganztag-text p {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.time-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.time-slot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.time-slot::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--primary);
+  border-radius: 0 4px 4px 0;
+}
+
+.time-slot:hover { transform: translateX(5px); }
+
+.time-slot-time {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.88rem;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.time-slot-label {
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ===== NEWS / AKTUELLES ===== */
+#aktuelles {
+  background: var(--white);
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.news-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  cursor: pointer;
+}
+
+.news-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.news-card-img {
+  height: 180px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+}
+
+.news-card-body {
+  padding: 1.5rem;
+}
+
+.news-card-date {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.news-card-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.news-card-excerpt {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ===== KULTURSCHULE ===== */
+#kultur {
+  background: var(--primary-dark);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+#kultur::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 50% 50% at 0% 0%, rgba(240,168,48,0.1), transparent),
+    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(45,159,91,0.15), transparent);
+}
+
+#kultur .section-label { color: var(--accent-light); }
+#kultur .section-title { color: white; }
+#kultur .section-subtitle { color: rgba(255,255,255,0.7); }
+
+.kultur-content {
+  position: relative;
+  z-index: 1;
+}
+
+.kultur-text {
+  max-width: 800px;
+}
+
+.kultur-text p {
+  color: rgba(255,255,255,0.75);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.kultur-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.kultur-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.kultur-badge:hover {
+  background: rgba(240,168,48,0.2);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== TEAM ===== */
+#team {
+  background: var(--bg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.team-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.team-card-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 700;
+}
+
+.team-card-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.25rem;
+}
+
+.team-card-role {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+}
+
+.team-card-contact {
+  font-size: 0.78rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* ===== TERMINE ===== */
+#termine {
+  background: var(--white);
+}
+
+.termine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+}
+
+.termin-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.termin-item:hover {
+  background: white;
+  box-shadow: var(--shadow);
+  transform: translateX(5px);
+}
+
+.termin-date {
+  text-align: center;
+  min-width: 60px;
+}
+
+.termin-day {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.termin-month {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.termin-divider {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), var(--primary-light));
+  border-radius: 1px;
+}
+
+.termin-info-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.15rem;
+}
+
+.termin-info-desc {
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+/* ===== KONTAKT ===== */
+#kontakt {
+  background: var(--bg-warm);
+}
+
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.kontakt-info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.kontakt-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.kontakt-item-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.kontakt-item-label {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kontakt-item-value {
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+}
+
+.kontakt-map {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  height: 100%;
+  min-height: 350px;
+}
+
+.kontakt-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--primary-dark);
+  color: rgba(255,255,255,0.6);
+  padding: 3rem 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+}
+
+footer a:hover { color: var(--accent-light); }
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* ===== MOODLE LINK BANNER ===== */
+.moodle-banner {
+  background: linear-gradient(135deg, var(--accent) 0%, #e8941a 100%);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.moodle-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255,255,255,0.04) 20px,
+    rgba(255,255,255,0.04) 40px
+  );
+}
+
+.moodle-banner a {
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.moodle-banner a:hover { text-decoration: underline; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; text-align: center; }
+  .hero-desc { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .ganztag-content { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .kontakt-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-burger { display: block; }
+  .about-visual { order: -1; }
+  .scroll-indicator { display: none; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 4rem 1.25rem; }
+  .about-features { grid-template-columns: 1fr; }
+  .about-visual { grid-template-columns: 1fr 1fr; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+
+/* ===== LOADING SCREEN ===== */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--primary-dark);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-text {
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.loader-bar {
+  width: 120px;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  animation: load-fill 1.2s ease-in-out forwards;
+}
+
+@keyframes load-fill {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 </style>
 </head>
 <body>
 
-<div class="filmstrip">
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-text">Grundschule Hardt</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
 </div>
 
-<header>
-  <div class="camera-emoji">🎬</div>
-  <h1 class="main-title">Trickfilm-Werkstatt</h1>
-  <p class="subtitle">Dein Abenteuer als Filmemacher·in beginnt hier!</p>
-</header>
+<!-- Cursor -->
+<div class="cursor-dot" id="cursor"></div>
 
-<div class="intro-box">
-  <span class="star-deco tl">⭐</span><span class="star-deco tr">🌟</span>
-  <span class="star-deco bl">✨</span><span class="star-deco br">⭐</span>
-  <p>Willkommen in der Trickfilm-Werkstatt! 🎉 Hier lernst du Schritt für Schritt, wie du in <strong>10 Wochen</strong> deinen eigenen Stop-Motion-Film planst. Klicke auf die bunten Buttons!</p>
-</div>
-
-<nav class="nav">
-  <button class="tab-btn active" onclick="showPanel(0,this)">💡 Ideen<span class="tab-badge" id="tbadge-0">✓</span></button>
-  <button class="tab-btn" onclick="showPanel(1,this)">🧸 Figuren<span class="tab-badge" id="tbadge-1">✓</span></button>
-  <button class="tab-btn" onclick="showPanel(2,this)">🌄 Hintergründe<span class="tab-badge" id="tbadge-2">✓</span></button>
-  <button class="tab-btn" onclick="showPanel(3,this)">📋 Storyboard<span class="tab-badge" id="tbadge-3">✓</span></button>
-  <button class="tab-btn" onclick="showPanel(4,this)">📅 10-Wochen-Plan<span class="tab-badge" id="tbadge-4">✓</span></button>
-  <button class="tab-btn" onclick="showPanel(5,this)">🏆 Fortschritt<span class="tab-badge" id="tbadge-5">✓</span></button>
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">GH</div>
+      <div>
+        <div class="nav-logo-text">Grundschule Hardt</div>
+        <div class="nav-logo-sub">Schwäbisch Gmünd</div>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks"></ul>
+    <button class="nav-burger" id="burger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<div id="save-indicator">💾 Gespeichert ✓</div>
-<div id="badge-toast">🏅 Neues Abzeichen freigeschaltet!</div>
+<div class="mobile-menu" id="mobileMenu"></div>
 
-<div class="content">
-
-<!-- ======= PANEL 0: IDEEN ======= -->
-<div class="panel active" id="panel-0">
-  <div class="panel-header ph-1">
-    <span class="panel-emoji">💡</span>
-    <h2 class="panel-title">Ideen finden &amp; Geschichte schreiben</h2>
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
   </div>
-  <div class="card-grid">
-    <div class="card">
-      <span class="card-icon">🌈</span>
-      <div class="card-title">Was ist Stop Motion?</div>
-      <p>Du bewegst Figuren ganz langsam und machst nach jedem Schritt ein Foto. Viele Fotos hintereinander lassen die Figuren lebendig werden! 🪄</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">✍️</span>
-      <div class="card-title">Schreib deine Geschichte!</div>
-      <p>Jeder gute Film braucht eine Geschichte. Beantworte: <strong>Wer</strong> ist dabei? <strong>Was</strong> passiert? Wo spielt es? Wie endet es?</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🎭</span>
-      <div class="card-title">Genres &amp; Ideen</div>
-      <p>Abenteuer, Märchen, Comedy, Freundschaft, Tiere, Fantasy... Lass deiner Fantasie freien Lauf! 🚀</p>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="idea-box">
-      <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--yellow);margin-bottom:6px">🎲 Ideen-Generator</div>
-      <div style="color:rgba(255,255,255,0.7);font-size:0.88rem;margin-bottom:12px">Du weißt nicht was du machen sollst? Würfle eine Idee!</div>
-      <div class="idea-result" id="idea-display">Drücke den Knopf und entdecke eine tolle Film-Idee! ✨</div>
-      <button class="gen-btn" onclick="generateIdea()">🎲 Idee würfeln!</button>
-    </div>
-    <div class="inner-box">
-      <div class="inner-title" style="color:var(--yellow)">📝 Meine Film-Geschichte</div>
-      <div style="display:grid;gap:10px">
-        <div>
-          <label class="lbl">🎬 Titel meines Films:</label>
-          <input type="text" id="s-title" placeholder="z.B. Der mutige Drachen-Ritter" style="width:100%;border-color:var(--yellow)">
-        </div>
-        <div>
-          <label class="lbl">🌟 Worum geht es?</label>
-          <textarea id="s-about" placeholder="Schreibe hier deine Geschichte auf..." style="width:100%;height:90px;border-color:var(--purple)"></textarea>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-          <div>
-            <label class="lbl">🎬 Anfang:</label>
-            <textarea id="s-begin" placeholder="Wie beginnt der Film?" style="width:100%;height:75px;border-color:var(--blue)"></textarea>
-          </div>
-          <div>
-            <label class="lbl">🌪️ Spannung:</label>
-            <textarea id="s-tension" placeholder="Was ist das Problem?" style="width:100%;height:75px;border-color:var(--orange)"></textarea>
-          </div>
-          <div>
-            <label class="lbl">🎉 Ende:</label>
-            <textarea id="s-end" placeholder="Wie endet der Film?" style="width:100%;height:75px;border-color:var(--green)"></textarea>
-          </div>
-        </div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span id="heroBadge">Kulturschule Baden-Württemberg</span>
+      </div>
+      <h1 id="heroTitle">Willkommen an der <em>Grundschule Hardt</em></h1>
+      <p class="hero-desc" id="heroDesc">
+        Offene Ganztagesschule auf dem Gmünder Sonnenhügel – wo Natur, Kultur und Bildung zusammenkommen.
+      </p>
+      <div class="hero-actions">
+        <a href="#about" class="btn btn-primary">Unsere Schule entdecken →</a>
+        <a href="#kontakt" class="btn btn-outline">Kontakt</a>
       </div>
     </div>
-    <div class="tip-box">
-      <span class="tip-icon">💡</span>
-      <p><strong>Profi-Tipp:</strong> Starte mit einer kurzen Geschichte – nur 1 bis 2 Minuten Film! Wichtig ist: Anfang, Problem und Ende kennen.</p>
+    <div class="hero-visual">
+      <div class="hero-card hero-card-1">
+        <div class="hero-card-emoji">🌿</div>
+        <div class="hero-card-title">Naturprofil</div>
+        <div class="hero-card-text">Wald, Wiese, Bach – Natur erleben im Schulalltag</div>
+      </div>
+      <div class="hero-card hero-card-2">
+        <div class="hero-card-stat" id="schuelerCount">110</div>
+        <div class="hero-card-title">Schülerinnen & Schüler</div>
+        <div class="hero-card-text">auf dem Sonnenhügel</div>
+      </div>
+      <div class="hero-card hero-card-3">
+        <div class="hero-card-emoji">🎨</div>
+        <div class="hero-card-title">Kulturagenten-Programm</div>
+        <div class="hero-card-text">Kreativität und Kunst als fester Bestandteil</div>
+      </div>
     </div>
   </div>
+  <div class="scroll-indicator">
+    <span>ENTDECKEN</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Moodle -->
+<div class="moodle-banner">
+  <a href="https://moodle1.belwue.de/moodle/login/index.php" target="_blank" rel="noopener">
+    📚 Zur Moodle-Lernplattform →
+  </a>
 </div>
 
-<!-- ======= PANEL 1: FIGUREN ======= -->
-<div class="panel" id="panel-1">
-  <div class="panel-header ph-2">
-    <span class="panel-emoji">🧸</span>
-    <h2 class="panel-title">Welche Figuren brauchst du?</h2>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <span class="card-icon">🤴</span>
-      <div class="card-title">Hauptfigur (Held·in)</div>
-      <p>Deine Geschichte braucht eine Hauptperson, die das Abenteuer erlebt und im Mittelpunkt steht.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🐉</span>
-      <div class="card-title">Gegner / Problem</div>
-      <p>Oft gibt es eine Herausforderung oder einen Bösewicht! Das macht den Film spannend.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🦊</span>
-      <div class="card-title">Freunde &amp; Helfer</div>
-      <p>Überlege, ob deine Hauptfigur Begleiter hat, die ihr helfen. Freunde machen alles besser!</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🎨</span>
-      <div class="card-title">Material zum Basteln</div>
-      <p>Knetmasse, Lego, Papierfiguren oder Playmobil eignen sich super! Sie müssen bewegbar sein.</p>
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">Über uns</div>
+        <h2 class="section-title">Lernen auf dem<br>Sonnenhügel</h2>
+        <p class="section-subtitle" id="aboutText">
+          Die Grundschule Hardt ist seit dem Schuljahr 2012/13 eine offene Ganztagesschule in städtischer Trägerschaft. Die Eltern können wählen, ob ihr Kind am Ganztag teilnimmt oder nicht. Zur Zeit besuchen etwa 110 Schülerinnen und Schüler die Schule, die im Süden der Stadt auf dem Gmünder Sonnenhügel steht.
+        </p>
+        <div class="about-features" id="aboutFeatures"></div>
+      </div>
+      <div class="about-visual reveal" id="aboutStats"></div>
     </div>
   </div>
-  <div class="panel-body">
-    <div class="two-col">
-      <!-- LEFT: add custom figure -->
-      <div class="inner-box" style="margin-bottom:0">
-        <div class="inner-title" style="color:var(--blue)">👥 Eigene Figur hinzufügen</div>
-        <div style="display:grid;gap:8px;margin-bottom:10px">
-          <div>
-            <label class="lbl">✏️ Name der Figur:</label>
-            <input type="text" id="fig-name" placeholder="z.B. Luna, Max, Drako ..." style="width:100%;border-color:var(--blue)" onkeydown="if(event.key==='Enter')addFigure()">
-          </div>
-          <div>
-            <label class="lbl">🎭 Rolle:</label>
-            <select id="fig-role" style="width:100%;font-family:'Nunito',sans-serif;border-radius:10px;border:2px solid var(--purple);padding:8px 12px;font-size:0.95rem;background:rgba(255,255,255,0.95);color:#222;cursor:pointer">
-              <option value="🦸 Held·in">🦸 Held·in</option>
-              <option value="😈 Bösewicht">😈 Bösewicht</option>
-              <option value="🤝 Bester Freund">🤝 Bester Freund</option>
-              <option value="🧙 Magische Figur">🧙 Magische Figur</option>
-              <option value="🐾 Tier-Begleiter">🐾 Tier-Begleiter</option>
-              <option value="👑 König / Königin">👑 König·in</option>
-              <option value="🧚 Fee / Elfe">🧚 Fee / Elfe</option>
-              <option value="🤖 Roboter">🤖 Roboter</option>
-              <option value="👻 Geist">👻 Geist</option>
-              <option value="🧟 Monster">🧟 Monster</option>
-              <option value="🦄 Magisches Tier">🦄 Magisches Tier</option>
-              <option value="🧑‍🍳 Handwerker·in">🧑‍🍳 Handwerker·in</option>
-              <option value="🕵️ Detektiv">🕵️ Detektiv</option>
-              <option value="🧑‍🚀 Astronaut·in">🧑‍🚀 Astronaut·in</option>
-              <option value="⚓ Nebenrolle">⚓ Nebenrolle</option>
-            </select>
-          </div>
+</section>
+
+<!-- Ganztag -->
+<section id="ganztag">
+  <div class="section-inner">
+    <div class="ganztag-content">
+      <div class="reveal">
+        <div class="section-label">Ganztagesschule</div>
+        <h2 class="section-title">Ein Tag bei uns</h2>
+        <div class="ganztag-text" id="ganztagText">
+          <p>Die Schule zeichnet sich durch ein umfassendes pädagogisches wie räumliches Angebot aus. Für die Kinder, die an der Ganztagesschule teilnehmen, sind die Unterrichtszeiten Montag bis Donnerstag von 8.00 Uhr bis 15.15 Uhr und am Freitag von 8.00 – 12.30 Uhr.</p>
+          <p>Es erfolgt eine Rhythmisierung des Schultages durch Unterricht, Bewegungspausen, Lernzeiten, Werkstattunterricht und vielfältige sportliche, musische, sowie Bildung und Betreuung unterstützende Angebote.</p>
+          <p>Die Mittagspause kann in der Schule verbracht werden. Die Kinder werden in dieser Zeit von vier pädagogischen Fachkräften betreut. Es besteht die Möglichkeit, ein kostenpflichtiges Mittagessen zu bestellen. An jedem Tag gibt es zwei verschiedene Essen zur Auswahl.</p>
+          <p>Auch außerhalb der Unterrichtszeit wird ein weiteres, kostenpflichtiges Betreuungsangebot von Montag bis Freitag ab 7 Uhr bis 17 Uhr durch die Stadt Schwäbisch Gmünd angeboten.</p>
         </div>
-        <button class="add-btn" onclick="addFigure()" style="width:100%">+ Figur hinzufügen</button>
-        <ul class="fig-items" id="fig-list" style="margin-top:12px"></ul>
       </div>
-      <!-- RIGHT: quick templates -->
-      <div class="inner-box" style="margin-bottom:0">
-        <div class="inner-title" style="color:var(--purple)">⚡ Schnell-Vorlagen</div>
-        <div style="color:rgba(255,255,255,0.5);font-size:0.75rem;margin-bottom:8px">Klicke auf eine Vorlage – dann kannst du den Namen noch anpassen!</div>
-        <div id="fig-templates-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
+      <div class="reveal">
+        <div class="time-grid" id="timeSlots"></div>
       </div>
     </div>
-    <div class="tip-box" style="margin-top:14px">
-      <span class="tip-icon">🧸</span>
-      <p><strong>Material-Tipp:</strong> Knetmasse ist super für Anfänger! Auch <strong>Lego-Figuren</strong> oder <strong>Papierfiguren</strong> funktionieren toll. Starte mit maximal 3–4 Figuren!</p>
+  </div>
+</section>
+
+<!-- Aktuelles -->
+<section id="aktuelles">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Aktuelles</div>
+      <h2 class="section-title">Neuigkeiten</h2>
+      <p class="section-subtitle">Was an unserer Schule gerade passiert.</p>
+    </div>
+    <div class="news-grid reveal" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- Kulturschule -->
+<section id="kultur">
+  <div class="section-inner kultur-content reveal">
+    <div class="section-label">Kulturschule</div>
+    <h2 class="section-title">Kultur & Kreativität</h2>
+    <div class="kultur-text" id="kulturText">
+      <p>Im Schuljahr 2016 startete die Grundschule Hardt mit dem Programm „Kulturagenten für kreative Schulen Baden-Württemberg". In ganz Baden-Württemberg gibt es das Programm in zehn Städten. Schwäbisch Gmünd und wir, die Grundschule Hardt, sind dabei.</p>
+      <p>Ziel des Programms ist es, bei den Schülerinnen und Schülern Neugier für künstlerische Aktivitäten zu wecken und mehr Kenntnisse über Kunst und Kultur zu vermitteln.</p>
+      <p>In jeder Klassenstufe wird nun jeweils ein Kunst- und Kulturprojekt pro Schuljahr durchgeführt. Dadurch wird den Schülerinnen und Schülern die Möglichkeit geboten, im Laufe ihrer Grundschulzeit ihre jeweiligen kreativen Neigungen weiter zu entwickeln und neue Erfahrungen in diesem Bereich zu sammeln.</p>
+      <p>Die Grundschule Hardt wurde im Rahmen des Landesprogramms „Kulturschule Baden-Württemberg" als Kulturschule Baden-Württemberg ausgezeichnet.</p>
+    </div>
+    <div class="kultur-badges" id="kulturBadges"></div>
+  </div>
+</section>
+
+<!-- Team -->
+<section id="team">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Unser Team</div>
+      <h2 class="section-title">Menschen, die bewegen</h2>
+      <p class="section-subtitle">Die Menschen hinter unserer Schule.</p>
+    </div>
+    <div class="team-grid reveal" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- Termine -->
+<section id="termine">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Termine</div>
+      <h2 class="section-title">Kommende Veranstaltungen</h2>
+      <p class="section-subtitle">Merken Sie sich diese Termine vor.</p>
+    </div>
+    <div class="termine-list reveal" id="termineList"></div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section id="kontakt">
+  <div class="section-inner">
+    <div class="kontakt-grid">
+      <div class="reveal">
+        <div class="section-label">Kontakt</div>
+        <h2 class="section-title">So erreichen<br>Sie uns</h2>
+        <div class="kontakt-info-items" id="kontaktInfo"></div>
+      </div>
+      <div class="kontakt-map reveal">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.5!2d9.7987!3d48.7850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ3JzA2LjAiTiA5wrA0Nyc1NS4zIkU!5e0!3m2!1sde!2sde!4v1"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Standort Grundschule Hardt"
+        ></iframe>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ======= PANEL 2: HINTERGRÜNDE ======= -->
-<div class="panel" id="panel-2">
-  <div class="panel-header ph-3">
-    <span class="panel-emoji">🌄</span>
-    <h2 class="panel-title">Welche Hintergründe brauchst du?</h2>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <span class="card-icon">🏠</span>
-      <div class="card-title">Was ist ein Hintergrund?</div>
-      <p>Der Hintergrund zeigt, wo die Geschichte stattfindet. Zeichne ihn auf Papier oder benutze fertige Bilder.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🎨</span>
-      <div class="card-title">Selbst malen</div>
-      <p>Male deinen Hintergrund auf Papier oder Pappe! Nicht zu bunt – damit die Figuren gut sichtbar sind.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">📸</span>
-      <div class="card-title">Fotos nutzen</div>
-      <p>Auch echte Fotos oder ausgedruckte Bilder als Hintergrund funktionieren wunderbar!</p>
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>© <span id="footerYear"></span> Grundschule Hardt – Schwäbisch Gmünd</div>
+    <div class="footer-links">
+      <a href="#" id="datenschutzLink">Datenschutz</a>
+      <a href="#" id="impressumLink">Impressum</a>
     </div>
   </div>
-  <div class="panel-body">
-    <div class="inner-title" style="color:var(--blue);text-align:center">🗺️ Wähle deine Schauplätze</div>
-    <div class="bg-gallery">
-      <div class="bg-card" onclick="toggleBg(this,'Wald')"><div class="bg-preview" style="background:linear-gradient(135deg,#2d5a27,#4a7c59)">🌲</div><div class="bg-label">Wald</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Schloss')"><div class="bg-preview" style="background:linear-gradient(135deg,#7f7f9f,#a0a0c0)">🏰</div><div class="bg-label">Schloss</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Weltall')"><div class="bg-preview" style="background:linear-gradient(135deg,#0a0a2e,#1a1a4e)">🌌</div><div class="bg-label">Weltall</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Strand')"><div class="bg-preview" style="background:linear-gradient(135deg,#87CEEB,#F4A460)">🏖️</div><div class="bg-label">Strand</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Dorf')"><div class="bg-preview" style="background:linear-gradient(135deg,#90EE90,#DEB887)">🏘️</div><div class="bg-label">Dorf</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Schule')"><div class="bg-preview" style="background:linear-gradient(135deg,#FFD700,#FF8C00)">🏫</div><div class="bg-label">Schule</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Küche')"><div class="bg-preview" style="background:linear-gradient(135deg,#f0e8d0,#ddd)">🍳</div><div class="bg-label">Küche</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Höhle')"><div class="bg-preview" style="background:linear-gradient(135deg,#333,#555)">🦇</div><div class="bg-label">Höhle</div></div>
-      <div class="bg-card" onclick="toggleBg(this,'Unterwasser')"><div class="bg-preview" style="background:linear-gradient(135deg,#006994,#0099cc)">🐠</div><div class="bg-label">Unterwasser</div></div>
-    </div>
-    <div class="inner-box">
-      <div class="inner-title" style="color:var(--yellow);font-size:1rem">✅ Meine ausgewählten Schauplätze:</div>
-      <div id="selected-bgs">Noch keine Hintergründe ausgewählt. Klicke auf die Bilder oben!</div>
-    </div>
-    <div class="tip-box">
-      <span class="tip-icon">🎨</span>
-      <p><strong>Profi-Tipp:</strong> Befestige deinen Hintergrund gut! Wenn er sich zwischen den Fotos verschiebt, sieht der Film wackelig aus. Benutze Klebestreifen oder Magnete!</p>
-    </div>
-  </div>
-</div>
+</footer>
 
-<!-- ======= PANEL 3: STORYBOARD ======= -->
-<div class="panel" id="panel-3">
-  <div class="panel-header ph-4">
-    <span class="panel-emoji">📋</span>
-    <h2 class="panel-title">Das Storyboard erstellen</h2>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <span class="card-icon">🖼️</span>
-      <div class="card-title">Was ist ein Storyboard?</div>
-      <p>Ein Storyboard ist wie ein Comic deines Films! Du zeichnest die wichtigsten Szenen auf, damit du weißt, was du drehen musst.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🎨</span>
-      <div class="card-title">Direkt reinzeichnen!</div>
-      <p>Jetzt neu: Male deine Szenen direkt in die Felder! Wähle eine Farbe und zeichne mit der Maus oder dem Finger.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">🔢</span>
-      <div class="card-title">Szenen einteilen</div>
-      <p>Teile deine Geschichte in 6–12 Szenen ein. Schreibe dazu, was passiert und was gesagt wird.</p>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="inner-title" style="color:var(--green);text-align:center">🎬 Mein digitales Storyboard</div>
-    <div class="sb-grid" id="sb-grid"></div>
-    <div style="text-align:center">
-      <button class="add-frame-btn" onclick="addFrame()">+ Szene hinzufügen</button>
-    </div>
-    <div class="tip-box" style="margin-top:14px">
-      <span class="tip-icon">🎨</span>
-      <p><strong>Zeichen-Tipp:</strong> Wähle eine Farbe und male direkt in das graue Feld! Mit dem 🗑️ Button kannst du eine Szene löschen. Klicke auf das Emoji um ein anderes auszuwählen.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ======= PANEL 4: 10-WOCHEN-PLAN ======= -->
-<div class="panel" id="panel-4">
-  <div class="panel-header ph-5">
-    <span class="panel-emoji">📅</span>
-    <h2 class="panel-title">Dein 10-Wochen-Filmplan</h2>
-  </div>
-  <div class="panel-body">
-    <div class="tip-box" style="margin-bottom:14px">
-      <span class="tip-icon">✏️</span>
-      <p><strong>Tipp:</strong> Klicke direkt auf einen Wochen-Titel oder die Beschreibung um den Text anzupassen! So kannst du den Plan für dich personalisieren.</p>
-    </div>
-    <div class="week-grid" id="week-grid"></div>
-    <div class="tip-box" style="margin-top:14px">
-      <span class="tip-icon">⏰</span>
-      <p><strong>Zeit-Tipp:</strong> Plane lieber mehr Zeit ein als du denkst! Stop-Motion-Filme dauern länger als man glaubt. Extra-Zeit kannst du für Verbesserungen nutzen!</p>
-    </div>
-  </div>
-</div>
-
-<!-- ======= PANEL 5: FORTSCHRITT ======= -->
-<div class="panel" id="panel-5">
-  <div class="panel-header ph-6">
-    <span class="panel-emoji">🏆</span>
-    <h2 class="panel-title">Dein Fortschritt</h2>
-  </div>
-  <div class="panel-body">
-
-    <!-- BADGES -->
-    <div class="badges-section">
-      <div class="badges-title">🏅 Deine Abzeichen</div>
-      <div class="badges-grid" id="badges-grid"></div>
-    </div>
-
-    <div class="inner-box">
-      <div class="inner-title" style="color:var(--yellow);text-align:center">⭐ Wie weit bist du?</div>
-      <div class="prog-item"><div class="prog-label"><span>💡 Geschichte geschrieben</span><span id="pct-0">0%</span></div><div class="prog-bar" onclick="cycleProgress(0)"><div class="prog-fill" id="fill-0" style="background:linear-gradient(90deg,#FF3366,#FF6B35)"></div></div></div>
-      <div class="prog-item"><div class="prog-label"><span>🧸 Figuren geplant</span><span id="pct-1">0%</span></div><div class="prog-bar" onclick="cycleProgress(1)"><div class="prog-fill" id="fill-1" style="background:linear-gradient(90deg,#A855F7,#6366F1)"></div></div></div>
-      <div class="prog-item"><div class="prog-label"><span>🌄 Hintergründe fertig</span><span id="pct-2">0%</span></div><div class="prog-bar" onclick="cycleProgress(2)"><div class="prog-fill" id="fill-2" style="background:linear-gradient(90deg,#4ECDC4,#06b6d4)"></div></div></div>
-      <div class="prog-item"><div class="prog-label"><span>📋 Storyboard erstellt</span><span id="pct-3">0%</span></div><div class="prog-bar" onclick="cycleProgress(3)"><div class="prog-fill" id="fill-3" style="background:linear-gradient(90deg,#6BCB77,#84cc16)"></div></div></div>
-      <div class="prog-item"><div class="prog-label"><span>📸 Fotos aufgenommen</span><span id="pct-4">0%</span></div><div class="prog-bar" onclick="cycleProgress(4)"><div class="prog-fill" id="fill-4" style="background:linear-gradient(90deg,#FFD93D,#FF6B35)"></div></div></div>
-      <div class="prog-item"><div class="prog-label"><span>🎬 Film fertiggestellt</span><span id="pct-5">0%</span></div><div class="prog-bar" onclick="cycleProgress(5)"><div class="prog-fill" id="fill-5" style="background:linear-gradient(90deg,#FF69B4,#A855F7)"></div></div></div>
-      <div class="prog-hint">↑ Klicke auf die Balken um deinen Fortschritt zu aktualisieren!</div>
-    </div>
-
-    <div class="inner-box">
-      <div class="inner-title" style="color:var(--yellow)">✅ Meine Aufgaben-Checkliste</div>
-      <ul class="checklist">
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>💡 Ich habe eine Film-Idee gefunden!</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>✍️ Meine Geschichte ist aufgeschrieben.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>🧸 Ich weiß, welche Figuren ich brauche.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>🎨 Meine Figuren sind gebastelt oder ausgesucht.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>🌄 Meine Hintergründe sind gemalt oder vorbereitet.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>📋 Mein Storyboard ist fertig gezeichnet.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>📱 Ich habe eine Kamera oder ein Handy bereit.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>📸 Ich habe alle Fotos gemacht.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>🎬 Mein Film ist fertig zusammengestellt.</li>
-        <li class="cl-item" onclick="toggleCheck(this)"><span class="check-box"></span>🎉 Ich habe meinen Film präsentiert!</li>
-      </ul>
-    </div>
-
-    <div class="congrats-box" id="congrats">
-      <p style="font-family:'Fredoka One',cursive;font-size:1.8rem;color:white;text-shadow:2px 2px 0 rgba(0,0,0,0.2)">🎉 SUPER GEMACHT! 🎉</p>
-      <p style="color:white;font-weight:700;margin-top:8px">Du hast deinen eigenen Trickfilm geplant – das ist wirklich toll!</p>
-    </div>
-
-    <!-- PDF EXPORT / IMPORT -->
-    <div class="pdf-bar" style="margin-top:14px">
-      <button class="pdf-btn pdf-export-btn" onclick="exportPDF()">📄 PDF herunterladen</button>
-      <button class="pdf-btn pdf-import-btn" onclick="document.getElementById('pdf-import-input').click()">📂 Projekt laden (.json)</button>
-      <button class="pdf-btn" style="background:linear-gradient(135deg,#A855F7,#6366F1);color:white" onclick="exportJSON()">💾 Projekt speichern (.json)</button>
-      <input type="file" id="pdf-import-input" accept=".json" onchange="importJSON(this)">
-    </div>
-  </div>
-</div>
-
-</div><!-- /content -->
-
-<!-- CANVAS FULLSCREEN MODAL -->
-<div class="canvas-modal-overlay" id="canvas-modal">
-  <div class="canvas-modal">
-    <div class="canvas-modal-header">
-      <span class="canvas-modal-title" id="modal-title">🎨 Szene zeichnen</span>
-      <button class="canvas-modal-close" onclick="closeCanvasModal()">✕ Schließen</button>
-    </div>
-    <div class="canvas-modal-tools">
-      <div id="modal-colors"></div>
-      <button class="modal-tool-btn" id="modal-eraser" onclick="toggleModalEraser()">⬜ Radierer</button>
-      <input type="range" class="modal-brush" id="modal-brush" min="2" max="30" value="6">
-      <button class="modal-tool-btn" onclick="clearModalCanvas()" style="background:rgba(255,100,100,0.3)">🗑️ Alles löschen</button>
-      <button class="modal-apply-btn" onclick="applyModalCanvas()">✓ Übernehmen</button>
-    </div>
-    <div class="canvas-modal-body" id="modal-canvas-wrap">
-      <canvas id="modal-canvas"></canvas>
-    </div>
-  </div>
-</div>
-
-<div class="filmstrip" style="border-bottom:none;border-top:3px solid var(--yellow)">
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-  <div class="fh"></div><div class="fh"></div><div class="fh"></div><div class="fh"></div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- ========== JSON DATA ========== -->
 <script>
-// ============================================================
-// SOUND ENGINE (Web Audio API – no external files needed)
-// ============================================================
-var AC = null;
-function getAC() {
-  if (!AC) {
-    try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
-  }
-  return AC;
-}
-function playTone(freq, type, dur, vol) {
-  var ac = getAC(); if (!ac) return;
-  var o = ac.createOscillator();
-  var g = ac.createGain();
-  o.connect(g); g.connect(ac.destination);
-  o.type = type || 'sine';
-  o.frequency.value = freq;
-  g.gain.setValueAtTime(vol||0.18, ac.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
-  o.start(); o.stop(ac.currentTime + dur);
-}
-function playClick()    { playTone(800,'square',0.08,0.15); }
-function playPop()      { playTone(600,'sine',0.12,0.2); setTimeout(function(){ playTone(900,'sine',0.1,0.15); },60); }
-function playSuccess()  { [523,659,784,1047].forEach(function(f,i){ setTimeout(function(){ playTone(f,'sine',0.18,0.2); },i*80); }); }
-function playCameraShot(){ playTone(1200,'square',0.04,0.3); setTimeout(function(){ playTone(300,'sine',0.15,0.2); },50); }
-function playCheck()    { playTone(440,'sine',0.05,0.12); setTimeout(function(){ playTone(550,'sine',0.1,0.15); },60); }
-function playBadge()    { [392,523,659,784,1047].forEach(function(f,i){ setTimeout(function(){ playTone(f,'triangle',0.2,0.25); },i*70); }); }
+// All regularly changing data is defined here as JSON
+// In production, these would be separate .json files loaded via fetch()
 
-// ============================================================
-// PANEL SWITCHING
-// ============================================================
-function showPanel(idx, btn) {
-  playClick();
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById('panel-' + idx).classList.add('active');
-  btn.classList.add('active');
-}
-
-// ============================================================
-// localStorage SAVE / LOAD
-// ============================================================
-var saveTimer = null;
-function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveAll, 700); }
-
-function saveAll() {
-  try {
-    var data = {
-      story: {
-        title: document.getElementById('s-title').value,
-        about: document.getElementById('s-about').value,
-        begin: document.getElementById('s-begin').value,
-        tension: document.getElementById('s-tension').value,
-        end: document.getElementById('s-end').value
-      },
-      figures: getFigures(),
-      backgrounds: Object.keys(selectedBgs),
-      storyboard: getStoryboardData(),
-      weekplan: getWeekData(),
-      progress: progState,
-      checklist: getChecklistState(),
-      badges: earnedBadges
-    };
-    localStorage.setItem('trickfilm-werkstatt', JSON.stringify(data));
-    showSaveIndicator();
-  } catch(e) { console.warn('Speichern fehlgeschlagen:', e); }
-}
-
-function loadAll() {
-  try {
-    var raw = localStorage.getItem('trickfilm-werkstatt');
-    if (!raw) return;
-    var data = JSON.parse(raw);
-    applyData(data);
-  } catch(e) { console.warn('Laden fehlgeschlagen:', e); }
-}
-
-function applyData(data) {
-  if (data.story) {
-    document.getElementById('s-title').value   = data.story.title   || '';
-    document.getElementById('s-about').value   = data.story.about   || '';
-    document.getElementById('s-begin').value   = data.story.begin   || '';
-    document.getElementById('s-tension').value = data.story.tension || '';
-    document.getElementById('s-end').value     = data.story.end     || '';
-  }
-  if (data.figures && data.figures.length) {
-    document.getElementById('fig-list').innerHTML = '';
-    data.figures.forEach(function(f){
-      // Support both old string format and new object format
-      if (typeof f === 'string') buildFigItem({name: f, role: ''}, true);
-      else buildFigItem(f, true);
-    });
-  }
-  if (data.backgrounds) {
-    data.backgrounds.forEach(function(name){
-      selectedBgs[name] = true;
-      document.querySelectorAll('.bg-card').forEach(function(card){
-        if (card.getAttribute('onclick') && card.getAttribute('onclick').indexOf("'"+name+"'") !== -1)
-          card.classList.add('selected');
-      });
-    });
-    updateBgDisplay();
-  }
-  if (data.storyboard && data.storyboard.length) {
-    document.getElementById('sb-grid').innerHTML = '';
-    frameCount = 0;
-    data.storyboard.forEach(function(f){ addFrame(f.emoji, f.text, f.drawing); });
-  }
-  if (data.weekplan && data.weekplan.length) {
-    buildWeekGrid(data.weekplan);
-  }
-  if (data.progress) {
-    data.progress.forEach(function(val, idx){
-      progState[idx] = val;
-      document.getElementById('fill-' + idx).style.width = val + '%';
-      document.getElementById('pct-' + idx).textContent = val + '%';
-    });
-    if (progState.every(function(v){ return v===100; }))
-      document.getElementById('congrats').style.display = 'block';
-  }
-  if (data.checklist) {
-    var items = document.querySelectorAll('.cl-item');
-    data.checklist.forEach(function(checked, i){
-      if (checked && items[i]) {
-        items[i].classList.add('checked');
-        items[i].querySelector('.check-box').textContent = '✓';
-      }
-    });
-  }
-  if (data.badges) { earnedBadges = data.badges; renderBadges(); }
-}
-
-function getFigures() {
-  var names = [];
-  document.querySelectorAll('#fig-list .fig-item span').forEach(function(s){ names.push(s.textContent); });
-  return names;
-}
-function getStoryboardData() {
-  var frames = [];
-  document.querySelectorAll('.sb-frame').forEach(function(frame){
-    var img = frame.querySelector('.sb-emoji-overlay');
-    var ta  = frame.querySelector('.sb-ta');
-    var cv  = frame.querySelector('.sb-canvas');
-    frames.push({
-      emoji: img ? img.textContent : '🎬',
-      text:  ta  ? ta.value        : '',
-      drawing: cv ? cv.toDataURL() : null
-    });
-  });
-  return frames;
-}
-function getChecklistState() {
-  var states = [];
-  document.querySelectorAll('.cl-item').forEach(function(li){ states.push(li.classList.contains('checked')); });
-  return states;
-}
-function showSaveIndicator() {
-  var ind = document.getElementById('save-indicator');
-  ind.style.opacity = '1';
-  setTimeout(function(){ ind.style.opacity = '0'; }, 1800);
-}
-
-// ============================================================
-// IDEAS
-// ============================================================
-var ideas = [
-  "🐉 Ein kleiner Drache lernt das Fliegen – aber er hat Angst vor der Höhe!",
-  "🚀 Eine Raumfahrerin verliert ihren Roboter-Freund auf dem Mars.",
-  "🐠 Eine Meerjungfrau sucht ihre verlorene Schatztruhe.",
-  "🦁 Ein mutiger Löwe hilft einem kleinen Vogel, sein Nest zu bauen.",
-  "🧙 Eine Hexe backt einen Zauberkuchen – aber der Kuchen läuft davon!",
-  "🤖 Ein Roboter möchte unbedingt tanzen lernen.",
-  "🦄 Ein Einhorn findet einen magischen Regenbogen-Schatz.",
-  "🐺 Ein Wolf möchte Freunde finden und backt einen Kuchen für alle.",
-  "🌙 Ein Kind kann nicht einschlafen und erlebt ein Abenteuer im Traumland.",
-  "🎪 Ein Zirkus-Elefant verliert seinen Hut und sucht ihn überall!",
-  "🌊 Drei Freunde bauen ein Boot und fahren zu einer geheimen Insel.",
-  "🍕 Die Pizza im Kühlschrank kommt nachts zum Leben!",
-  "🦊 Ein Fuchs und ein Hase werden beste Freunde – obwohl alle sagen das geht nicht.",
-  "🐢 Eine Schildkröte möchte unbedingt Astronautin werden.",
-  "🌷 Eine Blume sucht die Sonne und muss dabei viele Hindernisse überwinden."
-];
-var lastIdea = -1;
-function generateIdea() {
-  playPop();
-  var idx; do { idx = Math.floor(Math.random() * ideas.length); } while (idx === lastIdea && ideas.length > 1);
-  lastIdea = idx;
-  var el = document.getElementById('idea-display');
-  el.style.opacity = '0';
-  setTimeout(function(){ el.textContent = ideas[idx]; el.style.opacity = '1'; }, 200);
-  checkBadge('ideenmeister');
-}
-
-// ============================================================
-// FIGURES
-// ============================================================
-var figureTemplates = [
-  {emoji:'🦸', name:'Held·in',         role:'Hauptfigur',    desc:'Tapfer & mutig'},
-  {emoji:'😈', name:'Bösewicht',        role:'Gegner',        desc:'Das große Problem'},
-  {emoji:'🤝', name:'Bester Freund',    role:'Begleiter',     desc:'Hilft immer!'},
-  {emoji:'🧙', name:'Zauberer·in',      role:'Magische Figur',desc:'Hat besondere Kräfte'},
-  {emoji:'🐾', name:'Tier-Begleiter',   role:'Begleiter',     desc:'Treuer Weggefährte'},
-  {emoji:'👑', name:'König·in',         role:'Herrscher·in',  desc:'Regiert das Land'},
-  {emoji:'🧚', name:'Fee',              role:'Helferin',      desc:'Bringt Magie'},
-  {emoji:'🤖', name:'Roboter',          role:'Technik-Held',  desc:'Schlau & schnell'},
-  {emoji:'👻', name:'Freundlicher Geist',role:'Geheimnis',    desc:'Lebt in einer anderen Welt'},
-  {emoji:'🧟', name:'Monster',          role:'Gegner',        desc:'Sieht wild aus!'},
-  {emoji:'🦄', name:'Einhorn',          role:'Magisches Tier',desc:'Bringt Glück'},
-  {emoji:'🐉', name:'Drache',           role:'Begleiter',     desc:'Groß & stark'},
-  {emoji:'🕵️', name:'Detektiv',         role:'Ermittler·in',  desc:'Löst alle Rätsel'},
-  {emoji:'🧑‍🚀',name:'Astronaut·in',    role:'Entdecker·in',  desc:'Erforscht das Weltall'},
-  {emoji:'🧑‍🍳',name:'Köch·in',         role:'Handwerk',      desc:'Zaubert leckere Gerichte'},
-  {emoji:'🦊', name:'Fuchs',            role:'Schlauer Fuchs',desc:'Listig & clever'},
-  {emoji:'🐺', name:'Wolf',             role:'Streiter',      desc:'Mutig & stark'},
-  {emoji:'🌸', name:'Waldgeist',        role:'Natur-Wesen',   desc:'Hütet den Wald'},
-  {emoji:'🧞', name:'Dschinn',          role:'Wunsch-Erfüller',desc:'Erfüllt drei Wünsche'},
-  {emoji:'🦸‍♀️',name:'Superheldin',     role:'Hauptfigur',    desc:'Hat Superkräfte'}
+const NAVIGATION_DATA = [
+  { label: "Über uns", href: "#about" },
+  { label: "Ganztag", href: "#ganztag" },
+  { label: "Aktuelles", href: "#aktuelles" },
+  { label: "Kultur", href: "#kultur" },
+  { label: "Team", href: "#team" },
+  { label: "Termine", href: "#termine" },
+  { label: "Kontakt", href: "#kontakt" }
 ];
 
-function initFigureTemplates() {
-  var grid = document.getElementById('fig-templates-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  figureTemplates.forEach(function(t){
-    var btn = document.createElement('button'); btn.className = 'fig-template-btn';
-    btn.innerHTML =
-      '<span class="fig-template-emoji">' + t.emoji + '</span>' +
-      '<span class="fig-template-info">' +
-        '<span class="fig-template-name">' + t.name + '</span>' +
-        '<span class="fig-template-desc">' + t.desc + '</span>' +
-      '</span>';
-    btn.onclick = function(){
-      // Pre-fill name field with template name, set role dropdown
-      document.getElementById('fig-name').value = t.name;
-      var sel = document.getElementById('fig-role');
-      // Try to match role in select options
-      for (var i = 0; i < sel.options.length; i++) {
-        if (sel.options[i].value.indexOf(t.emoji) !== -1) { sel.selectedIndex = i; break; }
-      }
-      playPop();
-      addFigure();
-    };
-    grid.appendChild(btn);
-  });
-}
-
-function addFigure() {
-  var nameInp = document.getElementById('fig-name');
-  var roleEl  = document.getElementById('fig-role');
-  var name = nameInp.value.trim();
-  var role = roleEl ? roleEl.value : '🦸 Held·in';
-  if (!name) { nameInp.focus(); return; }
-  buildFigItem({name: name, role: role}, false);
-  nameInp.value = ''; nameInp.focus();
-  scheduleSave(); checkBadge('figuren-kuenstler');
-}
-
-function addFigureTemplate(roleStr) {
-  // Legacy – kept for compatibility
-  buildFigItem({name: roleStr.replace(/^[\S]+\s/, ''), role: roleStr}, false);
-  scheduleSave(); checkBadge('figuren-kuenstler');
-}
-
-function buildFigItem(fig, silent) {
-  // fig can be {name, role} object or plain string (legacy)
-  if (typeof fig === 'string') fig = {name: fig, role: ''};
-  if (!silent) playPop();
-
-  var parts = fig.role ? fig.role.split(' ') : [];
-  var roleEmoji = (parts[0] && parts[0].length <= 4) ? parts[0] : '🎭';
-  var roleLabel = parts.slice(1).join(' ') || fig.role || '';
-
-  var li = document.createElement('li'); li.className = 'fig-item';
-  li.dataset.name = fig.name;
-  li.dataset.role = fig.role || '';
-
-  var emojiDiv = document.createElement('div'); emojiDiv.className = 'fig-item-emoji'; emojiDiv.textContent = roleEmoji;
-  var infoDiv  = document.createElement('div'); infoDiv.className = 'fig-item-info';
-  var nameDiv  = document.createElement('div'); nameDiv.className = 'fig-item-name'; nameDiv.textContent = fig.name;
-  var roleDiv  = document.createElement('div'); roleDiv.className = 'fig-item-role'; roleDiv.textContent = roleLabel;
-  infoDiv.appendChild(nameDiv); infoDiv.appendChild(roleDiv);
-
-  var btn = document.createElement('button'); btn.className = 'fig-del'; btn.textContent = '✕';
-  btn.onclick = function(){ playClick(); li.remove(); scheduleSave(); };
-
-  li.appendChild(emojiDiv); li.appendChild(infoDiv); li.appendChild(btn);
-  document.getElementById('fig-list').appendChild(li);
-}
-
-function getFigures() {
-  var figs = [];
-  document.querySelectorAll('#fig-list .fig-item').forEach(function(li){
-    figs.push({ name: li.dataset.name || '', role: li.dataset.role || '' });
-  });
-  return figs;
-}
-var selectedBgs = {};
-function toggleBg(card, name) {
-  playClick();
-  if (selectedBgs[name]) { delete selectedBgs[name]; card.classList.remove('selected'); }
-  else { selectedBgs[name] = true; card.classList.add('selected'); }
-  updateBgDisplay(); scheduleSave();
-  if (Object.keys(selectedBgs).length >= 1) checkBadge('kulissenbauer');
-}
-function updateBgDisplay() {
-  var el = document.getElementById('selected-bgs');
-  var keys = Object.keys(selectedBgs);
-  if (keys.length === 0) {
-    el.textContent = 'Noch keine Hintergründe ausgewählt. Klicke auf die Bilder oben!';
-    el.style.fontStyle = 'italic';
-  } else {
-    el.style.fontStyle = 'normal'; el.innerHTML = '';
-    keys.forEach(function(n){
-      var sp = document.createElement('span');
-      sp.textContent = '✅ ' + n;
-      sp.style.cssText = 'display:inline-block;background:rgba(255,255,255,0.15);color:white;padding:4px 12px;border-radius:20px;margin:3px;font-weight:700;';
-      el.appendChild(sp);
-    });
-  }
-}
-
-// ============================================================
-// STORYBOARD + CANVAS DRAWING
-// ============================================================
-var frameCount = 0;
-var frameEmojis = ['🌅','🏃','💬','😱','🤝','🎉','🌙','✨','🚪','🏆','❤️','🎬','⚡','🌊','🔥','🎵'];
-var emojiPalette = ['🌅','🏃','💬','😱','🤝','🎉','🌙','✨','🚪','🏆','❤️','🎬','⚡','🌊','🔥','🎵','😊','😢','😮','🤔','👀','🐲','🌈','🌺','🎈','🎭','🏔️','🗺️','🍎','🎠'];
-var drawColors = ['#e74c3c','#e67e22','#f1c40f','#2ecc71','#3498db','#9b59b6','#1abc9c','#e91e63','#795548','#000000','#ffffff'];
-
-function addFrame(savedEmoji, savedText, savedDrawing) {
-  frameCount++;
-  var grid = document.getElementById('sb-grid');
-  var frame = document.createElement('div'); frame.className = 'sb-frame';
-  var emoji = savedEmoji || frameEmojis[(frameCount-1) % frameEmojis.length];
-
-  // --- HEADER ---
-  var header = document.createElement('div'); header.className = 'sb-header';
-  var titleSpan = document.createElement('span'); titleSpan.textContent = 'Szene ' + frameCount;
-  var toolsDiv = document.createElement('div'); toolsDiv.className = 'sb-tools';
-
-  // Emoji picker button
-  var emojiBtn = document.createElement('button'); emojiBtn.className = 'sb-tool-btn'; emojiBtn.textContent = '😊';
-  emojiBtn.title = 'Emoji wählen';
-
-  // Expand button
-  var expandBtn = document.createElement('button'); expandBtn.className = 'sb-tool-btn'; expandBtn.textContent = '⛶';
-  expandBtn.title = 'Vergrößern';
-  expandBtn.onclick = function(){ openCanvasModal(canvas, emojiOverlay, frameCount); };
-
-  var delBtn = document.createElement('span'); delBtn.className = 'sb-del'; delBtn.textContent = '🗑️';
-  delBtn.onclick = function(){ playClick(); frame.remove(); scheduleSave(); };
-
-  toolsDiv.appendChild(emojiBtn);
-  toolsDiv.appendChild(expandBtn);
-  toolsDiv.appendChild(delBtn);
-  header.appendChild(titleSpan);
-  header.appendChild(toolsDiv);
-
-  // --- CANVAS WRAP ---
-  var canvasWrap = document.createElement('div'); canvasWrap.className = 'sb-canvas-wrap';
-  var canvas = document.createElement('canvas'); canvas.className = 'sb-canvas';
-  var emojiOverlay = document.createElement('div'); emojiOverlay.className = 'sb-emoji-overlay'; emojiOverlay.textContent = emoji;
-
-  canvasWrap.appendChild(canvas);
-  canvasWrap.appendChild(emojiOverlay);
-
-  // --- EMOJI POPUP ---
-  var popup = document.createElement('div'); popup.className = 'emoji-popup';
-  emojiPalette.forEach(function(e){
-    var btn = document.createElement('button'); btn.className = 'ep-btn'; btn.textContent = e;
-    btn.onclick = function(ev){ ev.stopPropagation(); emojiOverlay.textContent = e; popup.classList.remove('open'); scheduleSave(); };
-    popup.appendChild(btn);
-  });
-  emojiBtn.onclick = function(ev){
-    ev.stopPropagation();
-    document.querySelectorAll('.emoji-popup').forEach(function(p){ if(p!==popup) p.classList.remove('open'); });
-    popup.classList.toggle('open');
-  };
-  canvasWrap.appendChild(popup);
-
-  // --- COLOR TOOLBAR ---
-  var colorRow = document.createElement('div'); colorRow.className = 'sb-color-row';
-
-  var currentColor = '#e74c3c';
-  var currentBrush = 4;
-  var isEraser = false;
-
-  drawColors.forEach(function(c, i){
-    var dot = document.createElement('div'); dot.className = 'color-dot';
-    dot.style.background = c;
-    if (c === '#ffffff') dot.style.border = '2px solid #ccc';
-    if (i === 0) dot.classList.add('active-color');
-    dot.onclick = function(){
-      isEraser = false;
-      currentColor = c;
-      colorRow.querySelectorAll('.color-dot').forEach(function(d){ d.classList.remove('active-color'); });
-      dot.classList.add('active-color');
-      eraserBtn.classList.remove('active-tool');
-    };
-    colorRow.appendChild(dot);
-  });
-
-  // Eraser button
-  var eraserBtn = document.createElement('button'); eraserBtn.className = 'sb-tool-btn'; eraserBtn.textContent = '⬜';
-  eraserBtn.title = 'Radierer';
-  eraserBtn.onclick = function(){
-    isEraser = !isEraser;
-    eraserBtn.classList.toggle('active-tool', isEraser);
-  };
-  colorRow.appendChild(eraserBtn);
-
-  // Brush size
-  var brushSlider = document.createElement('input'); brushSlider.type = 'range';
-  brushSlider.min = 2; brushSlider.max = 20; brushSlider.value = 4;
-  brushSlider.className = 'brush-size';
-  brushSlider.oninput = function(){ currentBrush = parseInt(this.value); };
-  colorRow.appendChild(brushSlider);
-
-  // Clear
-  var clearBtn = document.createElement('button'); clearBtn.className = 'clear-btn'; clearBtn.textContent = 'Löschen';
-  clearBtn.onclick = function(){
-    playClick();
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    emojiOverlay.classList.remove('hidden');
-    scheduleSave();
-  };
-  colorRow.appendChild(clearBtn);
-
-  // --- TEXTAREA ---
-  var ta = document.createElement('textarea'); ta.className = 'sb-ta'; ta.placeholder = 'Was passiert hier?';
-  if (savedText) ta.value = savedText;
-  ta.addEventListener('input', scheduleSave);
-
-  // Assemble frame
-  frame.appendChild(header);
-  frame.appendChild(canvasWrap);
-  frame.appendChild(colorRow);
-  frame.appendChild(ta);
-  grid.appendChild(frame);
-
-  // --- CANVAS SETUP (after DOM append so offsetWidth is valid) ---
-  requestAnimationFrame(function(){
-    var w = canvasWrap.offsetWidth || 240;
-    var h = 110;
-    canvas.width = w; canvas.height = h;
-
-    if (savedDrawing) {
-      var img = new Image();
-      img.onload = function(){ canvas.getContext('2d').drawImage(img,0,0); };
-      img.src = savedDrawing;
-      emojiOverlay.classList.add('hidden');
-    }
-
-    // Drawing logic
-    var drawing = false;
-    var lastX = 0, lastY = 0;
-
-    function getPos(e) {
-      var r = canvas.getBoundingClientRect();
-      var scaleX = canvas.width / r.width;
-      var scaleY = canvas.height / r.height;
-      if (e.touches) {
-        return { x:(e.touches[0].clientX - r.left)*scaleX, y:(e.touches[0].clientY - r.top)*scaleY };
-      }
-      return { x:(e.clientX - r.left)*scaleX, y:(e.clientY - r.top)*scaleY };
-    }
-
-    function startDraw(e) {
-      e.preventDefault();
-      drawing = true;
-      var pos = getPos(e); lastX = pos.x; lastY = pos.y;
-      emojiOverlay.classList.add('hidden');
-      playCameraShot();
-    }
-    function doDraw(e) {
-      e.preventDefault();
-      if (!drawing) return;
-      var ctx = canvas.getContext('2d');
-      var pos = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.strokeStyle = isEraser ? '#f5f5f5' : currentColor;
-      ctx.lineWidth = isEraser ? currentBrush*3 : currentBrush;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.stroke();
-      lastX = pos.x; lastY = pos.y;
-    }
-    function endDraw(e) {
-      if (!drawing) return;
-      drawing = false;
-      scheduleSave();
-      checkBadge('storyboard-star');
-    }
-
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', doDraw);
-    canvas.addEventListener('mouseup', endDraw);
-    canvas.addEventListener('mouseleave', endDraw);
-    canvas.addEventListener('touchstart', startDraw, {passive:false});
-    canvas.addEventListener('touchmove', doDraw, {passive:false});
-    canvas.addEventListener('touchend', endDraw);
-  });
-}
-
-document.addEventListener('click', function(){
-  document.querySelectorAll('.emoji-popup').forEach(function(p){ p.classList.remove('open'); });
-});
-
-// ============================================================
-// WEEK PLAN  (editable titles, descriptions & tag picker)
-// ============================================================
-var weeks = [
-  {w:1, title:'Ideen sammeln & Geschichte erfinden', desc:'Schreibe auf, worum es in deinem Film geht. Notiere Anfang, Problem und Ende. Tausch dich mit Freunden aus!', color:'#FF3366', tags:['💡 Brainstorming','✍️ Geschichte']},
-  {w:2, title:'Geschichte verfeinern & Titel finden', desc:'Verbessere deine Geschichte. Wer ist der Held? Was ist das Problem? Wie wird es gelöst? Finde einen tollen Titel!', color:'#FF6B35', tags:['📖 Geschichte','🎬 Titel']},
-  {w:3, title:'Figuren planen & skizzieren', desc:'Überlege, wie deine Figuren aussehen sollen. Zeichne erste Skizzen! Welche Farben? Welche besonderen Merkmale?', color:'#d4a000', tags:['🧸 Figuren','✏️ Zeichnen']},
-  {w:4, title:'Figuren basteln & Material sammeln', desc:'Besorge Knetmasse, Lego oder anderes Material. Baue und bastle deine Figuren! Teste, ob sie gut zu bewegen sind.', color:'#6BCB77', tags:['🎨 Basteln','🛠️ Material']},
-  {w:5, title:'Hintergründe planen & gestalten', desc:'Male oder besorge die Hintergründe für alle Szenen. Befestige sie sicher für die Aufnahmen.', color:'#4ECDC4', tags:['🌄 Hintergründe','🎨 Malen']},
-  {w:6, title:'Storyboard zeichnen', desc:'Zeichne jede Szene als kleines Bild auf. Das ist dein Plan fürs Drehen! Notiere was passiert und was gesagt wird.', color:'#06b6d4', tags:['📋 Storyboard','🖼️ Planen']},
-  {w:7, title:'Drehen vorbereiten & Test-Aufnahmen', desc:'Richte Kamera, Hintergrund und Beleuchtung ein. Mache Probe-Fotos um die Technik zu testen!', color:'#A855F7', tags:['📱 Kamera','🎬 Probe']},
-  {w:8, title:'Hauptdrehtage: Fotos aufnehmen!', desc:'Jetzt wird gedreht! Bewege die Figuren ganz langsam und fotografiere jeden Schritt. Halte die Kamera ruhig!', color:'#6366F1', tags:['📸 Aufnehmen','🎬 Action!']},
-  {w:9, title:'Film zusammensetzen & Ton hinzufügen', desc:'Bringe alle Fotos in der richtigen Reihenfolge zusammen. Füge Musik oder Geräusche hinzu!', color:'#ec4899', tags:['🎵 Ton','✂️ Schnitt']},
-  {w:10, title:'🎉 Premiere! Film vorführen & feiern', desc:'Zeige deinen fertigen Film der Klasse, Familie oder Freunden! Du hast es geschafft!', color:'#F59E0B', tags:['🎉 Premiere','🏆 Fertig!']}
+const FEATURES_DATA = [
+  { icon: "🌲", title: "Naturprofil", text: "Regelmäßige Begegnungen mit Wald, Wiese, Teich und Bach" },
+  { icon: "🎭", title: "Kulturschule", text: "Ausgezeichnet als Kulturschule Baden-Württemberg" },
+  { icon: "🎵", title: "Musische Bildung", text: "Kooperation mit der Musikschule" },
+  { icon: "💻", title: "Digitale Medien", text: "Moderner Umgang mit digitalen Medien" }
 ];
 
-// All available tag categories with their colors
-var allTagOptions = [
-  {label:'💡 Brainstorming', color:'#8b5cf6'},
-  {label:'✍️ Geschichte',    color:'#3b82f6'},
-  {label:'📖 Lesen',         color:'#6366f1'},
-  {label:'🎬 Titel',         color:'#f43f5e'},
-  {label:'🧸 Figuren',       color:'#f59e0b'},
-  {label:'✏️ Zeichnen',      color:'#84cc16'},
-  {label:'🎨 Malen',         color:'#10b981'},
-  {label:'🎨 Basteln',       color:'#14b8a6'},
-  {label:'🛠️ Material',      color:'#78716c'},
-  {label:'🌄 Hintergründe',  color:'#0ea5e9'},
-  {label:'📋 Storyboard',    color:'#22c55e'},
-  {label:'🖼️ Planen',        color:'#a855f7'},
-  {label:'📱 Kamera',        color:'#ec4899'},
-  {label:'🎬 Probe',         color:'#ef4444'},
-  {label:'📸 Aufnehmen',     color:'#f97316'},
-  {label:'🎬 Action!',       color:'#dc2626'},
-  {label:'🎵 Ton',           color:'#7c3aed'},
-  {label:'✂️ Schnitt',       color:'#0891b2'},
-  {label:'🎉 Premiere',      color:'#d97706'},
-  {label:'🏆 Fertig!',       color:'#16a34a'},
-  {label:'💬 Teamarbeit',    color:'#2563eb'},
-  {label:'🔍 Recherche',     color:'#9333ea'},
-  {label:'📝 Notizen',       color:'#0d9488'},
-  {label:'🖥️ Technik',       color:'#475569'},
-  {label:'🎭 Proben',        color:'#be185d'},
-  {label:'🌟 Präsentation',  color:'#ca8a04'}
+const STATS_DATA = [
+  { number: "110", label: "Schülerinnen & Schüler", accent: false },
+  { number: "4", label: "Klassenstufen", accent: true },
+  { number: "2012", label: "Ganztag seit", accent: false },
+  { number: "10+", label: "Kooperationspartner", accent: false }
 ];
 
-function getTagColor(label) {
-  var opt = allTagOptions.find(function(o){ return o.label === label; });
-  return opt ? opt.color : '#888';
-}
-
-function buildWeekGrid(savedWeeks) {
-  var wg = document.getElementById('week-grid');
-  wg.innerHTML = '';
-  var source = savedWeeks || weeks;
-  source.forEach(function(w, idx){
-    var weekColor = weeks[idx] ? weeks[idx].color : '#888';
-    // Use saved tags if present, else fall back to default
-    var currentTags = (w.tags && w.tags.length) ? w.tags : (weeks[idx] ? weeks[idx].tags : []);
-
-    var div = document.createElement('div'); div.className = 'week-item';
-
-    var num = document.createElement('div'); num.className = 'week-num';
-    num.style.background = weekColor;
-    num.innerHTML = '<span>WOCHE</span>' + w.w;
-
-    var con = document.createElement('div'); con.className = 'week-content';
-
-    var h3 = document.createElement('h3');
-    h3.contentEditable = 'true';
-    h3.textContent = w.title;
-    h3.addEventListener('input', scheduleSave);
-    h3.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); this.blur(); } });
-
-    var p = document.createElement('p');
-    p.contentEditable = 'true';
-    p.textContent = w.desc;
-    p.addEventListener('input', scheduleSave);
-
-    var tagsDiv = document.createElement('div'); tagsDiv.className = 'week-tags';
-    tagsDiv.dataset.weekIdx = idx;
-
-    // Render tags
-    function renderTags(tagList) {
-      tagsDiv.innerHTML = '';
-      tagList.forEach(function(t){
-        var sp = document.createElement('span'); sp.className = 'week-tag';
-        sp.style.background = getTagColor(t);
-        var labelNode = document.createTextNode(t);
-        var delBtn = document.createElement('button'); delBtn.className = 'week-tag-del';
-        delBtn.innerHTML = '×'; delBtn.title = 'Entfernen';
-        delBtn.onclick = function(e){
-          e.stopPropagation();
-          var tags = getCurrentTags(tagsDiv);
-          var newTags = tags.filter(function(x){ return x !== t; });
-          renderTags(newTags);
-          scheduleSave();
-        };
-        sp.appendChild(labelNode); sp.appendChild(delBtn);
-        tagsDiv.appendChild(sp);
-      });
-
-      // Add "+" button with picker
-      var addBtn = document.createElement('button'); addBtn.className = 'week-tag-add'; addBtn.textContent = '+ Kategorie';
-
-      var picker = document.createElement('div'); picker.className = 'tag-picker';
-      var pickerTitle = document.createElement('div'); pickerTitle.className = 'tag-picker-title'; pickerTitle.textContent = 'Kategorie wählen:';
-      var pickerGrid = document.createElement('div'); pickerGrid.className = 'tag-picker-grid';
-
-      allTagOptions.forEach(function(opt){
-        var optBtn = document.createElement('button'); optBtn.className = 'tag-option';
-        optBtn.style.background = opt.color; optBtn.textContent = opt.label;
-        var currentList = getCurrentTags(tagsDiv);
-        if (currentList.indexOf(opt.label) !== -1) optBtn.classList.add('already-used');
-        optBtn.onclick = function(e){
-          e.stopPropagation();
-          var list = getCurrentTags(tagsDiv);
-          if (list.indexOf(opt.label) !== -1) return; // already there
-          list.push(opt.label);
-          renderTags(list);
-          scheduleSave();
-          playPop();
-        };
-        pickerGrid.appendChild(optBtn);
-      });
-
-      picker.appendChild(pickerTitle); picker.appendChild(pickerGrid);
-      document.body.appendChild(picker);
-      addBtn.appendChild(document.createTextNode(''));  // keep addBtn clean
-
-      addBtn.addEventListener('click', function(e){
-        e.stopPropagation();
-        // Close all other pickers first
-        document.querySelectorAll('.tag-picker.open').forEach(function(pk){ if(pk!==picker) pk.classList.remove('open'); });
-        if (picker.classList.contains('open')) {
-          picker.classList.remove('open');
-        } else {
-          // Position picker below the button using fixed coords
-          var rect = addBtn.getBoundingClientRect();
-          picker.style.top = (rect.bottom + 6) + 'px';
-          picker.style.left = Math.min(rect.left, window.innerWidth - 270) + 'px';
-          picker.classList.add('open');
-        }
-      });
-
-      tagsDiv.appendChild(addBtn);
-    }
-
-    function getCurrentTags(td) {
-      var tags = [];
-      td.querySelectorAll('.week-tag').forEach(function(sp){
-        // Get text content minus the × button text
-        var clone = sp.cloneNode(true);
-        clone.querySelectorAll('.week-tag-del').forEach(function(b){ b.remove(); });
-        tags.push(clone.textContent.trim());
-      });
-      return tags;
-    }
-
-    renderTags(currentTags);
-
-    con.appendChild(h3); con.appendChild(p); con.appendChild(tagsDiv);
-
-    var editCol = document.createElement('div'); editCol.className = 'week-edit-col';
-    editCol.innerHTML = '<span class="week-edit-icon">✏️</span><span class="week-edit-hint">BEARBEITEN</span>';
-
-    div.appendChild(num); div.appendChild(con); div.appendChild(editCol);
-    wg.appendChild(div);
-  });
-}
-
-// Close tag pickers when clicking outside
-document.addEventListener('click', function(){
-  document.querySelectorAll('.tag-picker.open').forEach(function(p){ p.classList.remove('open'); });
-});
-
-function getCurrentTagsFromItem(item) {
-  var tags = [];
-  item.querySelectorAll('.week-tags .week-tag').forEach(function(sp){
-    var clone = sp.cloneNode(true);
-    clone.querySelectorAll('.week-tag-del').forEach(function(b){ b.remove(); });
-    tags.push(clone.textContent.trim());
-  });
-  return tags;
-}
-
-function getWeekData() {
-  var result = [];
-  document.querySelectorAll('.week-item').forEach(function(item, idx){
-    var h3   = item.querySelector('h3');
-    var p    = item.querySelector('p');
-    var tags = getCurrentTagsFromItem(item);
-    result.push({ w: idx+1, title: h3 ? h3.textContent : '', desc: p ? p.textContent : '', tags: tags });
-  });
-  return result;
-}
-
-// ============================================================
-// PROGRESS
-// ============================================================
-var progLevels = [0,25,50,75,100];
-var progState = [0,0,0,0,0,0];
-function cycleProgress(idx) {
-  playClick();
-  var pos = progLevels.indexOf(progState[idx]);
-  var next = progLevels[(pos+1) % progLevels.length];
-  progState[idx] = next;
-  document.getElementById('fill-'+idx).style.width = next+'%';
-  document.getElementById('pct-'+idx).textContent = next+'%';
-  if (next === 100) { playSuccess(); checkBadge('fortschritt-held'); }
-  if (progState.every(function(v){ return v===100; })) {
-    document.getElementById('congrats').style.display = 'block';
-    launchConfetti(); checkBadge('filmstar');
-  }
-  scheduleSave();
-}
-
-// ============================================================
-// CHECKLIST
-// ============================================================
-function toggleCheck(li) {
-  li.classList.toggle('checked');
-  li.querySelector('.check-box').textContent = li.classList.contains('checked') ? '✓' : '';
-  if (li.classList.contains('checked')) { playCheck(); checkBadge('fleissig'); }
-  scheduleSave();
-}
-
-// ============================================================
-// BADGES
-// ============================================================
-var badgeDefs = [
-  { id:'ideenmeister',     icon:'💡', name:'Ideen-Meisterin',    desc:'Ideen-Generator benutzt' },
-  { id:'figuren-kuenstler',icon:'🧸', name:'Figuren-Künstler',   desc:'Erste Figur hinzugefügt' },
-  { id:'kulissenbauer',    icon:'🌄', name:'Kulissenbauer',       desc:'Ersten Hintergrund gewählt' },
-  { id:'storyboard-star',  icon:'🎨', name:'Storyboard-Star',     desc:'Erste Szene gezeichnet' },
-  { id:'fleissig',         icon:'✅', name:'Fleißige Biene',       desc:'Aufgabe abgehakt' },
-  { id:'fortschritt-held', icon:'📈', name:'Fortschritt-Held',    desc:'Ersten Balken auf 100%' },
-  { id:'filmstar',         icon:'🌟', name:'Film-Superstar',       desc:'Alles abgeschlossen!' },
-  { id:'erstes-kapitel',   icon:'📖', name:'Erstes Kapitel',       desc:'Geschichte geschrieben' }
+const TIME_SLOTS_DATA = [
+  { time: "07:00 Uhr", label: "Betreuung (kostenpflichtig)" },
+  { time: "08:00 Uhr", label: "Unterrichtsbeginn" },
+  { time: "12:30 Uhr", label: "Mittagspause & Betreuung" },
+  { time: "13:45 Uhr", label: "Nachmittagsunterricht / AGs" },
+  { time: "15:15 Uhr", label: "Ganztagesende (Mo-Do)" },
+  { time: "bis 17:00", label: "Betreuung (kostenpflichtig)" }
 ];
-var earnedBadges = {};
 
-function renderBadges() {
-  var grid = document.getElementById('badges-grid');
-  grid.innerHTML = '';
-  badgeDefs.forEach(function(b){
-    var card = document.createElement('div'); card.className = 'badge-card'; card.id = 'badge-'+b.id;
-    if (earnedBadges[b.id]) card.classList.add('earned');
-    card.innerHTML =
-      '<span class="badge-lock">🔒</span>' +
-      '<span class="badge-icon">' + b.icon + '</span>' +
-      '<div class="badge-name">' + b.name + '</div>';
-    card.title = b.desc;
-    grid.appendChild(card);
-  });
-}
-
-var shownToasts = {};
-function checkBadge(id) {
-  if (earnedBadges[id]) return;
-  earnedBadges[id] = true;
-  var card = document.getElementById('badge-'+id);
-  if (card) card.classList.add('earned');
-  if (!shownToasts[id]) {
-    shownToasts[id] = true;
-    var def = badgeDefs.find(function(b){ return b.id===id; });
-    if (def) showBadgeToast('🏅 Abzeichen: ' + def.icon + ' ' + def.name);
-    playBadge();
-    launchMiniConfetti();
+const NEWS_DATA = [
+  {
+    emoji: "🎃",
+    date: "Herbst 2024",
+    title: "Spiele in der Natur-AG",
+    excerpt: "Die SchülerInnen der „Spiele in der Natur-AG" erlebten im vergangenen Halbjahr die Natur mit allen Sinnen. Passend zum Herbst und zu Halloween konnten die Kinder beim Kürbisschnitzen ihre Schnitzfertigkeiten unter Beweis stellen.",
+    color: "#e67e22"
+  },
+  {
+    emoji: "🎒",
+    date: "September 2024",
+    title: "Einschulung der neuen Erstklässler",
+    excerpt: "Am 18. September wurden 21 neue Erstklässler im Rahmen einer tollen Aufnahmefeier eingeschult. Die Klasse 4 überraschte die neuen Schulkinder mit ihrem Theaterstück „Der Grüffelo".",
+    color: "#2ecc71"
+  },
+  {
+    emoji: "🐝",
+    date: "März 2024",
+    title: "Besuch beim Imker",
+    excerpt: "Die Schülerinnen und Schüler wurden während der Natur-erleben-AG von Imker Wolfgang Dahnke umfassend über die spannenden Vorgänge innerhalb eines Bienenjahres informiert.",
+    color: "#f39c12"
   }
-  scheduleSave();
-}
-
-function showBadgeToast(msg) {
-  var t = document.getElementById('badge-toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2800);
-}
-
-// ============================================================
-// CONFETTI
-// ============================================================
-var confColors = ['#FF3366','#FFD93D','#4ECDC4','#A855F7','#6BCB77','#FF6B35','#FF69B4'];
-function launchConfetti() { for(var i=0;i<80;i++) spawnConfetti(); }
-function launchMiniConfetti() { for(var i=0;i<30;i++) spawnConfetti(); }
-function spawnConfetti() {
-  var el = document.createElement('div'); el.className = 'confetti-piece';
-  el.style.left = Math.random()*100 + 'vw';
-  el.style.background = confColors[Math.floor(Math.random()*confColors.length)];
-  el.style.width = (6+Math.random()*8)+'px';
-  el.style.height = (6+Math.random()*8)+'px';
-  el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-  el.style.animationDuration = (1.5 + Math.random()*2) + 's';
-  el.style.animationDelay = Math.random()*0.5+'s';
-  document.body.appendChild(el);
-  setTimeout(function(){ el.remove(); }, 3500);
-}
-
-// ============================================================
-// CANVAS FULLSCREEN MODAL
-// ============================================================
-var modalTargetCanvas = null;
-var modalTargetEmoji = null;
-var modalColor = '#e74c3c';
-var modalBrush = 6;
-var modalEraser = false;
-var modalDrawing = false;
-var modalLastX = 0, modalLastY = 0;
-var drawColors = ['#e74c3c','#e67e22','#f1c40f','#2ecc71','#3498db','#9b59b6','#1abc9c','#e91e63','#795548','#000000','#ffffff'];
-
-// Build modal color dots once
-(function(){
-  var mc = document.getElementById('modal-colors');
-  if (!mc) return;
-  mc.style.display = 'flex'; mc.style.gap = '5px'; mc.style.flexWrap = 'wrap';
-  drawColors.forEach(function(c, i){
-    var dot = document.createElement('div'); dot.className = 'modal-color-dot';
-    dot.style.background = c;
-    if (c==='#ffffff') dot.style.border = '2px solid #555';
-    if (i===0) { dot.classList.add('active-color'); }
-    dot.onclick = function(){
-      modalColor = c; modalEraser = false;
-      mc.querySelectorAll('.modal-color-dot').forEach(function(d){ d.classList.remove('active-color'); });
-      dot.classList.add('active-color');
-      document.getElementById('modal-eraser').classList.remove('active-tool');
-    };
-    mc.appendChild(dot);
-  });
-})();
-
-function openCanvasModal(srcCanvas, emojiEl, sceneNum) {
-  modalTargetCanvas = srcCanvas;
-  modalTargetEmoji = emojiEl;
-  document.getElementById('modal-title').textContent = '🎨 Szene ' + sceneNum + ' zeichnen';
-
-  var mc = document.getElementById('modal-canvas');
-  var wrap = document.getElementById('modal-canvas-wrap');
-  var W = Math.min(window.innerWidth * 0.88, 860);
-  var H = Math.min(window.innerHeight * 0.55, 500);
-  mc.width = W; mc.height = H;
-  mc.style.width = W + 'px'; mc.style.height = H + 'px';
-
-  // Copy existing drawing from small canvas
-  var ctx = mc.getContext('2d');
-  ctx.fillStyle = '#f5f5f5';
-  ctx.fillRect(0, 0, W, H);
-  if (srcCanvas && srcCanvas.width > 0) {
-    ctx.drawImage(srcCanvas, 0, 0, W, H);
-  }
-
-  document.getElementById('canvas-modal').classList.add('open');
-  setupModalDrawing(mc);
-}
-
-function setupModalDrawing(mc) {
-  mc.onmousedown = mc.ontouchstart = null;
-  mc.onmousemove = mc.ontouchmove = null;
-  mc.onmouseup = mc.ontouchend = mc.onmouseleave = null;
-
-  function getPos(e) {
-    var r = mc.getBoundingClientRect();
-    var sx = mc.width / r.width, sy = mc.height / r.height;
-    if (e.touches) return {x:(e.touches[0].clientX-r.left)*sx, y:(e.touches[0].clientY-r.top)*sy};
-    return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
-  }
-  mc.addEventListener('mousedown', function(e){
-    modalDrawing=true; var p=getPos(e); modalLastX=p.x; modalLastY=p.y;
-    if (modalTargetEmoji) modalTargetEmoji.classList.add('hidden');
-    playCameraShot();
-  });
-  mc.addEventListener('mousemove', function(e){
-    if (!modalDrawing) return;
-    var ctx=mc.getContext('2d'), p=getPos(e);
-    ctx.beginPath(); ctx.moveTo(modalLastX,modalLastY); ctx.lineTo(p.x,p.y);
-    ctx.strokeStyle = modalEraser ? '#f5f5f5' : modalColor;
-    ctx.lineWidth = modalEraser ? modalBrush*3 : modalBrush;
-    ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-    modalLastX=p.x; modalLastY=p.y;
-  });
-  mc.addEventListener('mouseup', function(){ modalDrawing=false; });
-  mc.addEventListener('mouseleave', function(){ modalDrawing=false; });
-  mc.addEventListener('touchstart', function(e){ e.preventDefault(); modalDrawing=true; var p=getPos(e); modalLastX=p.x; modalLastY=p.y; if(modalTargetEmoji) modalTargetEmoji.classList.add('hidden'); playCameraShot(); }, {passive:false});
-  mc.addEventListener('touchmove', function(e){ e.preventDefault(); if(!modalDrawing) return; var ctx=mc.getContext('2d'),p=getPos(e); ctx.beginPath(); ctx.moveTo(modalLastX,modalLastY); ctx.lineTo(p.x,p.y); ctx.strokeStyle=modalEraser?'#f5f5f5':modalColor; ctx.lineWidth=modalEraser?modalBrush*3:modalBrush; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke(); modalLastX=p.x; modalLastY=p.y; }, {passive:false});
-  mc.addEventListener('touchend', function(){ modalDrawing=false; });
-
-  document.getElementById('modal-brush').oninput = function(){ modalBrush = parseInt(this.value); };
-}
-
-function toggleModalEraser() {
-  modalEraser = !modalEraser;
-  document.getElementById('modal-eraser').classList.toggle('active-tool', modalEraser);
-}
-function clearModalCanvas() {
-  var mc = document.getElementById('modal-canvas');
-  var ctx = mc.getContext('2d');
-  ctx.fillStyle = '#f5f5f5'; ctx.fillRect(0,0,mc.width,mc.height);
-  if (modalTargetEmoji) modalTargetEmoji.classList.remove('hidden');
-}
-function applyModalCanvas() {
-  if (!modalTargetCanvas) { closeCanvasModal(); return; }
-  var mc = document.getElementById('modal-canvas');
-  var ctx = modalTargetCanvas.getContext('2d');
-  modalTargetCanvas.width = modalTargetCanvas.offsetWidth || 240;
-  modalTargetCanvas.height = modalTargetCanvas.offsetHeight || 110;
-  ctx.drawImage(mc, 0, 0, modalTargetCanvas.width, modalTargetCanvas.height);
-  scheduleSave();
-  closeCanvasModal();
-}
-function closeCanvasModal() {
-  document.getElementById('canvas-modal').classList.remove('open');
-  modalTargetCanvas = null; modalTargetEmoji = null;
-}
-document.getElementById('canvas-modal').addEventListener('click', function(e){
-  if (e.target === this) closeCanvasModal();
-});
-
-// ============================================================
-// JSON EXPORT / IMPORT  (für Projekt-Backup)
-// ============================================================
-function exportJSON() {
-  playSuccess();
-  var data = {
-    story: {
-      title: document.getElementById('s-title').value,
-      about: document.getElementById('s-about').value,
-      begin: document.getElementById('s-begin').value,
-      tension: document.getElementById('s-tension').value,
-      end: document.getElementById('s-end').value
-    },
-    figures: getFigures(),
-    backgrounds: Object.keys(selectedBgs),
-    storyboard: getStoryboardData(),
-    weekplan: getWeekData(),
-    progress: progState,
-    checklist: getChecklistState(),
-    badges: earnedBadges,
-    exportDate: new Date().toLocaleDateString('de-DE')
-  };
-  var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  var title = document.getElementById('s-title').value || 'mein-film';
-  a.href = url; a.download = 'trickfilm-' + title.replace(/[^a-zA-Z0-9]/g,'-').toLowerCase() + '.json';
-  a.click(); URL.revokeObjectURL(url);
-}
-
-function importJSON(input) {
-  var file = input.files[0]; if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      var data = JSON.parse(e.target.result);
-      // Reset storyboard & figures before applying
-      document.getElementById('fig-list').innerHTML = '';
-      document.getElementById('sb-grid').innerHTML = ''; frameCount = 0;
-      selectedBgs = {};
-      document.querySelectorAll('.bg-card').forEach(function(c){ c.classList.remove('selected'); });
-      progState = [0,0,0,0,0,0];
-      document.querySelectorAll('.cl-item').forEach(function(li){ li.classList.remove('checked'); li.querySelector('.check-box').textContent=''; });
-      buildWeekGrid(); // reset week grid first
-      applyData(data);
-      saveAll();
-      playSuccess();
-      showBadgeToast('📂 Projekt erfolgreich geladen!');
-    } catch(err) { alert('Fehler beim Laden der Datei. Bitte wähle eine gültige .json Datei.'); }
-    input.value = '';
-  };
-  reader.readAsText(file);
-}
-
-// ============================================================
-// PDF EXPORT  – canvas-basiert (kein Emoji-Problem, kein Versatz)
-// ============================================================
-function exportPDF() {
-  if (typeof window.jspdf === 'undefined' && typeof jspdf === 'undefined') {
-    alert('PDF-Bibliothek lädt noch – bitte kurz warten und erneut versuchen.'); return;
-  }
-  playSuccess();
-
-  // Collect all data first
-  var filmTitle  = document.getElementById('s-title').value    || 'Mein Stop-Motion-Film';
-  var storyAbout = document.getElementById('s-about').value    || '';
-  var storyBegin = document.getElementById('s-begin').value    || '';
-  var storyTens  = document.getElementById('s-tension').value  || '';
-  var storyEnd   = document.getElementById('s-end').value      || '';
-  var figs       = getFigures();
-  var bgs        = Object.keys(selectedBgs);
-  var sbData     = getStoryboardData();
-  var wData      = getWeekData();
-  var progLabels = ['Geschichte','Figuren','Hintergruende','Storyboard','Fotos','Film fertig'];
-  var dateStr    = new Date().toLocaleDateString('de-DE');
-
-  // Helper: strip all emoji / non-latin chars that helvetica can't render
-  function clean(s) {
-    return (s || '').replace(/[^\x00-\x7E\u00C0-\u024F]/g, '').trim();
-  }
-  // Keep only the text part of "🦸 Held·in" → "Held·in"
-  function roleText(r) {
-    return clean((r || '').replace(/^\S+\s*/, ''));
-  }
-  // Strip leading emoji from background names like "🏔️ Berge" → "Berge"
-  function bgText(s) {
-    return clean((s || '').replace(/^\S+\s*/, '')) || clean(s) || s;
-  }
-
-  var jsPDF = (window.jspdf || jspdf).jsPDF;
-  var doc = new jsPDF({ orientation:'p', unit:'mm', format:'a4' });
-
-  // ─── Layout constants ──────────────────────────────────────
-  var PW = 210, PH = 297;
-  var ML = 14, MR = 14, MT = 14;
-  var CW = PW - ML - MR;   // content width = 182
-  var y = MT;
-
-  // ─── Color palette ─────────────────────────────────────────
-  var C = {
-    bg:      [15, 23, 42],    // dark navy
-    surface: [30, 41, 59],    // slightly lighter
-    card:    [248, 250, 252], // near-white
-    yellow:  [251, 191, 36],
-    orange:  [249, 115, 22],
-    pink:    [236, 72, 153],
-    purple:  [139, 92, 246],
-    teal:    [20, 184, 166],
-    green:   [34, 197, 94],
-    blue:    [59, 130, 246],
-    text:    [15, 23, 42],
-    muted:   [100, 116, 139],
-    white:   [255, 255, 255],
-    border:  [226, 232, 240]
-  };
-
-  // ─── Helpers ───────────────────────────────────────────────
-  function newPage() {
-    doc.addPage();
-    y = MT;
-    // subtle top bar on every page
-    doc.setFillColor.apply(doc, C.bg);
-    doc.rect(0, 0, PW, 8, 'F');
-    doc.setFontSize(6.5); doc.setFont('helvetica','normal');
-    doc.setTextColor.apply(doc, C.yellow);
-    doc.text('Trickfilm-Werkstatt  |  ' + filmTitle + '  |  ' + dateStr, ML, 5.5);
-    y = 14;
-  }
-
-  function need(h) { if (y + h > PH - 10) newPage(); }
-
-  function setColor(arr) { doc.setTextColor(arr[0], arr[1], arr[2]); }
-  function setFill(arr)  { doc.setFillColor(arr[0], arr[1], arr[2]); }
-  function setDraw(arr)  { doc.setDrawColor(arr[0], arr[1], arr[2]); }
-
-  // Section heading with colored left bar
-  function sectionHead(label, color) {
-    need(14);
-    setFill(color);
-    doc.rect(ML, y, 3, 10, 'F');
-    doc.setFontSize(13); doc.setFont('helvetica','bold');
-    setColor(color);
-    doc.text(label, ML + 6, y + 7);
-    y += 14;
-  }
-
-  // Small label above a value
-  function fieldLabel(txt) {
-    doc.setFontSize(7); doc.setFont('helvetica','bold');
-    setColor(C.muted);
-    doc.text(txt.toUpperCase(), ML, y);
-    y += 4;
-  }
-
-  // Body text with wrapping
-  function bodyText(txt, x, maxW, color) {
-    x = x === undefined ? ML : x;
-    maxW = maxW === undefined ? CW : maxW;
-    color = color || C.text;
-    doc.setFontSize(9); doc.setFont('helvetica','normal');
-    setColor(color);
-    var lines = doc.splitTextToSize(txt || '-', maxW);
-    need(lines.length * 5 + 2);
-    doc.text(lines, x, y);
-    y += lines.length * 5 + 2;
-  }
-
-  // Pill badge
-  function pill(txt, x, py, bgColor, textColor) {
-    var tw = doc.getStringUnitWidth(txt) * 8 / doc.internal.scaleFactor;
-    var pw2 = tw + 6, ph = 5.5;
-    setFill(bgColor);
-    doc.roundedRect(x, py - 4, pw2, ph, 1.5, 1.5, 'F');
-    doc.setFontSize(7); doc.setFont('helvetica','bold');
-    setColor(textColor || C.white);
-    doc.text(txt, x + 3, py);
-    return pw2 + 3;
-  }
-
-  // Thin horizontal rule
-  function rule() {
-    need(6);
-    setDraw(C.border);
-    doc.setLineWidth(0.2);
-    doc.line(ML, y, PW - MR, y);
-    y += 5;
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // PAGE 1 – COVER
-  // ═══════════════════════════════════════════════════════════
-  // Full-page dark background
-  setFill(C.bg);
-  doc.rect(0, 0, PW, PH, 'F');
-
-  // Decorative accent bar top
-  setFill(C.yellow);
-  doc.rect(0, 0, PW, 3, 'F');
-
-  // Camera icon area (simple geometric)
-  var cx = PW/2, cy = 90;
-  setFill(C.surface);
-  doc.roundedRect(cx - 22, cy - 16, 44, 32, 4, 4, 'F');
-  setFill(C.yellow);
-  doc.circle(cx, cy, 9, 'F');
-  setFill(C.bg);
-  doc.circle(cx, cy, 5.5, 'F');
-  setFill(C.yellow);
-  doc.roundedRect(cx + 18, cy - 6, 6, 8, 1, 1, 'F');
-
-  // Title
-  doc.setFontSize(30); doc.setFont('helvetica','bold');
-  setColor(C.yellow);
-  doc.text('Trickfilm-Werkstatt', PW/2, 140, {align:'center'});
-
-  // Subtitle – film name
-  doc.setFontSize(16); doc.setFont('helvetica','normal');
-  setColor(C.white);
-  var shortTitle = filmTitle.length > 40 ? filmTitle.substring(0,38) + '...' : filmTitle;
-  doc.text(shortTitle, PW/2, 155, {align:'center'});
-
-  // Divider line
-  setFill(C.orange);
-  doc.rect(PW/2 - 20, 161, 40, 1.5, 'F');
-
-  // Tagline
-  doc.setFontSize(9); doc.setFont('helvetica','normal');
-  setColor([148, 163, 184]);
-  doc.text('Mein persoenlicher Stop-Motion-Projektplan', PW/2, 170, {align:'center'});
-
-  // Date badge
-  setFill(C.surface);
-  doc.roundedRect(PW/2 - 28, 178, 56, 10, 2, 2, 'F');
-  doc.setFontSize(8); doc.setFont('helvetica','normal');
-  setColor(C.muted);
-  doc.text('Erstellt am  ' + dateStr, PW/2, 184.5, {align:'center'});
-
-  // Bottom accent
-  setFill(C.orange);
-  doc.rect(0, PH - 3, PW, 3, 'F');
-  setFill(C.yellow);
-  doc.rect(0, PH - 3, PW * 0.4, 3, 'F');
-
-  // ═══════════════════════════════════════════════════════════
-  // PAGE 2 – GESCHICHTE & FIGUREN
-  // ═══════════════════════════════════════════════════════════
-  newPage();
-
-  // ── Geschichte ──
-  sectionHead('Geschichte & Handlung', C.pink);
-
-  // Film title big
-  setFill([253, 242, 248]);
-  doc.roundedRect(ML, y, CW, 12, 2, 2, 'F');
-  setFill(C.pink);
-  doc.roundedRect(ML, y, 3, 12, 1, 1, 'F');
-  doc.setFontSize(11); doc.setFont('helvetica','bold');
-  setColor(C.pink);
-  doc.text(filmTitle.substring(0, 50), ML + 8, y + 8);
-  y += 16;
-
-  // Story fields in a 2-col layout
-  var col1x = ML, col2x = ML + CW/2 + 2, colW2 = CW/2 - 2;
-
-  if (storyAbout) {
-    fieldLabel('Worum geht es?');
-    bodyText(storyAbout, ML, CW);
-    y += 2;
-  }
-
-  var hasThree = storyBegin || storyTens || storyEnd;
-  if (hasThree) {
-    need(30);
-    var boxH = 28;
-    var bw = (CW - 4) / 3;
-
-    // Three act boxes
-    var acts = [
-      {label:'Anfang', val:storyBegin, color:C.blue},
-      {label:'Spannung', val:storyTens, color:C.orange},
-      {label:'Ende', val:storyEnd, color:C.green}
-    ];
-    acts.forEach(function(act, i){
-      var bx = ML + i * (bw + 2);
-      setFill(act.color);
-      doc.roundedRect(bx, y, bw, 7, 1.5, 1.5, 'F');
-      doc.setFontSize(7.5); doc.setFont('helvetica','bold'); setColor(C.white);
-      doc.text(act.label, bx + bw/2, y + 4.8, {align:'center'});
-
-      setFill([245, 247, 250]);
-      doc.roundedRect(bx, y + 7, bw, boxH - 7, 0, 1.5, 'F');
-      setDraw(act.color); doc.setLineWidth(0.3);
-      doc.roundedRect(bx, y, bw, boxH, 1.5, 1.5, 'S');
-
-      if (act.val) {
-        doc.setFontSize(7.5); doc.setFont('helvetica','normal'); setColor(C.text);
-        var ls = doc.splitTextToSize(act.val, bw - 4);
-        ls = ls.slice(0, 4);
-        doc.text(ls, bx + 2, y + 13);
-      }
-    });
-    y += boxH + 6;
-  }
-
-  rule();
-
-  // ── Figuren ──
-  sectionHead('Figuren', C.purple);
-
-  if (!figs.length) {
-    bodyText('Noch keine Figuren eingetragen.', ML, CW, C.muted);
-  } else {
-    var fcols = 3, fgap = 3;
-    var fcw = (CW - fgap * (fcols - 1)) / fcols;
-    var fch = 20;
-    var fcol = 0;
-    var frowY = y;
-
-    figs.forEach(function(f) {
-      need(fch + 4);
-      if (fcol === 0) frowY = y;
-      var fx = ML + fcol * (fcw + fgap);
-
-      // Card
-      setFill([245, 240, 255]);
-      doc.roundedRect(fx, frowY, fcw, fch, 2, 2, 'F');
-      setDraw(C.purple); doc.setLineWidth(0.3);
-      doc.roundedRect(fx, frowY, fcw, fch, 2, 2, 'S');
-
-      // Top color strip with role
-      var rt = roleText(f.role) || 'Figur';
-      setFill(C.purple);
-      doc.roundedRect(fx, frowY, fcw, 6.5, 2, 2, 'F');
-      doc.rect(fx, frowY + 3, fcw, 3.5, 'F'); // square off bottom of strip
-      doc.setFontSize(6.5); doc.setFont('helvetica','bold'); setColor(C.white);
-      doc.text(rt.substring(0, 18), fx + fcw/2, frowY + 5, {align:'center'});
-
-      // Name
-      doc.setFontSize(8.5); doc.setFont('helvetica','bold'); setColor(C.text);
-      var nm = clean(f.name || 'Unbenannt').substring(0, 20);
-      doc.text(nm, fx + fcw/2, frowY + 14, {align:'center'});
-
-      fcol++;
-      if (fcol >= fcols) { fcol = 0; y = frowY + fch + fgap; frowY = y; }
-    });
-    if (fcol > 0) y = frowY + fch + 4;
-  }
-  y += 2;
-
-  // ─── if enough space, add Hintergruende on same page, else new page
-  var bgsNeeded = Math.ceil(bgs.length / 4) * 10 + 24;
-  if (y + bgsNeeded > PH - 10) newPage();
-  else rule();
-
-  // ── Hintergründe ──
-  sectionHead('Schauplaetze & Hintergruende', C.teal);
-
-  if (!bgs.length) {
-    bodyText('Noch keine Schauplaetze ausgewaehlt.', ML, CW, C.muted);
-  } else {
-    // Horizontal pill list
-    var px = ML, bgRowY = y;
-    need(10);
-    bgs.forEach(function(bg) {
-      var txt = bgText(bg) || bg.substring(0,20);
-      var tw = doc.getStringUnitWidth(txt) * 9 / doc.internal.scaleFactor + 8;
-      if (px + tw > PW - MR) { px = ML; bgRowY += 9; need(10); }
-      setFill([204, 251, 241]);
-      doc.roundedRect(px, bgRowY - 5, tw, 7, 2, 2, 'F');
-      setDraw(C.teal); doc.setLineWidth(0.25);
-      doc.roundedRect(px, bgRowY - 5, tw, 7, 2, 2, 'S');
-      doc.setFontSize(8); doc.setFont('helvetica','bold'); setColor([15, 118, 110]);
-      doc.text(txt, px + 4, bgRowY);
-      px += tw + 4;
-    });
-    y = bgRowY + 8;
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // PAGE(S) – STORYBOARD
-  // ═══════════════════════════════════════════════════════════
-  newPage();
-  sectionHead('Storyboard', C.green);
-
-  if (!sbData.length) {
-    bodyText('Noch keine Szenen erstellt.', ML, CW, C.muted);
-  } else {
-    var scols = 3, sgap = 4;
-    var scw = (CW - sgap * (scols - 1)) / scols;
-    var imgH = 36, captH = 14;
-    var sch = imgH + captH;
-    var scol = 0, srowY = y;
-
-    sbData.forEach(function(frame, i) {
-      need(sch + 6);
-      if (scol === 0) srowY = y;
-      var sx = ML + scol * (scw + sgap);
-
-      // Frame outer box
-      setFill(C.card);
-      doc.roundedRect(sx, srowY, scw, sch, 2, 2, 'F');
-      setDraw(C.border); doc.setLineWidth(0.25);
-      doc.roundedRect(sx, srowY, scw, sch, 2, 2, 'S');
-
-      // Header bar
-      setFill(C.bg);
-      doc.roundedRect(sx, srowY, scw, 6.5, 2, 2, 'F');
-      doc.rect(sx, srowY + 3, scw, 3.5, 'F');
-      doc.setFontSize(6.5); doc.setFont('helvetica','bold'); setColor(C.yellow);
-      doc.text('SZENE ' + (i + 1), sx + 3, srowY + 5);
-
-      // Image
-      if (frame.drawing && frame.drawing.length > 100 && frame.drawing !== 'data:,') {
-        try { doc.addImage(frame.drawing, 'PNG', sx + 1, srowY + 7, scw - 2, imgH - 1); }
-        catch(e) {
-          setFill([238, 242, 246]); doc.rect(sx+1, srowY+7, scw-2, imgH-1, 'F');
-          doc.setFontSize(8); setColor(C.muted);
-          doc.text('(Zeichnung)', sx + scw/2, srowY + 7 + (imgH/2), {align:'center'});
-        }
-      } else {
-        setFill([238, 242, 246]); doc.rect(sx+1, srowY+7, scw-2, imgH-1, 'F');
-        doc.setFontSize(8); setColor(C.muted);
-        doc.text('Szene ' + (i+1), sx + scw/2, srowY + 7 + (imgH/2), {align:'center'});
-      }
-
-      // Caption
-      if (frame.text) {
-        doc.setFontSize(6.5); doc.setFont('helvetica','normal'); setColor(C.text);
-        var ls = doc.splitTextToSize(frame.text, scw - 4);
-        ls = ls.slice(0, 2);
-        doc.text(ls, sx + 2, srowY + imgH + 11);
-      }
-
-      scol++;
-      if (scol >= scols) { scol = 0; y = srowY + sch + 6; srowY = y; }
-    });
-    if (scol > 0) y = srowY + sch + 6;
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // PAGE – 10-WOCHEN-PLAN
-  // ═══════════════════════════════════════════════════════════
-  newPage();
-  sectionHead('10-Wochen-Plan', C.yellow);
-
-  var weekColors = [
-    [239,68,68],[249,115,22],[234,179,8],[34,197,94],[20,184,166],
-    [6,182,212],[168,85,246],[99,102,241],[236,72,153],[245,158,11]
-  ];
-
-  wData.forEach(function(w, idx) {
-    need(18);
-    var wc = weekColors[idx] || C.blue;
-    var rowH = 15;
-
-    // Week number badge
-    setFill(wc);
-    doc.roundedRect(ML, y, 16, rowH, 2, 2, 'F');
-    doc.setFontSize(9); doc.setFont('helvetica','bold'); setColor(C.white);
-    doc.text(String(w.w), ML + 8, y + 6, {align:'center'});
-    doc.setFontSize(5.5); doc.setFont('helvetica','normal');
-    doc.text('WO.', ML + 8, y + 11.5, {align:'center'});
-
-    // Content area
-    setFill([249, 250, 251]);
-    doc.roundedRect(ML + 18, y, CW - 18, rowH, 0, 2, 'F');
-    setFill(wc); doc.rect(ML + 18, y, 2, rowH, 'F'); // left accent line
-
-    // Title
-    doc.setFontSize(8.5); doc.setFont('helvetica','bold'); setColor(C.text);
-    var wt = clean(w.title || '').substring(0, 55);
-    doc.text(wt, ML + 23, y + 6);
-
-    // Description
-    doc.setFontSize(7); doc.setFont('helvetica','normal'); setColor(C.muted);
-    var wd = clean(w.desc || '');
-    var wdLines = doc.splitTextToSize(wd, CW - 24);
-    doc.text(wdLines.slice(0, 1), ML + 23, y + 11.5);
-
-    // Tags on right side
-    if (w.tags && w.tags.length) {
-      var tx = PW - MR - 2;
-      var tagRowY = y + 5;
-      w.tags.slice(0,2).forEach(function(tag) {
-        var ct = clean(tag).substring(0,14);
-        if (!ct) return;
-        var tw2 = doc.getStringUnitWidth(ct) * 7 / doc.internal.scaleFactor + 6;
-        tx -= tw2;
-        setFill([226, 232, 240]);
-        doc.roundedRect(tx, tagRowY - 3.5, tw2, 5.5, 1.5, 1.5, 'F');
-        doc.setFontSize(6); doc.setFont('helvetica','normal'); setColor(C.muted);
-        doc.text(ct, tx + 3, tagRowY);
-        tx -= 3;
-      });
-    }
-
-    y += rowH + 2;
-  });
-
-  // ═══════════════════════════════════════════════════════════
-  // PAGE – FORTSCHRITT & CHECKLISTE
-  // ═══════════════════════════════════════════════════════════
-  newPage();
-  sectionHead('Fortschritt', C.orange);
-
-  var pLabels = ['Geschichte geschrieben','Figuren geplant','Hintergruende fertig','Storyboard erstellt','Fotos aufgenommen','Film fertiggestellt'];
-  var pColors  = [C.pink, C.purple, C.teal, C.green, C.yellow, C.orange];
-
-  pLabels.forEach(function(lbl, idx) {
-    need(14);
-    var val = progState[idx] || 0;
-    var pc = pColors[idx];
-    var barW = CW - 30;
-
-    doc.setFontSize(8.5); doc.setFont('helvetica','normal'); setColor(C.text);
-    doc.text(lbl, ML, y);
-
-    // percentage badge
-    setFill(val === 100 ? C.green : C.border);
-    doc.roundedRect(ML + CW - 14, y - 5, 14, 6.5, 1.5, 1.5, 'F');
-    doc.setFontSize(7); doc.setFont('helvetica','bold');
-    setColor(val === 100 ? C.white : C.muted);
-    doc.text(val + '%', ML + CW - 7, y - 0.5, {align:'center'});
-
-    // bar track
-    setFill(C.border);
-    doc.roundedRect(ML, y + 2, barW, 5, 2, 2, 'F');
-    // bar fill
-    if (val > 0) {
-      setFill(pc);
-      doc.roundedRect(ML, y + 2, barW * val / 100, 5, 2, 2, 'F');
-    }
-    y += 13;
-  });
-
-  y += 4;
-  rule();
-
-  // ── Checkliste ──
-  sectionHead('Aufgaben-Checkliste', C.blue);
-
-  var clItems = [];
-  document.querySelectorAll('.cl-item').forEach(function(li) {
-    var txt = clean(li.textContent || '').trim();
-    clItems.push({ text: txt, done: li.classList.contains('checked') });
-  });
-
-  clItems.forEach(function(item) {
-    need(9);
-    // Checkbox
-    if (item.done) {
-      setFill(C.green); doc.roundedRect(ML, y - 4.5, 5.5, 5.5, 1, 1, 'F');
-      doc.setFontSize(7); doc.setFont('helvetica','bold'); setColor(C.white);
-      doc.text('/', ML + 0.8, y); // checkmark approximation
-    } else {
-      setFill(C.white); setDraw(C.border); doc.setLineWidth(0.3);
-      doc.roundedRect(ML, y - 4.5, 5.5, 5.5, 1, 1, 'FD');
-    }
-    doc.setFontSize(8.5); doc.setFont('helvetica','normal');
-    setColor(item.done ? C.muted : C.text);
-    doc.text(item.text.substring(0, 70), ML + 8, y);
-    if (item.done) {
-      // strikethrough
-      var tw = doc.getStringUnitWidth(item.text.substring(0,70)) * 8.5 / doc.internal.scaleFactor;
-      setDraw(C.muted); doc.setLineWidth(0.3);
-      doc.line(ML + 8, y - 1, ML + 8 + Math.min(tw, CW - 10), y - 1);
-    }
-    y += 8;
-  });
-
-  // ── Footer on last page ──
-  setFill(C.bg);
-  doc.rect(0, PH - 12, PW, 12, 'F');
-  setFill(C.yellow); doc.rect(0, PH - 12, PW, 1.5, 'F');
-  doc.setFontSize(7); doc.setFont('helvetica','normal'); setColor([148, 163, 184]);
-  doc.text('Trickfilm-Werkstatt  –  Erstellt am ' + dateStr, PW/2, PH - 5, {align:'center'});
-
-  doc.save('Trickfilm-' + filmTitle.replace(/[^a-zA-Z0-9]/g, '-').substring(0,30) + '.pdf');
-}
-
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? [parseInt(result[1],16), parseInt(result[2],16), parseInt(result[3],16)] : [100,100,100];
-}
-
-// ============================================================
-// STORY INPUT AUTO-SAVE + BADGE TRIGGER
-// ============================================================
-['s-title','s-about','s-begin','s-tension','s-end'].forEach(function(id){
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('input', function(){
-    scheduleSave();
-    if (document.getElementById('s-title').value.length > 2) checkBadge('erstes-kapitel');
-  });
-});
-
-// ============================================================
-// INIT
-// ============================================================
-renderBadges();
-initFigureTemplates();
-buildWeekGrid();
-for (var i = 0; i < 6; i++) { addFrame(); }
-loadAll();
+];
+
+const KULTUR_BADGES_DATA = [
+  "Kulturagenten-Programm",
+  "Kulturschule BW",
+  "Musisch-künstlerisch",
+  "Theater & Darstellung",
+  "Bildnerisches Gestalten",
+  "Kooperation mit Künstlern"
+];
+
+const TEAM_DATA = [
+  { name: "Frau Bärbel Schlienz", role: "Rektorin", contact: "07171 66929", initials: "BS" },
+  { name: "Frau Jutta Stegmeier", role: "Sekretariat", contact: "07171 66929", initials: "JS" },
+  { name: "Frau Christine Brückner-Weber", role: "Schulsozialarbeiterin", contact: "07171 939048", initials: "CB" },
+  { name: "Frau Noreen Corrinth", role: "Schulsozialarbeiterin", contact: "07171 939048", initials: "NC" },
+  { name: "Herr Martin Stadelmaier", role: "Hausmeister", contact: "0176 17071369", initials: "MS" },
+  { name: "Frau Olga Tuchscherer", role: "Leitung Schulkindbetreuung", contact: "0176 17071414", initials: "OT" }
+];
+
+const TERMINE_DATA = [
+  { day: "14", month: "Apr", title: "Schulstart nach Osterferien", desc: "Unterrichtsbeginn nach den Osterferien" },
+  { day: "01", month: "Mai", title: "Feiertag – schulfrei", desc: "Tag der Arbeit" },
+  { day: "29", month: "Mai", title: "Christi Himmelfahrt", desc: "Feiertag – schulfrei" },
+  { day: "09", month: "Jun", title: "Pfingstferien", desc: "Pfingstferien Baden-Württemberg" },
+  { day: "24", month: "Jul", title: "Sommerferien", desc: "Letzter Schultag vor den Sommerferien" }
+];
+
+const KONTAKT_DATA = [
+  { icon: "📍", label: "Adresse", value: "Székesfehérvárer Str. 12, 73525 Schwäbisch Gmünd" },
+  { icon: "📞", label: "Telefon", value: "07171 66929" },
+  { icon: "📠", label: "Fax", value: "07171 37588" },
+  { icon: "✉️", label: "E-Mail", value: "poststelle@gshardt-gd.schule.bwl.de" },
+  { icon: "🕐", label: "Sekretariat", value: "Di–Fr, 09:00–11:30 Uhr" }
+];
 </script>
+
+<!-- ========== APPLICATION LOGIC ========== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ===== LOADER =====
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1400);
+
+  // ===== NAVIGATION =====
+  const navLinksEl = document.getElementById('navLinks');
+  const mobileMenuEl = document.getElementById('mobileMenu');
+  
+  NAVIGATION_DATA.forEach(item => {
+    navLinksEl.innerHTML += `<li><a href="${item.href}">${item.label}</a></li>`;
+    mobileMenuEl.innerHTML += `<a href="${item.href}" class="mobile-link">${item.label}</a>`;
+  });
+
+  // Burger
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenuEl.classList.toggle('open');
+    document.body.style.overflow = mobileMenuEl.classList.contains('open') ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenuEl.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ===== ABOUT FEATURES =====
+  const featuresEl = document.getElementById('aboutFeatures');
+  FEATURES_DATA.forEach(f => {
+    featuresEl.innerHTML += `
+      <div class="about-feature">
+        <div class="about-feature-icon">${f.icon}</div>
+        <div class="about-feature-title">${f.title}</div>
+        <div class="about-feature-text">${f.text}</div>
+      </div>`;
+  });
+
+  // ===== ABOUT STATS =====
+  const statsEl = document.getElementById('aboutStats');
+  STATS_DATA.forEach(s => {
+    statsEl.innerHTML += `
+      <div class="stat-card ${s.accent ? 'accent' : ''}">
+        <div class="stat-number">${s.number}</div>
+        <div class="stat-label">${s.label}</div>
+      </div>`;
+  });
+
+  // ===== TIME SLOTS =====
+  const timeSlotsEl = document.getElementById('timeSlots');
+  TIME_SLOTS_DATA.forEach(t => {
+    timeSlotsEl.innerHTML += `
+      <div class="time-slot">
+        <div class="time-slot-time">${t.time}</div>
+        <div class="time-slot-label">${t.label}</div>
+      </div>`;
+  });
+
+  // ===== NEWS =====
+  const newsGridEl = document.getElementById('newsGrid');
+  NEWS_DATA.forEach(n => {
+    newsGridEl.innerHTML += `
+      <div class="news-card">
+        <div class="news-card-img" style="background: linear-gradient(135deg, ${n.color}, ${n.color}cc)">
+          ${n.emoji}
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-date">${n.date}</div>
+          <div class="news-card-title">${n.title}</div>
+          <div class="news-card-excerpt">${n.excerpt}</div>
+        </div>
+      </div>`;
+  });
+
+  // ===== KULTUR BADGES =====
+  const kulturBadgesEl = document.getElementById('kulturBadges');
+  KULTUR_BADGES_DATA.forEach(b => {
+    kulturBadgesEl.innerHTML += `<div class="kultur-badge">${b}</div>`;
+  });
+
+  // ===== TEAM =====
+  const teamGridEl = document.getElementById('teamGrid');
+  TEAM_DATA.forEach(t => {
+    teamGridEl.innerHTML += `
+      <div class="team-card">
+        <div class="team-card-avatar">${t.initials}</div>
+        <div class="team-card-name">${t.name}</div>
+        <div class="team-card-role">${t.role}</div>
+        <div class="team-card-contact">☎ ${t.contact}</div>
+      </div>`;
+  });
+
+  // ===== TERMINE =====
+  const termineListEl = document.getElementById('termineList');
+  TERMINE_DATA.forEach(t => {
+    termineListEl.innerHTML += `
+      <div class="termin-item">
+        <div class="termin-date">
+          <div class="termin-day">${t.day}</div>
+          <div class="termin-month">${t.month}</div>
+        </div>
+        <div class="termin-divider"></div>
+        <div>
+          <div class="termin-info-title">${t.title}</div>
+          <div class="termin-info-desc">${t.desc}</div>
+        </div>
+      </div>`;
+  });
+
+  // ===== KONTAKT =====
+  const kontaktInfoEl = document.getElementById('kontaktInfo');
+  KONTAKT_DATA.forEach(k => {
+    kontaktInfoEl.innerHTML += `
+      <div class="kontakt-item">
+        <div class="kontakt-item-icon">${k.icon}</div>
+        <div>
+          <div class="kontakt-item-label">${k.label}</div>
+          <div class="kontakt-item-value">${k.value}</div>
+        </div>
+      </div>`;
+  });
+
+  // ===== FOOTER YEAR =====
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  // ===== REVEAL ON SCROLL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ===== FLOATING NATURE PARTICLES (WOW EFFECT) =====
+  const emojis = ['🍃', '🌿', '🍂', '🌸', '🦋', '✨', '🌻', '🐝'];
+  function createParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (15 + Math.random() * 20) + 's';
+    p.style.animationDelay = Math.random() * 5 + 's';
+    p.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 40000);
+  }
+  for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 2000);
+  setInterval(createParticle, 4000);
+
+  // ===== CURSOR TRAIL =====
+  const cursor = document.getElementById('cursor');
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.opacity = '1';
+  });
+  document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+
+  function animateCursor() {
+    const cx = parseFloat(cursor.style.left) || mouseX;
+    const cy = parseFloat(cursor.style.top) || mouseY;
+    cursor.style.left = cx + (mouseX - cx) * 0.15 + 'px';
+    cursor.style.top = cy + (mouseY - cy) * 0.15 + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // ===== COUNTER ANIMATION =====
+  function animateCounters() {
+    document.querySelectorAll('.stat-number').forEach(el => {
+      const target = parseInt(el.textContent);
+      if (isNaN(target)) return;
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 40));
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(interval); }
+        el.textContent = current;
+      }, 30);
+    });
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { animateCounters(); statsObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.3 });
+  const statsSection = document.getElementById('aboutStats');
+  if (statsSection) statsObserver.observe(statsSection);
+
+  // ===== SMOOTH ANCHOR SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>

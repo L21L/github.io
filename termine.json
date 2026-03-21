@@ -1,0 +1,7 @@
+[
+  { "day": "14", "month": "Apr", "title": "Schulstart nach Osterferien", "desc": "Unterrichtsbeginn nach den Osterferien" },
+  { "day": "01", "month": "Mai", "title": "Feiertag – schulfrei", "desc": "Tag der Arbeit" },
+  { "day": "29", "month": "Mai", "title": "Christi Himmelfahrt", "desc": "Feiertag – schulfrei" },
+  { "day": "09", "month": "Jun", "title": "Pfingstferien", "desc": "Pfingstferien Baden-Württemberg" },
+  { "day": "24", "month": "Jul", "title": "Sommerferien", "desc": "Letzter Schultag vor den Sommerferien" }
+]
