@@ -7,1668 +7,561 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --primary: #1a6b3c;
-  --primary-light: #2d9f5b;
-  --primary-dark: #0e4426;
-  --accent: #f0a830;
-  --accent-light: #ffd47a;
-  --bg: #faf8f4;
-  --bg-warm: #f4efe6;
-  --text: #2a2a2a;
-  --text-light: #6b6b6b;
-  --white: #ffffff;
-  --shadow: 0 4px 30px rgba(0,0,0,0.08);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
-  --radius: 16px;
-  --radius-sm: 10px;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  line-height: 1.7;
-}
-
-/* ===== CUSTOM CURSOR TRAIL ===== */
-.cursor-dot {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.3s;
-  mix-blend-mode: multiply;
-}
-
-/* ===== FLOATING NATURE PARTICLES ===== */
-.particle {
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.15;
-  animation: float-particle linear infinite;
-  font-size: 1.4rem;
-}
-
-@keyframes float-particle {
-  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.15; }
-  90% { opacity: 0.15; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-}
-
-/* ===== NAVIGATION ===== */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 1rem 2rem;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(250, 248, 244, 0.85);
-}
-
-nav.scrolled {
-  padding: 0.6rem 2rem;
-  box-shadow: 0 2px 30px rgba(0,0,0,0.06);
-}
-
-.nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-  color: var(--primary-dark);
-}
-
-.nav-logo-icon {
-  width: 44px;
-  height: 44px;
-  background: var(--primary);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 700;
-  transition: transform 0.3s;
-}
-
-.nav-logo:hover .nav-logo-icon { transform: rotate(-5deg) scale(1.05); }
-
-.nav-logo-text {
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
-}
-
-.nav-logo-sub {
-  font-size: 0.72rem;
-  color: var(--text-light);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-
-.nav-links {
-  display: flex;
-  gap: 0.25rem;
-  list-style: none;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--text);
-  font-size: 0.88rem;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.2s;
-  position: relative;
-}
-
-.nav-links a:hover {
-  background: var(--primary);
-  color: white;
-}
-
-.nav-burger {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  position: relative;
-}
-
-.nav-burger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--text);
-  position: absolute;
-  left: 7px;
-  transition: all 0.3s;
-}
-
-.nav-burger span:nth-child(1) { top: 10px; }
-.nav-burger span:nth-child(2) { top: 17px; }
-.nav-burger span:nth-child(3) { top: 24px; }
-
-.nav-burger.open span:nth-child(1) { transform: rotate(45deg); top: 17px; }
-.nav-burger.open span:nth-child(2) { opacity: 0; }
-.nav-burger.open span:nth-child(3) { transform: rotate(-45deg); top: 17px; }
-
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(250,248,244,0.97);
-  backdrop-filter: blur(30px);
-  z-index: 999;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.mobile-menu.open { display: flex; }
-
-.mobile-menu a {
-  text-decoration: none;
-  color: var(--primary-dark);
-  font-size: 1.5rem;
-  font-weight: 600;
-  padding: 0.5rem 2rem;
-  border-radius: 12px;
-  transition: all 0.2s;
-}
-
-.mobile-menu a:hover { background: var(--primary); color: white; }
-
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  padding: 6rem 2rem 4rem;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.hero-bg-gradient {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(26,107,60,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,168,48,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(250,248,244,1) 0%, rgba(244,239,230,1) 100%);
-}
-
-.hero-shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-}
-
-.hero-shape-1 {
-  width: 500px; height: 500px;
-  background: var(--primary);
-  top: -100px; right: -100px;
-  opacity: 0.06;
-  animation: morph 20s ease-in-out infinite;
-}
-
-.hero-shape-2 {
-  width: 300px; height: 300px;
-  background: var(--accent);
-  bottom: -50px; left: 10%;
-  opacity: 0.08;
-  animation: morph 15s ease-in-out infinite reverse;
-}
-
-@keyframes morph {
-  0%, 100% { border-radius: 50% 40% 60% 50%; transform: translate(0, 0) rotate(0deg); }
-  25% { border-radius: 40% 60% 50% 50%; transform: translate(20px, -20px) rotate(5deg); }
-  50% { border-radius: 60% 50% 40% 60%; transform: translate(-10px, 10px) rotate(-3deg); }
-  75% { border-radius: 50% 50% 60% 40%; transform: translate(10px, 20px) rotate(2deg); }
-}
-
-.hero-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(26,107,60,0.08);
-  color: var(--primary);
-  padding: 0.4rem 1rem;
-  border-radius: 100px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.03em;
-  animation: fadeInUp 0.8s ease both;
-}
-
-.hero-badge-dot {
-  width: 8px; height: 8px;
-  background: var(--primary-light);
-  border-radius: 50%;
-  animation: pulse 2s ease infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--primary-dark);
-  margin-bottom: 1.5rem;
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-
-.hero h1 em {
-  font-style: italic;
-  color: var(--primary-light);
-}
-
-.hero-desc {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  max-width: 500px;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  animation: fadeInUp 0.8s ease 0.3s both;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.8rem;
-  border-radius: 12px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: white;
-  box-shadow: 0 4px 15px rgba(26,107,60,0.25);
-}
-
-.btn-primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(26,107,60,0.3);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid rgba(26,107,60,0.2);
-}
-
-.btn-outline:hover {
-  border-color: var(--primary);
-  background: rgba(26,107,60,0.04);
-}
-
-/* Hero right — animated illustration */
-.hero-visual {
-  position: relative;
-  height: 450px;
-  animation: fadeInUp 1s ease 0.4s both;
-}
-
-.hero-card {
-  position: absolute;
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  padding: 1.5rem;
-  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
-}
-
-.hero-card:hover { transform: translateY(-5px) rotate(0deg) !important; }
-
-.hero-card-1 {
-  top: 0; left: 10%;
-  transform: rotate(-3deg);
-  width: 220px;
-  z-index: 3;
-}
-
-.hero-card-2 {
-  top: 120px; right: 0;
-  transform: rotate(2deg);
-  width: 200px;
-  z-index: 2;
-}
-
-.hero-card-3 {
-  bottom: 20px; left: 20%;
-  transform: rotate(-1deg);
-  width: 240px;
-  z-index: 1;
-}
-
-.hero-card-emoji {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.hero-card-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--primary-dark);
-  margin-bottom: 0.25rem;
-}
-
-.hero-card-text {
-  font-size: 0.78rem;
-  color: var(--text-light);
-  line-height: 1.5;
-}
-
-.hero-card-stat {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-light);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  animation: fadeInUp 1s ease 1s both;
-}
-
-.scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--primary-light), transparent);
-  animation: scroll-pulse 2s ease infinite;
-}
-
-@keyframes scroll-pulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.3); }
-}
-
-/* ===== SECTIONS COMMON ===== */
-section {
-  padding: 6rem 2rem;
-  position: relative;
-}
-
-.section-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 1rem;
-}
-
-.section-label::before {
-  content: '';
-  width: 20px;
-  height: 2px;
-  background: var(--accent);
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 1rem;
-  line-height: 1.2;
-}
-
-.section-subtitle {
-  font-size: 1.05rem;
-  color: var(--text-light);
-  max-width: 600px;
-  line-height: 1.7;
-  margin-bottom: 3rem;
-}
-
-/* Reveal animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== ABOUT / SCHOOL PROFILE ===== */
-#about {
-  background: var(--white);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.about-features {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.about-feature {
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  padding: 1.25rem;
-  transition: all 0.3s;
-}
-
-.about-feature:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-}
-
-.about-feature-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.about-feature-title {
-  font-weight: 700;
-  font-size: 0.88rem;
-  color: var(--primary-dark);
-  margin-bottom: 0.25rem;
-}
-
-.about-feature-text {
-  font-size: 0.78rem;
-  color: var(--text-light);
-  line-height: 1.5;
-}
-
-/* About visual — animated counter cards */
-.about-visual {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-}
-
-.stat-card {
-  background: var(--bg);
-  border-radius: var(--radius);
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  transform: scaleX(0);
-  transition: transform 0.5s;
-}
-
-.stat-card:hover::before { transform: scaleX(1); }
-
-.stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.82rem;
-  color: var(--text-light);
-  font-weight: 500;
-}
-
-.stat-card.accent { background: var(--primary); }
-.stat-card.accent .stat-number { color: var(--accent-light); }
-.stat-card.accent .stat-label { color: rgba(255,255,255,0.8); }
-
-/* ===== GANZTAG ===== */
-#ganztag {
-  background: var(--bg-warm);
-}
-
-.ganztag-content {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.ganztag-text p {
-  color: var(--text-light);
-  margin-bottom: 1rem;
-  line-height: 1.8;
-}
-
-.time-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.time-slot {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: white;
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow);
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.time-slot::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: var(--primary);
-  border-radius: 0 4px 4px 0;
-}
-
-.time-slot:hover { transform: translateX(5px); }
-
-.time-slot-time {
-  font-weight: 700;
-  color: var(--primary);
-  font-size: 0.88rem;
-  white-space: nowrap;
-  min-width: 100px;
-}
-
-.time-slot-label {
-  font-size: 0.88rem;
-  color: var(--text);
-  font-weight: 500;
-}
-
-/* ===== NEWS / AKTUELLES ===== */
-#aktuelles {
-  background: var(--white);
-}
-
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.news-card {
-  background: var(--bg);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-  cursor: pointer;
-}
-
-.news-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.news-card-img {
-  height: 180px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.news-card-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
-}
-
-.news-card-body {
-  padding: 1.5rem;
-}
-
-.news-card-date {
-  font-size: 0.75rem;
-  color: var(--primary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.5rem;
-}
-
-.news-card-title {
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--primary-dark);
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
-}
-
-.news-card-excerpt {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  line-height: 1.6;
-}
-
-/* ===== KULTURSCHULE ===== */
-#kultur {
-  background: var(--primary-dark);
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-#kultur::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 50% 50% at 0% 0%, rgba(240,168,48,0.1), transparent),
-    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(45,159,91,0.15), transparent);
-}
-
-#kultur .section-label { color: var(--accent-light); }
-#kultur .section-title { color: white; }
-#kultur .section-subtitle { color: rgba(255,255,255,0.7); }
-
-.kultur-content {
-  position: relative;
-  z-index: 1;
-}
-
-.kultur-text {
-  max-width: 800px;
-}
-
-.kultur-text p {
-  color: rgba(255,255,255,0.75);
-  line-height: 1.8;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-.kultur-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 2rem;
-}
-
-.kultur-badge {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-}
-
-.kultur-badge:hover {
-  background: rgba(240,168,48,0.2);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* ===== TEAM ===== */
-#team {
-  background: var(--bg);
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.team-card {
-  background: white;
-  border-radius: var(--radius);
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.team-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-.team-card-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-light), var(--accent));
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: 700;
-}
-
-.team-card-name {
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--primary-dark);
-  margin-bottom: 0.25rem;
-}
-
-.team-card-role {
-  font-size: 0.82rem;
-  color: var(--text-light);
-  margin-bottom: 0.75rem;
-}
-
-.team-card-contact {
-  font-size: 0.78rem;
-  color: var(--primary);
-  font-weight: 500;
-}
-
-/* ===== TERMINE ===== */
-#termine {
-  background: var(--white);
-}
-
-.termine-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 800px;
-}
-
-.termin-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  transition: all 0.3s;
-  position: relative;
-}
-
-.termin-item:hover {
-  background: white;
-  box-shadow: var(--shadow);
-  transform: translateX(5px);
-}
-
-.termin-date {
-  text-align: center;
-  min-width: 60px;
-}
-
-.termin-day {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
-}
-
-.termin-month {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.termin-divider {
-  width: 2px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--accent), var(--primary-light));
-  border-radius: 1px;
-}
-
-.termin-info-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--primary-dark);
-  margin-bottom: 0.15rem;
-}
-
-.termin-info-desc {
-  font-size: 0.82rem;
-  color: var(--text-light);
-}
-
-/* ===== KONTAKT ===== */
-#kontakt {
-  background: var(--bg-warm);
-}
-
-.kontakt-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-}
-
-.kontakt-info-items {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.kontakt-item {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.kontakt-item-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--primary);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.kontakt-item-label {
-  font-size: 0.78rem;
-  color: var(--text-light);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.kontakt-item-value {
-  font-weight: 600;
-  color: var(--primary-dark);
-  font-size: 0.95rem;
-}
-
-.kontakt-map {
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  height: 100%;
-  min-height: 350px;
-}
-
-.kontakt-map iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* ===== FOOTER ===== */
-footer {
-  background: var(--primary-dark);
-  color: rgba(255,255,255,0.6);
-  padding: 3rem 2rem;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-footer a {
-  color: rgba(255,255,255,0.8);
-  text-decoration: none;
-}
-
-footer a:hover { color: var(--accent-light); }
-
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
-}
-
-/* ===== MOODLE LINK BANNER ===== */
-.moodle-banner {
-  background: linear-gradient(135deg, var(--accent) 0%, #e8941a 100%);
-  padding: 1.5rem 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.moodle-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 20px,
-    rgba(255,255,255,0.04) 20px,
-    rgba(255,255,255,0.04) 40px
-  );
-}
-
-.moodle-banner a {
-  color: var(--primary-dark);
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.moodle-banner a:hover { text-decoration: underline; }
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .hero-content { grid-template-columns: 1fr; text-align: center; }
-  .hero-desc { margin-left: auto; margin-right: auto; }
-  .hero-actions { justify-content: center; }
-  .hero-visual { display: none; }
-  .about-grid { grid-template-columns: 1fr; }
-  .ganztag-content { grid-template-columns: 1fr; }
-  .news-grid { grid-template-columns: 1fr; }
-  .kontakt-grid { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  .nav-burger { display: block; }
-  .about-visual { order: -1; }
-  .scroll-indicator { display: none; }
-}
-
-@media (max-width: 600px) {
-  section { padding: 4rem 1.25rem; }
-  .about-features { grid-template-columns: 1fr; }
-  .about-visual { grid-template-columns: 1fr 1fr; }
-  .hero-actions { flex-direction: column; align-items: center; }
-  .footer-inner { flex-direction: column; text-align: center; }
-  .footer-links { justify-content: center; }
-}
-
-/* ===== LOADING SCREEN ===== */
-.loader {
-  position: fixed;
-  inset: 0;
-  background: var(--primary-dark);
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1.5rem;
-  transition: opacity 0.6s, visibility 0.6s;
-}
-
-.loader.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.loader-text {
-  color: white;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  animation: fadeInUp 0.6s ease both;
-}
-
-.loader-bar {
-  width: 120px;
-  height: 3px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.loader-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 3px;
-  animation: load-fill 1.2s ease-in-out forwards;
-}
-
-@keyframes load-fill {
-  0% { width: 0%; }
-  100% { width: 100%; }
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#1a6b3c;--primary-light:#2d9f5b;--primary-dark:#0e4426;
+  --accent:#f0a830;--accent-light:#ffd47a;
+  --bg:#faf8f4;--bg-warm:#f4efe6;
+  --text:#2a2a2a;--text-light:#6b6b6b;--white:#fff;
+  --shadow:0 4px 30px rgba(0,0,0,.08);--shadow-lg:0 20px 60px rgba(0,0,0,.12);
+  --radius:16px;--radius-sm:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7}
+
+
+
+/* PARTICLES */
+.particle{position:fixed;pointer-events:none;z-index:0;opacity:0;animation:pfloat linear infinite;font-size:1.2rem}
+@keyframes pfloat{0%{transform:translateY(105vh) rotate(0);opacity:0}8%{opacity:.18}90%{opacity:.18}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s cubic-bezier(.22,1,.36,1);background:transparent}
+nav.scrolled{padding:.6rem 2rem;box-shadow:0 2px 30px rgba(0,0,0,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(250,248,244,.92)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:#fff;transition:color .4s}
+.nav-logo-icon{width:44px;height:44px;background:var(--primary);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;font-weight:700;transition:transform .3s}
+.nav-logo:hover .nav-logo-icon{transform:rotate(-5deg) scale(1.05)}
+.nav-logo-text{font-weight:700;font-size:1.05rem;letter-spacing:-.02em}
+.nav-logo-sub{font-size:.7rem;color:rgba(255,255,255,.7);font-weight:400;letter-spacing:.04em;transition:color .4s}
+.nav-links{display:flex;gap:.2rem;list-style:none}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.9);font-size:.86rem;font-weight:500;padding:.45rem .9rem;border-radius:8px;transition:all .3s}
+.nav-links a:hover{background:var(--primary);color:#fff}
+nav.scrolled .nav-logo{color:var(--primary-dark)}
+nav.scrolled .nav-logo-sub{color:var(--text-light)}
+nav.scrolled .nav-links a{color:var(--text)}
+nav.scrolled .nav-links a:hover{background:var(--primary);color:#fff}
+.burger{display:none;background:none;border:none;cursor:pointer;width:40px;height:40px;position:relative;z-index:1002}
+.burger span{display:block;width:22px;height:2px;background:#fff;position:absolute;left:9px;transition:all .3s}
+nav.scrolled .burger span{background:var(--text)}
+.burger span:nth-child(1){top:11px}
+.burger span:nth-child(2){top:18px}
+.burger span:nth-child(3){top:25px}
+.burger.open span:nth-child(1){transform:rotate(45deg);top:18px}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg);top:18px}
+.mobile-overlay{position:fixed;inset:0;background:rgba(250,248,244,.97);backdrop-filter:blur(30px);z-index:1001;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;opacity:0;visibility:hidden;transition:all .35s}
+.mobile-overlay.open{opacity:1;visibility:visible}
+.mobile-overlay a{text-decoration:none;color:var(--primary-dark);font-size:1.4rem;font-weight:600;padding:.5rem 2rem;border-radius:12px;transition:all .2s}
+.mobile-overlay a:hover{background:var(--primary);color:#fff}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;padding:0}
+.hero-img{position:absolute;inset:0;z-index:0}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%;animation:heroZoom 20s ease-in-out infinite alternate}
+@keyframes heroZoom{0%{transform:scale(1)}100%{transform:scale(1.06)}}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(14,68,38,.85) 0%,rgba(14,68,38,.55) 35%,rgba(14,68,38,.15) 60%,transparent 100%)}
+.hero-inner{max-width:1200px;width:100%;margin:0 auto;position:relative;z-index:1;padding:0 2rem 4rem;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:end}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);color:#fff;padding:.4rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;margin-bottom:1.5rem;letter-spacing:.03em;animation:fadeUp .8s ease both;border:1px solid rgba(255,255,255,.2)}
+.hero-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,3.8rem);font-weight:700;line-height:1.1;color:#fff;margin-bottom:1.5rem;animation:fadeUp .8s ease .1s both;text-shadow:0 2px 30px rgba(0,0,0,.2)}
+.hero h1 em{font-style:italic;color:var(--accent-light)}
+.hero-desc{font-size:1.08rem;color:rgba(255,255,255,.85);max-width:500px;line-height:1.8;margin-bottom:2rem;animation:fadeUp .8s ease .2s both}
+.hero-actions{display:flex;gap:1rem;animation:fadeUp .8s ease .3s both;flex-wrap:wrap}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .3s cubic-bezier(.22,1,.36,1)}
+.btn-p{background:var(--accent);color:var(--primary-dark);box-shadow:0 4px 15px rgba(240,168,48,.35)}
+.btn-p:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 25px rgba(240,168,48,.4)}
+.btn-o{background:rgba(255,255,255,.12);color:#fff;border:2px solid rgba(255,255,255,.3);backdrop-filter:blur(8px)}
+.btn-o:hover{border-color:#fff;background:rgba(255,255,255,.2)}
+.hero-cards{display:flex;gap:1rem;animation:fadeUp 1s ease .4s both;align-items:flex-end;flex-wrap:wrap}
+.hcard{background:rgba(255,255,255,.12);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:1.2rem 1.4rem;transition:all .4s cubic-bezier(.22,1,.36,1);flex:1;min-width:140px}
+.hcard:hover{transform:translateY(-5px);background:rgba(255,255,255,.2)}
+.hcard-emoji{font-size:1.6rem;margin-bottom:.4rem}
+.hcard-title{font-weight:700;font-size:.85rem;color:#fff;margin-bottom:.15rem}
+.hcard-text{font-size:.73rem;color:rgba(255,255,255,.7);line-height:1.4}
+.hcard-stat{font-size:2rem;font-weight:800;color:var(--accent-light);line-height:1;margin-bottom:.2rem}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.6);font-size:.72rem;letter-spacing:.1em;font-weight:500;animation:fadeUp 1s ease 1s both;z-index:2}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);animation:spulse 2s ease infinite}
+@keyframes spulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.3)}}
+
+/* MOODLE */
+.moodle{background:linear-gradient(135deg,var(--accent) 0%,#e8941a 100%);padding:1.2rem 2rem;text-align:center;position:relative;overflow:hidden}
+.moodle::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.04) 20px,rgba(255,255,255,.04) 40px)}
+.moodle a{color:var(--primary-dark);font-weight:700;font-size:.95rem;text-decoration:none;position:relative;z-index:1}
+.moodle a:hover{text-decoration:underline}
+
+/* SECTIONS */
+section{padding:6rem 2rem;position:relative}
+.sec{max-width:1200px;margin:0 auto}
+.slabel{display:inline-flex;align-items:center;gap:.5rem;font-size:.76rem;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem}
+.slabel::before{content:'';width:20px;height:2px;background:var(--accent)}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;color:var(--primary-dark);margin-bottom:1rem;line-height:1.2}
+.ssub{font-size:1.02rem;color:var(--text-light);max-width:600px;line-height:1.7;margin-bottom:3rem}
+.rv{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ABOUT */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+.af{background:var(--bg);border-radius:var(--radius-sm);padding:1.2rem;transition:all .3s}
+.af:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.af-icon{font-size:1.5rem;margin-bottom:.4rem}
+.af-title{font-weight:700;font-size:.86rem;color:var(--primary-dark);margin-bottom:.2rem}
+.af-text{font-size:.77rem;color:var(--text-light);line-height:1.5}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.sc{background:var(--bg);border-radius:var(--radius);padding:2rem;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform .5s}
+.sc:hover::before{transform:scaleX(1)}
+.sc:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.sc-num{font-size:2.5rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:.25rem}
+.sc-lab{font-size:.8rem;color:var(--text-light);font-weight:500}
+.sc.acc{background:var(--primary)}
+.sc.acc .sc-num{color:var(--accent-light)}
+.sc.acc .sc-lab{color:rgba(255,255,255,.8)}
+
+/* GANZTAG */
+#ganztag{background:var(--bg-warm)}
+.gt-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
+.gt-text p{color:var(--text-light);margin-bottom:1rem;line-height:1.8}
+.tgrid{display:flex;flex-direction:column;gap:.75rem}
+.ts{display:flex;align-items:center;gap:1rem;background:#fff;padding:1rem 1.5rem;border-radius:var(--radius-sm);box-shadow:var(--shadow);transition:all .3s;position:relative;overflow:hidden}
+.ts::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);border-radius:0 4px 4px 0}
+.ts:hover{transform:translateX(5px)}
+.ts-time{font-weight:700;color:var(--primary);font-size:.86rem;white-space:nowrap;min-width:95px}
+.ts-label{font-size:.86rem;color:var(--text);font-weight:500}
+
+/* NEWS */
+#aktuelles{background:var(--white)}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.nc{background:var(--bg);border-radius:var(--radius);overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:pointer}
+.nc:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.nc-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.nc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.15),transparent)}
+.nc-body{padding:1.5rem}
+.nc-date{font-size:.73rem;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.nc-title{font-weight:700;font-size:1rem;color:var(--primary-dark);margin-bottom:.5rem;line-height:1.4}
+.nc-text{font-size:.84rem;color:var(--text-light);line-height:1.6}
+
+/* KULTUR */
+#kultur{background:var(--primary-dark);color:#fff;position:relative;overflow:hidden}
+#kultur::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 0% 0%,rgba(240,168,48,.1),transparent),radial-gradient(ellipse 50% 50% at 100% 100%,rgba(45,159,91,.15),transparent)}
+.kultur-inner{position:relative;z-index:1}
+.kultur-inner .slabel{color:var(--accent-light)}
+.kultur-inner .stitle{color:#fff}
+.kt p{color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:1rem;font-size:1rem}
+.kb{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.kbadge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;padding:.6rem 1.2rem;border-radius:100px;font-size:.84rem;font-weight:500;backdrop-filter:blur(10px);transition:all .3s}
+.kbadge:hover{background:rgba(240,168,48,.2);border-color:var(--accent);transform:translateY(-2px)}
+
+/* TEAM */
+#team{background:var(--bg)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+.tc{background:#fff;border-radius:var(--radius);padding:2rem;text-align:center;transition:all .3s;overflow:hidden}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.tc-avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--accent));margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;font-weight:700}
+.tc-name{font-weight:700;font-size:.95rem;color:var(--primary-dark);margin-bottom:.2rem}
+.tc-role{font-size:.8rem;color:var(--text-light);margin-bottom:.7rem}
+.tc-contact{font-size:.77rem;color:var(--primary);font-weight:500}
+
+/* TERMINE */
+#termine{background:var(--white)}
+.tl{display:flex;flex-direction:column;gap:1rem;max-width:800px}
+.ti{display:flex;align-items:center;gap:1.5rem;padding:1.2rem 1.5rem;background:var(--bg);border-radius:var(--radius-sm);transition:all .3s}
+.ti:hover{background:#fff;box-shadow:var(--shadow);transform:translateX(5px)}
+.ti-date{text-align:center;min-width:55px}
+.ti-day{font-size:1.8rem;font-weight:800;color:var(--primary);line-height:1}
+.ti-month{font-size:.7rem;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:.08em}
+.ti-div{width:2px;height:40px;background:linear-gradient(to bottom,var(--accent),var(--primary-light));border-radius:1px;flex-shrink:0}
+.ti-title{font-weight:700;font-size:.93rem;color:var(--primary-dark);margin-bottom:.1rem}
+.ti-desc{font-size:.8rem;color:var(--text-light)}
+
+/* KONTAKT */
+#kontakt{background:var(--bg-warm)}
+.kontakt-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.ki-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+.ki{display:flex;gap:1rem;align-items:flex-start}
+.ki-icon{width:48px;height:48px;background:var(--primary);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
+.ki-label{font-size:.76rem;color:var(--text-light);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.ki-value{font-weight:600;color:var(--primary-dark);font-size:.93rem}
+.map-box{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg);height:100%;min-height:350px;background:var(--bg)}
+.map-box iframe{width:100%;height:100%;border:none;min-height:350px}
+
+/* FOOTER */
+footer{background:var(--primary-dark);color:rgba(255,255,255,.6);padding:3rem 2rem;font-size:.84rem}
+footer a{color:rgba(255,255,255,.8);text-decoration:none}
+footer a:hover{color:var(--accent-light)}
+.ft{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-links{display:flex;gap:2rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;padding-bottom:3rem}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-actions{justify-content:center}
+  .hero-cards{justify-content:center}
+  .about-grid,.gt-grid,.kontakt-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .burger{display:block}
+  .about-stats{order:-1}
+  .scroll-hint{display:none}
+}
+@media(max-width:600px){
+  section{padding:4rem 1.25rem}
+  .about-features{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .hero-actions{flex-direction:column;align-items:center}
+  .hero-cards{flex-direction:column;align-items:stretch}
+  .hcard{min-width:auto}
+  .ft{flex-direction:column;text-align:center}
+  .ft-links{justify-content:center}
 }
 </style>
 </head>
 <body>
 
-<!-- Loader -->
-<div class="loader" id="loader">
-  <div class="loader-text">Grundschule Hardt</div>
-  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-</div>
 
-<!-- Cursor -->
-<div class="cursor-dot" id="cursor"></div>
 
-<!-- Navigation -->
+<!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
+    <a href="#home" class="nav-logo">
       <div class="nav-logo-icon">GH</div>
       <div>
         <div class="nav-logo-text">Grundschule Hardt</div>
         <div class="nav-logo-sub">Schwäbisch Gmünd</div>
       </div>
     </a>
-    <ul class="nav-links" id="navLinks"></ul>
-    <button class="nav-burger" id="burger" aria-label="Menü öffnen">
+    <ul class="nav-links">
+      <li><a href="#about">Über uns</a></li>
+      <li><a href="#ganztag">Ganztag</a></li>
+      <li><a href="#aktuelles">Aktuelles</a></li>
+      <li><a href="#kultur">Kultur</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#termine">Termine</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menü öffnen">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu"></div>
-
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-bg">
-    <div class="hero-bg-gradient"></div>
-    <div class="hero-shape hero-shape-1"></div>
-    <div class="hero-shape hero-shape-2"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        <span id="heroBadge">Kulturschule Baden-Württemberg</span>
-      </div>
-      <h1 id="heroTitle">Willkommen an der <em>Grundschule Hardt</em></h1>
-      <p class="hero-desc" id="heroDesc">
-        Offene Ganztagesschule auf dem Gmünder Sonnenhügel – wo Natur, Kultur und Bildung zusammenkommen.
-      </p>
-      <div class="hero-actions">
-        <a href="#about" class="btn btn-primary">Unsere Schule entdecken →</a>
-        <a href="#kontakt" class="btn btn-outline">Kontakt</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-card hero-card-1">
-        <div class="hero-card-emoji">🌿</div>
-        <div class="hero-card-title">Naturprofil</div>
-        <div class="hero-card-text">Wald, Wiese, Bach – Natur erleben im Schulalltag</div>
-      </div>
-      <div class="hero-card hero-card-2">
-        <div class="hero-card-stat" id="schuelerCount">110</div>
-        <div class="hero-card-title">Schülerinnen & Schüler</div>
-        <div class="hero-card-text">auf dem Sonnenhügel</div>
-      </div>
-      <div class="hero-card hero-card-3">
-        <div class="hero-card-emoji">🎨</div>
-        <div class="hero-card-title">Kulturagenten-Programm</div>
-        <div class="hero-card-text">Kreativität und Kunst als fester Bestandteil</div>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-indicator">
-    <span>ENTDECKEN</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- Moodle -->
-<div class="moodle-banner">
-  <a href="https://moodle1.belwue.de/moodle/login/index.php" target="_blank" rel="noopener">
-    📚 Zur Moodle-Lernplattform →
-  </a>
+<div class="mobile-overlay" id="mobileMenu">
+  <a href="#about">Über uns</a>
+  <a href="#ganztag">Ganztag</a>
+  <a href="#aktuelles">Aktuelles</a>
+  <a href="#kultur">Kultur</a>
+  <a href="#team">Team</a>
+  <a href="#termine">Termine</a>
+  <a href="#kontakt">Kontakt</a>
 </div>
 
-<!-- About -->
-<section id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="reveal">
-        <div class="section-label">Über uns</div>
-        <h2 class="section-title">Lernen auf dem<br>Sonnenhügel</h2>
-        <p class="section-subtitle" id="aboutText">
-          Die Grundschule Hardt ist seit dem Schuljahr 2012/13 eine offene Ganztagesschule in städtischer Trägerschaft. Die Eltern können wählen, ob ihr Kind am Ganztag teilnimmt oder nicht. Zur Zeit besuchen etwa 110 Schülerinnen und Schüler die Schule, die im Süden der Stadt auf dem Gmünder Sonnenhügel steht.
-        </p>
-        <div class="about-features" id="aboutFeatures"></div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-img">
+    <img src="header.jpg" alt="Grundschule Hardt – Schulgebäude auf dem Sonnenhügel">
+  </div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="hero-dot"></span> Kulturschule Baden-Württemberg</div>
+      <h1>Willkommen an der <em>Grundschule Hardt</em></h1>
+      <p class="hero-desc">Offene Ganztagesschule auf dem Gmünder Sonnenhügel – wo Natur, Kultur und Bildung zusammenkommen.</p>
+      <div class="hero-actions">
+        <a href="#about" class="btn btn-p">Unsere Schule entdecken →</a>
+        <a href="#kontakt" class="btn btn-o">Kontakt aufnehmen</a>
       </div>
-      <div class="about-visual reveal" id="aboutStats"></div>
+    </div>
+    <div class="hero-cards">
+      <div class="hcard"><div class="hcard-emoji">🌿</div><div class="hcard-title">Naturprofil</div><div class="hcard-text">Wald, Wiese, Bach</div></div>
+      <div class="hcard"><div class="hcard-stat">110</div><div class="hcard-title">Schüler:innen</div></div>
+      <div class="hcard"><div class="hcard-emoji">🎨</div><div class="hcard-title">Kulturagenten</div><div class="hcard-text">Kunst & Kreativität</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>ENTDECKEN</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- MOODLE -->
+<div class="moodle"><a href="https://moodle1.belwue.de/moodle/login/index.php" target="_blank" rel="noopener">📚 Hier geht es zur Moodle-Lernplattform →</a></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec">
+    <div class="about-grid">
+      <div class="rv">
+        <div class="slabel">Über uns</div>
+        <h2 class="stitle">Lernen auf dem<br>Sonnenhügel</h2>
+        <p class="ssub">Die Grundschule Hardt ist seit dem Schuljahr 2012/13 eine offene Ganztagesschule in städtischer Trägerschaft. Die Eltern können wählen, ob ihr Kind am Ganztag teilnimmt oder nicht. Zur Zeit besuchen etwa 110 Schülerinnen und Schüler die Schule, die im Süden der Stadt auf dem Gmünder Sonnenhügel steht.</p>
+        <div class="about-features">
+          <div class="af"><div class="af-icon">🌲</div><div class="af-title">Naturprofil</div><div class="af-text">Regelmäßige Begegnungen mit Wald, Wiese, Teich und Bach</div></div>
+          <div class="af"><div class="af-icon">🎭</div><div class="af-title">Kulturschule</div><div class="af-text">Ausgezeichnet als Kulturschule Baden-Württemberg</div></div>
+          <div class="af"><div class="af-icon">🎵</div><div class="af-title">Musische Bildung</div><div class="af-text">Kooperation mit der Musikschule</div></div>
+          <div class="af"><div class="af-icon">💻</div><div class="af-title">Digitale Medien</div><div class="af-text">Moderner Umgang mit digitalen Medien</div></div>
+        </div>
+      </div>
+      <div class="about-stats rv">
+        <div class="sc"><div class="sc-num" data-count="110">0</div><div class="sc-lab">Schülerinnen & Schüler</div></div>
+        <div class="sc acc"><div class="sc-num" data-count="4">0</div><div class="sc-lab">Klassenstufen</div></div>
+        <div class="sc"><div class="sc-num" data-count="2012">0</div><div class="sc-lab">Ganztag seit</div></div>
+        <div class="sc"><div class="sc-num" data-count="10">0</div><div class="sc-lab">Kooperationspartner</div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Ganztag -->
+<!-- GANZTAG -->
 <section id="ganztag">
-  <div class="section-inner">
-    <div class="ganztag-content">
-      <div class="reveal">
-        <div class="section-label">Ganztagesschule</div>
-        <h2 class="section-title">Ein Tag bei uns</h2>
-        <div class="ganztag-text" id="ganztagText">
+  <div class="sec">
+    <div class="gt-grid">
+      <div class="rv">
+        <div class="slabel">Ganztagesschule</div>
+        <h2 class="stitle">Ein Tag bei uns</h2>
+        <div class="gt-text">
           <p>Die Schule zeichnet sich durch ein umfassendes pädagogisches wie räumliches Angebot aus. Für die Kinder, die an der Ganztagesschule teilnehmen, sind die Unterrichtszeiten Montag bis Donnerstag von 8.00 Uhr bis 15.15 Uhr und am Freitag von 8.00 – 12.30 Uhr.</p>
           <p>Es erfolgt eine Rhythmisierung des Schultages durch Unterricht, Bewegungspausen, Lernzeiten, Werkstattunterricht und vielfältige sportliche, musische, sowie Bildung und Betreuung unterstützende Angebote.</p>
           <p>Die Mittagspause kann in der Schule verbracht werden. Die Kinder werden in dieser Zeit von vier pädagogischen Fachkräften betreut. Es besteht die Möglichkeit, ein kostenpflichtiges Mittagessen zu bestellen. An jedem Tag gibt es zwei verschiedene Essen zur Auswahl.</p>
           <p>Auch außerhalb der Unterrichtszeit wird ein weiteres, kostenpflichtiges Betreuungsangebot von Montag bis Freitag ab 7 Uhr bis 17 Uhr durch die Stadt Schwäbisch Gmünd angeboten.</p>
         </div>
       </div>
-      <div class="reveal">
-        <div class="time-grid" id="timeSlots"></div>
+      <div class="rv">
+        <div class="tgrid">
+          <div class="ts"><div class="ts-time">07:00 Uhr</div><div class="ts-label">Betreuung (kostenpflichtig)</div></div>
+          <div class="ts"><div class="ts-time">08:00 Uhr</div><div class="ts-label">Unterrichtsbeginn</div></div>
+          <div class="ts"><div class="ts-time">12:30 Uhr</div><div class="ts-label">Mittagspause & Betreuung</div></div>
+          <div class="ts"><div class="ts-time">13:45 Uhr</div><div class="ts-label">Nachmittagsunterricht / AGs</div></div>
+          <div class="ts"><div class="ts-time">15:15 Uhr</div><div class="ts-label">Ganztagesende (Mo–Do)</div></div>
+          <div class="ts"><div class="ts-time">bis 17:00</div><div class="ts-label">Betreuung (kostenpflichtig)</div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Aktuelles -->
+<!-- AKTUELLES -->
 <section id="aktuelles">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="section-label">Aktuelles</div>
-      <h2 class="section-title">Neuigkeiten</h2>
-      <p class="section-subtitle">Was an unserer Schule gerade passiert.</p>
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">Aktuelles</div>
+      <h2 class="stitle">Neuigkeiten</h2>
+      <p class="ssub">Was an unserer Schule gerade passiert.</p>
     </div>
-    <div class="news-grid reveal" id="newsGrid"></div>
+    <div class="news-grid rv">
+      <div class="nc">
+        <div class="nc-img" style="background:linear-gradient(135deg,#e67e22,#c0692b)">🎃</div>
+        <div class="nc-body">
+          <div class="nc-date">Herbst 2024</div>
+          <div class="nc-title">Spiele in der Natur-AG</div>
+          <div class="nc-text">Die SchülerInnen der „Spiele in der Natur-AG" erlebten im vergangenen Halbjahr die Natur mit allen Sinnen. Passend zum Herbst und zu Halloween konnten die Kinder beim Kürbisschnitzen ihre Schnitzfertigkeiten unter Beweis stellen.</div>
+        </div>
+      </div>
+      <div class="nc">
+        <div class="nc-img" style="background:linear-gradient(135deg,#2ecc71,#1a9c55)">🎒</div>
+        <div class="nc-body">
+          <div class="nc-date">September 2024</div>
+          <div class="nc-title">Einschulung der neuen Erstklässler</div>
+          <div class="nc-text">Am 18. September wurden 21 neue Erstklässler im Rahmen einer tollen Aufnahmefeier eingeschult. Die Klasse 4 überraschte die neuen Schulkinder mit ihrem Theaterstück „Der Grüffelo".</div>
+        </div>
+      </div>
+      <div class="nc">
+        <div class="nc-img" style="background:linear-gradient(135deg,#f39c12,#d4870e)">🐝</div>
+        <div class="nc-body">
+          <div class="nc-date">März 2024</div>
+          <div class="nc-title">Besuch beim Imker</div>
+          <div class="nc-text">Die Schülerinnen und Schüler wurden während der Natur-erleben-AG von Imker Wolfgang Dahnke umfassend über die spannenden Vorgänge innerhalb eines Bienenjahres informiert.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Kulturschule -->
+<!-- KULTUR -->
 <section id="kultur">
-  <div class="section-inner kultur-content reveal">
-    <div class="section-label">Kulturschule</div>
-    <h2 class="section-title">Kultur & Kreativität</h2>
-    <div class="kultur-text" id="kulturText">
+  <div class="sec kultur-inner rv">
+    <div class="slabel">Kulturschule</div>
+    <h2 class="stitle">Kultur & Kreativität</h2>
+    <div class="kt" style="max-width:800px">
       <p>Im Schuljahr 2016 startete die Grundschule Hardt mit dem Programm „Kulturagenten für kreative Schulen Baden-Württemberg". In ganz Baden-Württemberg gibt es das Programm in zehn Städten. Schwäbisch Gmünd und wir, die Grundschule Hardt, sind dabei.</p>
       <p>Ziel des Programms ist es, bei den Schülerinnen und Schülern Neugier für künstlerische Aktivitäten zu wecken und mehr Kenntnisse über Kunst und Kultur zu vermitteln.</p>
       <p>In jeder Klassenstufe wird nun jeweils ein Kunst- und Kulturprojekt pro Schuljahr durchgeführt. Dadurch wird den Schülerinnen und Schülern die Möglichkeit geboten, im Laufe ihrer Grundschulzeit ihre jeweiligen kreativen Neigungen weiter zu entwickeln und neue Erfahrungen in diesem Bereich zu sammeln.</p>
       <p>Die Grundschule Hardt wurde im Rahmen des Landesprogramms „Kulturschule Baden-Württemberg" als Kulturschule Baden-Württemberg ausgezeichnet.</p>
     </div>
-    <div class="kultur-badges" id="kulturBadges"></div>
+    <div class="kb">
+      <div class="kbadge">Kulturagenten-Programm</div>
+      <div class="kbadge">Kulturschule BW</div>
+      <div class="kbadge">Musisch-künstlerisch</div>
+      <div class="kbadge">Theater & Darstellung</div>
+      <div class="kbadge">Bildnerisches Gestalten</div>
+      <div class="kbadge">Kooperation mit Künstlern</div>
+    </div>
   </div>
 </section>
 
-<!-- Team -->
+<!-- TEAM -->
 <section id="team">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="section-label">Unser Team</div>
-      <h2 class="section-title">Menschen, die bewegen</h2>
-      <p class="section-subtitle">Die Menschen hinter unserer Schule.</p>
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">Unser Team</div>
+      <h2 class="stitle">Menschen, die bewegen</h2>
+      <p class="ssub">Die Menschen hinter unserer Schule.</p>
     </div>
-    <div class="team-grid reveal" id="teamGrid"></div>
+    <div class="team-grid rv">
+      <div class="tc"><div class="tc-avatar">BS</div><div class="tc-name">Frau Bärbel Schlienz</div><div class="tc-role">Rektorin</div><div class="tc-contact">☎ 07171 66929</div></div>
+      <div class="tc"><div class="tc-avatar">JS</div><div class="tc-name">Frau Jutta Stegmeier</div><div class="tc-role">Sekretariat</div><div class="tc-contact">☎ 07171 66929</div></div>
+      <div class="tc"><div class="tc-avatar">CB</div><div class="tc-name">Frau Christine Brückner-Weber</div><div class="tc-role">Schulsozialarbeiterin</div><div class="tc-contact">☎ 07171 939048</div></div>
+      <div class="tc"><div class="tc-avatar">NC</div><div class="tc-name">Frau Noreen Corrinth</div><div class="tc-role">Schulsozialarbeiterin</div><div class="tc-contact">☎ 07171 939048</div></div>
+      <div class="tc"><div class="tc-avatar">MS</div><div class="tc-name">Herr Martin Stadelmaier</div><div class="tc-role">Hausmeister</div><div class="tc-contact">☎ 0176 17071369</div></div>
+      <div class="tc"><div class="tc-avatar">OT</div><div class="tc-name">Frau Olga Tuchscherer</div><div class="tc-role">Leitung Schulkindbetreuung</div><div class="tc-contact">☎ 0176 17071414</div></div>
+    </div>
   </div>
 </section>
 
-<!-- Termine -->
+<!-- TERMINE -->
 <section id="termine">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="section-label">Termine</div>
-      <h2 class="section-title">Kommende Veranstaltungen</h2>
-      <p class="section-subtitle">Merken Sie sich diese Termine vor.</p>
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">Termine</div>
+      <h2 class="stitle">Kommende Veranstaltungen</h2>
+      <p class="ssub">Merken Sie sich diese Termine vor.</p>
     </div>
-    <div class="termine-list reveal" id="termineList"></div>
+    <div class="tl rv">
+      <div class="ti"><div class="ti-date"><div class="ti-day">14</div><div class="ti-month">Apr</div></div><div class="ti-div"></div><div><div class="ti-title">Schulstart nach Osterferien</div><div class="ti-desc">Unterrichtsbeginn nach den Osterferien</div></div></div>
+      <div class="ti"><div class="ti-date"><div class="ti-day">01</div><div class="ti-month">Mai</div></div><div class="ti-div"></div><div><div class="ti-title">Feiertag – schulfrei</div><div class="ti-desc">Tag der Arbeit</div></div></div>
+      <div class="ti"><div class="ti-date"><div class="ti-day">29</div><div class="ti-month">Mai</div></div><div class="ti-div"></div><div><div class="ti-title">Christi Himmelfahrt</div><div class="ti-desc">Feiertag – schulfrei</div></div></div>
+      <div class="ti"><div class="ti-date"><div class="ti-day">09</div><div class="ti-month">Jun</div></div><div class="ti-div"></div><div><div class="ti-title">Pfingstferien</div><div class="ti-desc">Pfingstferien Baden-Württemberg</div></div></div>
+      <div class="ti"><div class="ti-date"><div class="ti-day">24</div><div class="ti-month">Jul</div></div><div class="ti-div"></div><div><div class="ti-title">Sommerferien</div><div class="ti-desc">Letzter Schultag vor den Sommerferien</div></div></div>
+    </div>
   </div>
 </section>
 
-<!-- Kontakt -->
+<!-- KONTAKT -->
 <section id="kontakt">
-  <div class="section-inner">
+  <div class="sec">
     <div class="kontakt-grid">
-      <div class="reveal">
-        <div class="section-label">Kontakt</div>
-        <h2 class="section-title">So erreichen<br>Sie uns</h2>
-        <div class="kontakt-info-items" id="kontaktInfo"></div>
+      <div class="rv">
+        <div class="slabel">Kontakt</div>
+        <h2 class="stitle">So erreichen<br>Sie uns</h2>
+        <div class="ki-list">
+          <div class="ki"><div class="ki-icon">📍</div><div><div class="ki-label">Adresse</div><div class="ki-value">Székesfehérvárer Str. 12, 73525 Schwäbisch Gmünd</div></div></div>
+          <div class="ki"><div class="ki-icon">📞</div><div><div class="ki-label">Telefon</div><div class="ki-value">07171 66929</div></div></div>
+          <div class="ki"><div class="ki-icon">📠</div><div><div class="ki-label">Fax</div><div class="ki-value">07171 37588</div></div></div>
+          <div class="ki"><div class="ki-icon">✉️</div><div><div class="ki-label">E-Mail</div><div class="ki-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13637c60676067767f7f765374607b726177673e74773d60707b667f763d71647f3d7776">[email&#160;protected]</a></div></div></div>
+          <div class="ki"><div class="ki-icon">🕐</div><div><div class="ki-label">Sekretariat</div><div class="ki-value">Di–Fr, 09:00–11:30 Uhr</div></div></div>
+        </div>
       </div>
-      <div class="kontakt-map reveal">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.5!2d9.7987!3d48.7850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ3JzA2LjAiTiA5wrA0Nyc1NS4zIkU!5e0!3m2!1sde!2sde!4v1"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Standort Grundschule Hardt"
-        ></iframe>
+      <div class="map-box rv">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.5!2d9.7987!3d48.785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799a1c5e9a1b7e7%3A0x0!2zNDjCsDQ3JzA2LjAiTiA5wrA0Nyc1NS4zIkU!5e0!3m2!1sde!2sde!4v1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div>© <span id="footerYear"></span> Grundschule Hardt – Schwäbisch Gmünd</div>
-    <div class="footer-links">
-      <a href="#" id="datenschutzLink">Datenschutz</a>
-      <a href="#" id="impressumLink">Impressum</a>
+  <div class="ft">
+    <div>© 2026 Grundschule Hardt – Schwäbisch Gmünd</div>
+    <div class="ft-links">
+      <a href="https://gshardt-gd.de/?page_id=2" target="_blank">Datenschutz</a>
+      <a href="https://gshardt-gd.de/?page_id=15" target="_blank">Impressum</a>
     </div>
   </div>
 </footer>
 
-<!-- ========== JSON DATA ========== -->
-<script>
-// All regularly changing data is defined here as JSON
-// In production, these would be separate .json files loaded via fetch()
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  // === LOADER ===
+  // === LOADER REMOVED (not compatible with sandbox) ===
 
-const NAVIGATION_DATA = [
-  { label: "Über uns", href: "#about" },
-  { label: "Ganztag", href: "#ganztag" },
-  { label: "Aktuelles", href: "#aktuelles" },
-  { label: "Kultur", href: "#kultur" },
-  { label: "Team", href: "#team" },
-  { label: "Termine", href: "#termine" },
-  { label: "Kontakt", href: "#kontakt" }
-];
-
-const FEATURES_DATA = [
-  { icon: "🌲", title: "Naturprofil", text: "Regelmäßige Begegnungen mit Wald, Wiese, Teich und Bach" },
-  { icon: "🎭", title: "Kulturschule", text: "Ausgezeichnet als Kulturschule Baden-Württemberg" },
-  { icon: "🎵", title: "Musische Bildung", text: "Kooperation mit der Musikschule" },
-  { icon: "💻", title: "Digitale Medien", text: "Moderner Umgang mit digitalen Medien" }
-];
-
-const STATS_DATA = [
-  { number: "110", label: "Schülerinnen & Schüler", accent: false },
-  { number: "4", label: "Klassenstufen", accent: true },
-  { number: "2012", label: "Ganztag seit", accent: false },
-  { number: "10+", label: "Kooperationspartner", accent: false }
-];
-
-const TIME_SLOTS_DATA = [
-  { time: "07:00 Uhr", label: "Betreuung (kostenpflichtig)" },
-  { time: "08:00 Uhr", label: "Unterrichtsbeginn" },
-  { time: "12:30 Uhr", label: "Mittagspause & Betreuung" },
-  { time: "13:45 Uhr", label: "Nachmittagsunterricht / AGs" },
-  { time: "15:15 Uhr", label: "Ganztagesende (Mo-Do)" },
-  { time: "bis 17:00", label: "Betreuung (kostenpflichtig)" }
-];
-
-const NEWS_DATA = [
-  {
-    emoji: "🎃",
-    date: "Herbst 2024",
-    title: "Spiele in der Natur-AG",
-    excerpt: "Die SchülerInnen der „Spiele in der Natur-AG" erlebten im vergangenen Halbjahr die Natur mit allen Sinnen. Passend zum Herbst und zu Halloween konnten die Kinder beim Kürbisschnitzen ihre Schnitzfertigkeiten unter Beweis stellen.",
-    color: "#e67e22"
-  },
-  {
-    emoji: "🎒",
-    date: "September 2024",
-    title: "Einschulung der neuen Erstklässler",
-    excerpt: "Am 18. September wurden 21 neue Erstklässler im Rahmen einer tollen Aufnahmefeier eingeschult. Die Klasse 4 überraschte die neuen Schulkinder mit ihrem Theaterstück „Der Grüffelo".",
-    color: "#2ecc71"
-  },
-  {
-    emoji: "🐝",
-    date: "März 2024",
-    title: "Besuch beim Imker",
-    excerpt: "Die Schülerinnen und Schüler wurden während der Natur-erleben-AG von Imker Wolfgang Dahnke umfassend über die spannenden Vorgänge innerhalb eines Bienenjahres informiert.",
-    color: "#f39c12"
-  }
-];
-
-const KULTUR_BADGES_DATA = [
-  "Kulturagenten-Programm",
-  "Kulturschule BW",
-  "Musisch-künstlerisch",
-  "Theater & Darstellung",
-  "Bildnerisches Gestalten",
-  "Kooperation mit Künstlern"
-];
-
-const TEAM_DATA = [
-  { name: "Frau Bärbel Schlienz", role: "Rektorin", contact: "07171 66929", initials: "BS" },
-  { name: "Frau Jutta Stegmeier", role: "Sekretariat", contact: "07171 66929", initials: "JS" },
-  { name: "Frau Christine Brückner-Weber", role: "Schulsozialarbeiterin", contact: "07171 939048", initials: "CB" },
-  { name: "Frau Noreen Corrinth", role: "Schulsozialarbeiterin", contact: "07171 939048", initials: "NC" },
-  { name: "Herr Martin Stadelmaier", role: "Hausmeister", contact: "0176 17071369", initials: "MS" },
-  { name: "Frau Olga Tuchscherer", role: "Leitung Schulkindbetreuung", contact: "0176 17071414", initials: "OT" }
-];
-
-const TERMINE_DATA = [
-  { day: "14", month: "Apr", title: "Schulstart nach Osterferien", desc: "Unterrichtsbeginn nach den Osterferien" },
-  { day: "01", month: "Mai", title: "Feiertag – schulfrei", desc: "Tag der Arbeit" },
-  { day: "29", month: "Mai", title: "Christi Himmelfahrt", desc: "Feiertag – schulfrei" },
-  { day: "09", month: "Jun", title: "Pfingstferien", desc: "Pfingstferien Baden-Württemberg" },
-  { day: "24", month: "Jul", title: "Sommerferien", desc: "Letzter Schultag vor den Sommerferien" }
-];
-
-const KONTAKT_DATA = [
-  { icon: "📍", label: "Adresse", value: "Székesfehérvárer Str. 12, 73525 Schwäbisch Gmünd" },
-  { icon: "📞", label: "Telefon", value: "07171 66929" },
-  { icon: "📠", label: "Fax", value: "07171 37588" },
-  { icon: "✉️", label: "E-Mail", value: "poststelle@gshardt-gd.schule.bwl.de" },
-  { icon: "🕐", label: "Sekretariat", value: "Di–Fr, 09:00–11:30 Uhr" }
-];
-</script>
-
-<!-- ========== APPLICATION LOGIC ========== -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // ===== LOADER =====
-  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1400);
-
-  // ===== NAVIGATION =====
-  const navLinksEl = document.getElementById('navLinks');
-  const mobileMenuEl = document.getElementById('mobileMenu');
+  // === BURGER MENU ===
+  var burgerBtn = document.getElementById('burger');
+  var overlay = document.getElementById('mobileMenu');
   
-  NAVIGATION_DATA.forEach(item => {
-    navLinksEl.innerHTML += `<li><a href="${item.href}">${item.label}</a></li>`;
-    mobileMenuEl.innerHTML += `<a href="${item.href}" class="mobile-link">${item.label}</a>`;
+  burgerBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    burgerBtn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
   });
 
-  // Burger
-  const burger = document.getElementById('burger');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    mobileMenuEl.classList.toggle('open');
-    document.body.style.overflow = mobileMenuEl.classList.contains('open') ? 'hidden' : '';
-  });
-
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      burger.classList.remove('open');
-      mobileMenuEl.classList.remove('open');
+  // Close menu on link click
+  var mLinks = overlay.querySelectorAll('a');
+  for(var i = 0; i < mLinks.length; i++){
+    mLinks[i].addEventListener('click', function(){
+      burgerBtn.classList.remove('open');
+      overlay.classList.remove('open');
       document.body.style.overflow = '';
     });
-  });
+  }
 
-  // Nav scroll
-  window.addEventListener('scroll', () => {
+  // === NAV SCROLL ===
+  window.addEventListener('scroll', function(){
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // ===== ABOUT FEATURES =====
-  const featuresEl = document.getElementById('aboutFeatures');
-  FEATURES_DATA.forEach(f => {
-    featuresEl.innerHTML += `
-      <div class="about-feature">
-        <div class="about-feature-icon">${f.icon}</div>
-        <div class="about-feature-title">${f.title}</div>
-        <div class="about-feature-text">${f.text}</div>
-      </div>`;
-  });
+  // === REVEAL ON SCROLL ===
+  var rvEls = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('vis');
+          obs.unobserve(entry.target);
+        }
+      });
+    },{ threshold:0.1 });
+    rvEls.forEach(function(el){ obs.observe(el); });
+  } else {
+    rvEls.forEach(function(el){ el.classList.add('vis'); });
+  }
 
-  // ===== ABOUT STATS =====
-  const statsEl = document.getElementById('aboutStats');
-  STATS_DATA.forEach(s => {
-    statsEl.innerHTML += `
-      <div class="stat-card ${s.accent ? 'accent' : ''}">
-        <div class="stat-number">${s.number}</div>
-        <div class="stat-label">${s.label}</div>
-      </div>`;
-  });
+  // === COUNTER ANIMATION ===
+  var didCount = false;
+  var statsBox = document.querySelector('.about-stats');
+  if(statsBox && 'IntersectionObserver' in window){
+    var cObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !didCount){
+          didCount = true;
+          var nums = document.querySelectorAll('.sc-num[data-count]');
+          for(var i=0;i<nums.length;i++){
+            (function(el){
+              var target = parseInt(el.getAttribute('data-count'));
+              var cur = 0;
+              var steps = 35;
+              var step = Math.max(1, Math.ceil(target/steps));
+              var suffix = (target===10) ? '+' : '';
+              var iv = setInterval(function(){
+                cur += step;
+                if(cur >= target){ cur = target; clearInterval(iv); el.textContent = cur + suffix; }
+                else { el.textContent = cur; }
+              }, 40);
+            })(nums[i]);
+          }
+        }
+      });
+    },{ threshold:0.25 });
+    cObs.observe(statsBox);
+  }
 
-  // ===== TIME SLOTS =====
-  const timeSlotsEl = document.getElementById('timeSlots');
-  TIME_SLOTS_DATA.forEach(t => {
-    timeSlotsEl.innerHTML += `
-      <div class="time-slot">
-        <div class="time-slot-time">${t.time}</div>
-        <div class="time-slot-label">${t.label}</div>
-      </div>`;
-  });
-
-  // ===== NEWS =====
-  const newsGridEl = document.getElementById('newsGrid');
-  NEWS_DATA.forEach(n => {
-    newsGridEl.innerHTML += `
-      <div class="news-card">
-        <div class="news-card-img" style="background: linear-gradient(135deg, ${n.color}, ${n.color}cc)">
-          ${n.emoji}
-        </div>
-        <div class="news-card-body">
-          <div class="news-card-date">${n.date}</div>
-          <div class="news-card-title">${n.title}</div>
-          <div class="news-card-excerpt">${n.excerpt}</div>
-        </div>
-      </div>`;
-  });
-
-  // ===== KULTUR BADGES =====
-  const kulturBadgesEl = document.getElementById('kulturBadges');
-  KULTUR_BADGES_DATA.forEach(b => {
-    kulturBadgesEl.innerHTML += `<div class="kultur-badge">${b}</div>`;
-  });
-
-  // ===== TEAM =====
-  const teamGridEl = document.getElementById('teamGrid');
-  TEAM_DATA.forEach(t => {
-    teamGridEl.innerHTML += `
-      <div class="team-card">
-        <div class="team-card-avatar">${t.initials}</div>
-        <div class="team-card-name">${t.name}</div>
-        <div class="team-card-role">${t.role}</div>
-        <div class="team-card-contact">☎ ${t.contact}</div>
-      </div>`;
-  });
-
-  // ===== TERMINE =====
-  const termineListEl = document.getElementById('termineList');
-  TERMINE_DATA.forEach(t => {
-    termineListEl.innerHTML += `
-      <div class="termin-item">
-        <div class="termin-date">
-          <div class="termin-day">${t.day}</div>
-          <div class="termin-month">${t.month}</div>
-        </div>
-        <div class="termin-divider"></div>
-        <div>
-          <div class="termin-info-title">${t.title}</div>
-          <div class="termin-info-desc">${t.desc}</div>
-        </div>
-      </div>`;
-  });
-
-  // ===== KONTAKT =====
-  const kontaktInfoEl = document.getElementById('kontaktInfo');
-  KONTAKT_DATA.forEach(k => {
-    kontaktInfoEl.innerHTML += `
-      <div class="kontakt-item">
-        <div class="kontakt-item-icon">${k.icon}</div>
-        <div>
-          <div class="kontakt-item-label">${k.label}</div>
-          <div class="kontakt-item-value">${k.value}</div>
-        </div>
-      </div>`;
-  });
-
-  // ===== FOOTER YEAR =====
-  document.getElementById('footerYear').textContent = new Date().getFullYear();
-
-  // ===== REVEAL ON SCROLL =====
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-
-  // ===== FLOATING NATURE PARTICLES (WOW EFFECT) =====
-  const emojis = ['🍃', '🌿', '🍂', '🌸', '🦋', '✨', '🌻', '🐝'];
-  function createParticle() {
-    const p = document.createElement('div');
+  // === NATURE PARTICLES ===
+  var emojis = ['🍃','🌿','🍂','🌸','🦋','✨','🌻','🐝'];
+  function spawn(){
+    var p = document.createElement('div');
     p.className = 'particle';
-    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.animationDuration = (15 + Math.random() * 20) + 's';
-    p.style.animationDelay = Math.random() * 5 + 's';
-    p.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.animationDuration = (18+Math.random()*18) + 's';
+    p.style.animationDelay = (Math.random()*3) + 's';
+    p.style.fontSize = (0.9+Math.random()*0.8) + 'rem';
     document.body.appendChild(p);
-    setTimeout(() => p.remove(), 40000);
+    setTimeout(function(){ try{p.parentNode.removeChild(p);}catch(e){} }, 42000);
   }
-  for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 2000);
-  setInterval(createParticle, 4000);
+  for(var j=0;j<5;j++) setTimeout(spawn, j*2500);
+  setInterval(spawn, 5000);
 
-  // ===== CURSOR TRAIL =====
-  const cursor = document.getElementById('cursor');
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.opacity = '1';
-  });
-  document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-
-  function animateCursor() {
-    const cx = parseFloat(cursor.style.left) || mouseX;
-    const cy = parseFloat(cursor.style.top) || mouseY;
-    cursor.style.left = cx + (mouseX - cx) * 0.15 + 'px';
-    cursor.style.top = cy + (mouseY - cy) * 0.15 + 'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // ===== COUNTER ANIMATION =====
-  function animateCounters() {
-    document.querySelectorAll('.stat-number').forEach(el => {
-      const target = parseInt(el.textContent);
-      if (isNaN(target)) return;
-      let current = 0;
-      const step = Math.max(1, Math.floor(target / 40));
-      const interval = setInterval(() => {
-        current += step;
-        if (current >= target) { current = target; clearInterval(interval); }
-        el.textContent = current;
-      }, 30);
-    });
-  }
-
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { animateCounters(); statsObserver.unobserve(entry.target); }
-    });
-  }, { threshold: 0.3 });
-  const statsSection = document.getElementById('aboutStats');
-  if (statsSection) statsObserver.observe(statsSection);
-
-  // ===== SMOOTH ANCHOR SCROLL =====
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-});
-</script>
-
-</body>
-</html>
+  // === SMOOTH SCROLL ===
+  var anchors = document.querySelectorAll('a[href^="#"]');
+  for(var k=0;k<anchors.length;k++){
+    anchors[k].addEventListener('click', function(e){
